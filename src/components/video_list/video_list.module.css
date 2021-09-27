@@ -1,4 +1,5 @@
 .list {
   display: flex;
+  flex: 1 1 30%;
   flex-wrap: wrap;
 }

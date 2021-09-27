@@ -17,3 +17,6 @@ body {
   background-color: #181818;
   color: #fff;
 }
+.content {
+  display: flex;
+}

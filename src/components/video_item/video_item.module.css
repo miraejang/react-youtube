@@ -1,9 +1,25 @@
-.item {
-  width: 25%;
-  padding: 20px;
+li {
   box-sizing: border-box;
   cursor: pointer;
 }
 .img {
   max-width: 100%;
+}
+
+.mainItem {
+  width: 25%;
+  padding: 20px;
+}
+.detailItem {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin: 0.5em 0;
+}
+.detailItem .imgBox {
+  width: 30%;
+}
+.detailItem .infoBox {
+  width: 70%;
+  padding: 0 1em;
 }

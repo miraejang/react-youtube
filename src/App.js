@@ -1,8 +1,8 @@
 import VideoList from './components/video_list/video_list';
-import './App.css';
 import { useEffect, useState } from 'react';
 import { videosApi } from './api';
 import VideoDetail from './components/video_detail/video_detail';
+import styles from './App.module.css';
 
 function App() {
   const [videos, setVideos] = useState([]);
@@ -20,11 +20,14 @@ function App() {
   const videoClick = video => {
     setSelectedVideo(video.snippet.title);
   };
+
   return (
     <>
       <h1>Youtube</h1>
-      <VideoDetail selectedVideo={selectedVideo} />
-      <VideoList videos={videos} videoClick={videoClick} selectedVideo={selectedVideo ? true : false} />
+      <div className={styles.content}>
+        {selectedVideo && <VideoDetail selectedVideo={selectedVideo} />}
+        <VideoList videos={videos} videoClick={videoClick} selectedVideo={selectedVideo ? true : false} />
+      </div>
     </>
   );
 }
