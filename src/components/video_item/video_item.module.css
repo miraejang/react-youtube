@@ -2,6 +2,7 @@
   width: 25%;
   padding: 20px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 .img {
   max-width: 100%;
