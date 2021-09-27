@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { videosApi } from '../../api';
+import VideoItem from '../video_item/video_item';
 
 function VideoList() {
   const [videos, setVideos] = useState([]);
@@ -14,11 +15,11 @@ function VideoList() {
   }, []);
 
   return (
-    <div>
+    <ul>
       {videos.map(video => (
-        <p>{video.snippet.title}</p>
+        <VideoItem video={video} />
       ))}
-    </div>
+    </ul>
   );
 }
 
