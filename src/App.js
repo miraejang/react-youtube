@@ -1,4 +1,5 @@
 import VideoList from './components/video_list/video_list';
+import './App.css';
 
 function App() {
   return (

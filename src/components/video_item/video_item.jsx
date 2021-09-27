@@ -1,11 +1,12 @@
 import React from 'react';
+import styles from './video_item.module.css';
 
 function VideoItem({ video, video: { snippet } }) {
   return (
-    <li key={video.id}>
-      <img src={snippet.thumbnails.high.url} alt={`${snippet.title} thumbnail`} />
-      <h4>{snippet.title}</h4>
-      <p>{video.channelTitle}</p>
+    <li className={styles.item} key={video.id}>
+      <img className={styles.img} src={snippet.thumbnails.high.url} alt={`${snippet.title} thumbnail`} />
+      <h4 className={styles.title}>{snippet.title}</h4>
+      <p className={styles.channel}>{snippet.channelTitle}</p>
     </li>
   );
 }
