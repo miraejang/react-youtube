@@ -18,7 +18,7 @@ function App() {
   }, []);
 
   const videoClick = video => {
-    setSelectedVideo(video.snippet.title);
+    setSelectedVideo(video);
   };
 
   return (
