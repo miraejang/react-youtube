@@ -1,0 +1,85 @@
+.header {
+  display: flex;
+  width: 100%;
+  height: 60px;
+  background-color: #252321;
+  align-items: center;
+}
+.menuBox {
+  display: flex;
+  margin-left: 30px;
+  flex: 1 1 30%;
+  align-items: center;
+  cursor: pointer;
+}
+.menuBtn {
+  padding: 10px;
+  font-size: 20px;
+}
+.logo {
+  margin-left: 20px;
+  cursor: pointer;
+}
+.logoIcon {
+  display: inline-block;
+  position: relative;
+  z-index: 0;
+  font-size: 30px;
+  color: red;
+  text-align: center;
+  vertical-align: middle;
+}
+.logoIcon::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 35%;
+  top: 35%;
+  z-index: -1;
+  width: 30%;
+  height: 30%;
+  background-color: #fff;
+}
+.logoTxt {
+  font-weight: bold;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+.searchBox {
+  display: flex;
+  flex: 1 1 70%;
+  justify-content: center;
+}
+.input {
+  width: 570px;
+  height: 40px;
+  padding: 0 10px;
+  background-color: #121212;
+  border: 1px solid #303030;
+  box-sizing: border-box;
+  color: #fff;
+}
+.searchBtn {
+  width: 64px;
+  height: 40px;
+  font-size: 20px;
+  background-color: #313131;
+  color: #fff;
+}
+.logoImg {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  background-color: red;
+  border-radius: 20%;
+  text-align: center;
+  line-height: 30px;
+}
+.logoImg::after {
+  content: '▶';
+  line-height: 30px;
+  color: #fff;
+}
+.settingBox {
+  flex: 1 1 30%;
+}

@@ -1,4 +1,5 @@
 .detail {
+  overflow-y: auto;
   flex: 1 1 60%;
   padding: 2em;
 }
