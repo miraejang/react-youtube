@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 
-function Header(props) {
+function Header({ searchTerm, searchSubmit, valueChange }) {
   return (
     <header className={styles.header}>
       <div className={styles.menuBox}>
@@ -19,8 +19,8 @@ function Header(props) {
         </div>
       </div>
       <div className={styles.searchBox}>
-        <form className={styles.form}>
-          <input className={styles.input} type="text" placeholder="Search" />
+        <form className={styles.form} onSubmit={searchSubmit}>
+          <input value={searchTerm} onChange={valueChange} className={styles.input} type="text" placeholder="Search" />
           <button className={styles.searchBtn}>
             <FontAwesomeIcon className={styles.searchIcon} icon={faSearch} />
           </button>

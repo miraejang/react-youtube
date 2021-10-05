@@ -17,3 +17,15 @@ export const videosApi = {
       },
     }),
 };
+
+export const searchApi = {
+  search: term =>
+    api.get('search', {
+      params: {
+        part: 'snippet',
+        q: term,
+        maxResults: 20,
+        type: 'video',
+      },
+    }),
+};
