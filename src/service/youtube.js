@@ -1,15 +1,19 @@
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: 'https://www.googleapis.com/youtube/v3/',
-  params: {
-    key: 'AIzaSyC5GGuLb7zimO73RnKUXjzSezHuy1ZkmIc',
-  },
-});
+class Youtube {
+  constructor(key) {
+    this.youtube = axios.create({
+      baseURL: 'https://www.googleapis.com/youtube/v3/',
+      params: {
+        key: key,
+      },
+    });
+  }
+}
 
 export const videosApi = {
   mostPopular: () =>
-    api.get('videos', {
+    this.youtube.get('videos', {
       params: {
         part: 'snippet',
         chart: 'mostPopular',
@@ -20,7 +24,7 @@ export const videosApi = {
 
 export const searchApi = {
   search: term =>
-    api.get('search', {
+    this.youtube.get('search', {
       params: {
         part: 'snippet',
         q: term,
@@ -29,3 +33,5 @@ export const searchApi = {
       },
     }),
 };
+
+export default Youtube;
