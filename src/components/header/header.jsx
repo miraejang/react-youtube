@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import Search from '../search/search';
 
 function Header({ searchTerm, searchSubmit, valueChange }) {
   return (
@@ -18,14 +19,7 @@ function Header({ searchTerm, searchSubmit, valueChange }) {
           <span className={styles.logoTxt}>Youtube</span>
         </div>
       </div>
-      <div className={styles.searchBox}>
-        <form className={styles.form} onSubmit={searchSubmit}>
-          <input value={searchTerm} onChange={valueChange} className={styles.input} type="text" placeholder="Search" />
-          <button className={styles.searchBtn}>
-            <FontAwesomeIcon className={styles.searchIcon} icon={faSearch} />
-          </button>
-        </form>
-      </div>
+      <Search searchSubmit={searchSubmit} searchTerm={searchTerm} valueChange={valueChange} />
       <div className={styles.settingBox}></div>
     </header>
   );
