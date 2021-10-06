@@ -2,24 +2,89 @@ li {
   box-sizing: border-box;
   cursor: pointer;
 }
+.imgBox {
+}
+.imgViewBox {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-bottom: 56%;
+}
 .img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   max-width: 100%;
+  transform: translate(-50%, -50%);
+}
+.detailsBox {
+  display: inline-flex;
+  width: 100%;
+  flex-direction: row;
+}
+.logoBox {
+  flex: 1 1 14%;
+  text-align: center;
+}
+.logo {
+  display: inline-block;
+  overflow: hidden;
+  width: 2.25em;
+  height: 2.25em;
+  border-radius: 50%;
+  background-color: pink;
+}
+.infoBox {
+  color: #aaa;
+  flex: 1 1 80%;
+}
+.title {
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  color: #fff;
+  text-overflow: ellipsis;
+}
+.menuBox {
+  flex: 1 1 4%;
+  text-align: center;
+}
+.iconMenu {
+  display: none;
+  margin-top: 0.3em;
+}
+li:hover .iconMenu {
+  display: inline-block;
 }
 
-.mainItem {
+.grid {
   width: 25%;
   padding: 20px;
 }
-.detailItem {
+.grid .detailsBox {
+  margin-top: 1em;
+}
+.list {
   display: flex;
   width: 100%;
-  align-items: center;
   margin: 0.5em 0;
+  flex-direction: row;
 }
-.detailItem .imgBox {
-  width: 30%;
+.list .logoBox {
+  display: none;
 }
-.detailItem .infoBox {
-  width: 70%;
-  padding: 0 1em;
+.list .imgBox {
+  margin-right: 1em;
+  flex: 1 1 40%;
+}
+.list .detailsBox {
+  flex: 1 1 60%;
+}
+.list .infoBox {
+  flex: 1 1 96%;
+}
+.list .title {
+  font-size: 0.875em;
+}
+.list .channel {
+  font-size: 0.75em;
 }

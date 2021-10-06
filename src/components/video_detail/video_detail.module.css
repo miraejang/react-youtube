@@ -1,5 +1,4 @@
 .detail {
-  overflow-y: auto;
   flex: 1 1 60%;
   padding: 2em;
 }
@@ -15,12 +14,37 @@
   height: 100%;
 }
 .videoInfo {
+  margin-top: 1em;
+}
+.infoTop {
+  padding-bottom: 1.2em;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .videoTitle {
   font-size: 1.125em;
 }
 .published {
+  margin-top: 0.9em;
   font-size: 0.875em;
   color: #aaa;
+}
+.tag {
+  padding-right: 0.5em;
+  font-size: 0.75em;
+  color: #3ea6ff;
+}
+.infoDetails {
+  padding: 0.5em 0;
+}
+.tags {
+  margin-bottom: 1em;
+}
+.tags .tag {
+  font-size: 0.875em;
+}
+.channel {
+  margin: 1em 0;
+}
+.desc {
+  line-height: 1.5;
 }

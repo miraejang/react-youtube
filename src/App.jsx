@@ -10,7 +10,9 @@ function App({ youtube }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    youtube.mostPopular().then(videos => setVideos(videos.data.items));
+    youtube
+      .mostPopular() //
+      .then(videos => setVideos(videos.data.items));
   }, [youtube]);
 
   const videoClick = video => {
@@ -30,13 +32,14 @@ function App({ youtube }) {
   };
 
   const searchVideo = async term => {
-    youtube.search().then(videos => setVideos(videos.data.items));
+    youtube
+      .search() //
+      .then(videos => setVideos(videos.data.items));
   };
 
   return (
     <div className={styles.youtube}>
       <Header searchTerm={searchTerm} searchSubmit={searchSubmit} valueChange={valueChange} />
-
       <div className={styles.content}>
         {selectedVideo && <VideoDetail selectedVideo={selectedVideo} />}
         <VideoList videos={videos} videoClick={videoClick} selectedVideo={selectedVideo ? true : false} />
