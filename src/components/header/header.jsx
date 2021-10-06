@@ -5,24 +5,22 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Search from '../search/search';
 
-function Header({ searchTerm, searchSubmit, valueChange }) {
-  return (
-    <header className={styles.header}>
-      <div className={styles.menuBox}>
-        <div className={styles.menuBtn}>
-          <FontAwesomeIcon icon={faBars} />
-        </div>
-        <div className={styles.logo}>
-          <div className={styles.logoIcon}>
-            <FontAwesomeIcon icon={faYoutube} />
-          </div>
-          <span className={styles.logoTxt}>Youtube</span>
-        </div>
+const Header = ({ searchTerm, searchSubmit, valueChange }) => (
+  <header className={styles.header}>
+    <div className={styles.menuBox}>
+      <div className={styles.menuBtn}>
+        <FontAwesomeIcon icon={faBars} />
       </div>
-      <Search searchSubmit={searchSubmit} searchTerm={searchTerm} valueChange={valueChange} />
-      <div className={styles.settingBox}></div>
-    </header>
-  );
-}
+      <div className={styles.logo}>
+        <div className={styles.logoIcon}>
+          <FontAwesomeIcon icon={faYoutube} />
+        </div>
+        <span className={styles.logoTxt}>Youtube</span>
+      </div>
+    </div>
+    <Search searchSubmit={searchSubmit} searchTerm={searchTerm} valueChange={valueChange} />
+    <div className={styles.settingBox}></div>
+  </header>
+);
 
 export default Header;

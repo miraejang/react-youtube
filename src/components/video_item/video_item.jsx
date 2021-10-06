@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './video_item.module.css';
 
-function VideoItem({ video, video: { snippet }, videoClick, selectedVideo }) {
+const VideoItem = ({ video, video: { snippet }, videoClick, selectedVideo }) => {
   const itemType = selectedVideo ? styles.detailItem : styles.mainItem;
+
   return (
     <li className={itemType} onClick={() => videoClick(video)}>
       <div className={styles.imgBox}>
@@ -14,6 +15,6 @@ function VideoItem({ video, video: { snippet }, videoClick, selectedVideo }) {
       </div>
     </li>
   );
-}
+};
 
 export default VideoItem;
