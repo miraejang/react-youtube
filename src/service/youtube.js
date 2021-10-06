@@ -9,29 +9,29 @@ class Youtube {
       },
     });
   }
-}
 
-export const videosApi = {
-  mostPopular: () =>
-    this.youtube.get('videos', {
+  async mostPopular() {
+    const response = await this.youtube.get('videos', {
       params: {
         part: 'snippet',
         chart: 'mostPopular',
         maxResults: 20,
       },
-    }),
-};
+    });
+    return response;
+  }
 
-export const searchApi = {
-  search: term =>
-    this.youtube.get('search', {
+  async search(term) {
+    const response = this.youtube.get('search', {
       params: {
         part: 'snippet',
         q: term,
         maxResults: 20,
         type: 'video',
       },
-    }),
-};
+    });
+    return response;
+  }
+}
 
 export default Youtube;
