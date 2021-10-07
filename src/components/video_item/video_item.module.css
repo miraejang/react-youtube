@@ -39,10 +39,14 @@ li {
   flex: 1 1 80%;
 }
 .title {
+  overflow: hidden;
   margin-bottom: 0.5em;
   font-weight: 500;
   color: #fff;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .menuBox {
   flex: 1 1 4%;
