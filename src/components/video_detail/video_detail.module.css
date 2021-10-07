@@ -20,30 +20,73 @@
   padding-bottom: 1.2em;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.videoTitle {
-  font-size: 1.125em;
-}
-.published {
-  margin-top: 0.9em;
-  font-size: 0.875em;
-  color: #aaa;
-}
 .tag {
   padding-right: 0.5em;
   font-size: 0.75em;
   color: #3ea6ff;
 }
+.videoTitle {
+  font-size: 1.125em;
+}
+
+.videoPrimary {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.videoDetails {
+  margin-top: 0.9em;
+  font-size: 0.875em;
+  color: #aaa;
+}
+.published {
+}
+.rightBox {
+  display: flex;
+  flex-direction: row;
+}
+.like {
+  margin-right: 0.7em;
+}
+.thumbsUp,
+.thumbsDown {
+  margin-right: 0.3em;
+  font-size: 1.125em;
+  vertical-align: middle;
+}
+.likeCount,
+.dislikeCount {
+  font-size: 0.875em;
+  vertical-align: middle;
+}
 .infoDetails {
   padding: 0.5em 0;
+}
+.channelBox {
+  display: flex;
+  margin: 1em 0;
+  flex-direction: row;
+  align-items: center;
+}
+.logo {
+  width: 3em;
+  height: auto;
+  margin-right: 1em;
+  border-radius: 50%;
+}
+.channel {
+}
+.subscriber {
+  margin-top: 0.15em;
+  font-size: 0.75em;
+  color: #aaa;
 }
 .tags {
   margin-bottom: 1em;
 }
 .tags .tag {
   font-size: 0.875em;
-}
-.channel {
-  margin: 1em 0;
 }
 .desc {
   line-height: 1.5;

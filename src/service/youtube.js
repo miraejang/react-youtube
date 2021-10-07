@@ -13,7 +13,7 @@ class Youtube {
   async mostPopular() {
     const response = await this.youtube.get('videos', {
       params: {
-        part: 'snippet',
+        part: 'snippet, statistics',
         chart: 'mostPopular',
         maxResults: 20,
       },
@@ -28,6 +28,17 @@ class Youtube {
         q: query,
         maxResults: 20,
         type: 'video',
+      },
+    });
+    return response;
+  }
+
+  async channels(id) {
+    const response = this.youtube.get('channels', {
+      params: {
+        part: 'snippet, statistics',
+        id: id,
+        maxResults: 1,
       },
     });
     return response;

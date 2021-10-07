@@ -8,6 +8,7 @@ function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [channelInfo, setChannelInfo] = useState(null);
 
   useEffect(() => {
     youtube
@@ -16,6 +17,7 @@ function App({ youtube }) {
   }, [youtube]);
 
   const videoClick = video => {
+    channel(video.snippet.channelId);
     setSelectedVideo(video);
   };
 
@@ -37,11 +39,17 @@ function App({ youtube }) {
       .then(videos => setVideos(videos.data.items));
   };
 
+  const channel = async id => {
+    youtube
+      .channels(id) //
+      .then(channel => setChannelInfo(channel.data.items[0]));
+  };
+
   return (
     <div className={styles.youtube}>
       <Header searchTerm={searchTerm} searchSubmit={searchSubmit} valueChange={valueChange} />
       <div className={styles.content}>
-        {selectedVideo && <VideoDetail selectedVideo={selectedVideo} />}
+        {selectedVideo && <VideoDetail selectedVideo={selectedVideo} channelInfo={channelInfo} />}
         <VideoList videos={videos} videoClick={videoClick} selectedVideo={selectedVideo ? true : false} />
       </div>
     </div>
