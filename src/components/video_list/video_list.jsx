@@ -5,8 +5,8 @@ import styles from './video_list.module.css';
 const VideoList = ({ videos, videoClick, selectedVideo }) => (
   <ul className={styles.list}>
     {videos &&
-      videos.map(video => (
-        <VideoItem video={video} videoClick={videoClick} selectedVideo={selectedVideo} key={video.id} />
+      videos.map((video, idx) => (
+        <VideoItem video={video} videoClick={videoClick} selectedVideo={selectedVideo} key={`${video.id}${idx}`} />
       ))}
   </ul>
 );
