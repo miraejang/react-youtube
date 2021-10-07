@@ -13,7 +13,7 @@ const VideoDetail = ({ selectedVideo }) => {
           width="100%"
           height="100%"
           src={`http://www.youtube.com/embed/${selectedVideo.id}`}
-          frameborder="0"
+          frameBorder="0"
         ></iframe>
       </div>
       <div className={styles.videoInfo}>
