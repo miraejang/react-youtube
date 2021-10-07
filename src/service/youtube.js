@@ -21,11 +21,11 @@ class Youtube {
     return response;
   }
 
-  async search(term) {
+  async search(query) {
     const response = this.youtube.get('search', {
       params: {
         part: 'snippet',
-        q: term,
+        q: query,
         maxResults: 20,
         type: 'video',
       },

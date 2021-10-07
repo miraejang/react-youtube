@@ -31,9 +31,9 @@ function App({ youtube }) {
     setSearchTerm(term);
   };
 
-  const searchVideo = async term => {
+  const searchVideo = async query => {
     youtube
-      .search() //
+      .search(query) //
       .then(videos => setVideos(videos.data.items));
   };
 
