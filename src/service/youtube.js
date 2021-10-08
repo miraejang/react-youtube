@@ -10,6 +10,17 @@ class Youtube {
     });
   }
 
+  async videos(id) {
+    const response = await this.youtube.get('videos', {
+      params: {
+        part: 'snippet, statistics',
+        id: id,
+        maxResults: 1,
+      },
+    });
+    return response;
+  }
+
   async mostPopular() {
     const response = await this.youtube.get('videos', {
       params: {

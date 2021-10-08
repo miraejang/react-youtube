@@ -18,7 +18,9 @@ function App({ youtube }) {
 
   const videoClick = video => {
     channel(video.snippet.channelId);
-    setSelectedVideo(video);
+    youtube
+      .videos(video.id.videoId || video.id) //
+      .then(VideoDetail => setSelectedVideo(VideoDetail.data.items[0]));
   };
 
   const searchSubmit = e => {
@@ -33,13 +35,13 @@ function App({ youtube }) {
     setSearchTerm(term);
   };
 
-  const searchVideo = async query => {
+  const searchVideo = query => {
     youtube
       .search(query) //
       .then(videos => setVideos(videos.data.items));
   };
 
-  const channel = async id => {
+  const channel = id => {
     youtube
       .channels(id) //
       .then(channel => setChannelInfo(channel.data.items[0]));

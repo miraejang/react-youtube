@@ -4,8 +4,6 @@ import React from 'react';
 import styles from './video_detail.module.css';
 
 const VideoDetail = ({ selectedVideo, channelInfo }) => {
-  console.log(channelInfo);
-
   const formatDate = date => {
     const arr = date.split(/[-, T]/gi);
     const year = Number(arr[0]);
@@ -16,7 +14,7 @@ const VideoDetail = ({ selectedVideo, channelInfo }) => {
 
   const formatNumber = number => {
     number = Number(number);
-    if (number > 10000) return `${(number / 10000).toFixed(1)}만`;
+    if (number > 10000) return `${number / 10000}만`;
     return `${number.toLocaleString('en-IN')}`;
   };
 
@@ -29,7 +27,7 @@ const VideoDetail = ({ selectedVideo, channelInfo }) => {
           title={selectedVideo.snippet.title}
           width="100%"
           height="100%"
-          src={`http://www.youtube.com/embed/${selectedVideo.id}`}
+          src={`https://www.youtube.com/embed/${selectedVideo.id}`}
           frameBorder="0"
         ></iframe>
       </div>
@@ -42,7 +40,6 @@ const VideoDetail = ({ selectedVideo, channelInfo }) => {
               </span>
             ))}
           <h3 className={styles.videoTitle}>{selectedVideo.snippet.title}</h3>
-          {console.log(selectedVideo.statistics)}
           <div className={styles.videoPrimary}>
             <p className={styles.videoDetails}>
               {selectedVideo.statistics && selectedVideo.statistics.viewCount && (
