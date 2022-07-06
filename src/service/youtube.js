@@ -11,7 +11,7 @@ class Youtube {
         maxResults: 1,
       },
     });
-    return response;
+    return response.data.items;
   }
 
   async mostPopular() {
@@ -22,7 +22,7 @@ class Youtube {
         maxResults: 20,
       },
     });
-    return response;
+    return response.data.items;
   }
 
   async search(query) {
@@ -34,7 +34,7 @@ class Youtube {
         type: 'video',
       },
     });
-    return response;
+    return response.data.items;
   }
 
   async channels(id) {
@@ -45,7 +45,7 @@ class Youtube {
         maxResults: 1,
       },
     });
-    return response;
+    return response.data.items;
   }
 }
 

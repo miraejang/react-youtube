@@ -13,14 +13,14 @@ function App({ youtube }) {
   useEffect(() => {
     youtube
       .mostPopular() //
-      .then(videos => setVideos(videos.data.items));
+      .then(videos => setVideos(videos));
   }, [youtube]);
 
   const videoClick = video => {
     channel(video.snippet.channelId);
     youtube
       .videos(video.id.videoId || video.id) //
-      .then(VideoDetail => setSelectedVideo(VideoDetail.data.items[0]));
+      .then(VideoDetail => setSelectedVideo(VideoDetail[0]));
   };
 
   const searchSubmit = e => {
@@ -38,21 +38,40 @@ function App({ youtube }) {
   const searchVideo = query => {
     youtube
       .search(query) //
-      .then(videos => setVideos(videos.data.items));
+      .then(videos => setVideos(videos));
   };
 
   const channel = id => {
     youtube
       .channels(id) //
-      .then(channel => setChannelInfo(channel.data.items[0]));
+      .then(channel => setChannelInfo(channel[0]));
+  };
+
+  const clearSelected = () => {
+    console.log('clear');
+    setSelectedVideo(null);
   };
 
   return (
     <div className={styles.youtube}>
-      <Header searchTerm={searchTerm} searchSubmit={searchSubmit} valueChange={valueChange} />
+      <Header
+        searchTerm={searchTerm}
+        searchSubmit={searchSubmit}
+        valueChange={valueChange}
+        clearSelected={clearSelected}
+      />
       <div className={styles.content}>
-        {selectedVideo && <VideoDetail selectedVideo={selectedVideo} channelInfo={channelInfo} />}
-        <VideoList videos={videos} videoClick={videoClick} selectedVideo={selectedVideo ? true : false} />
+        {selectedVideo && (
+          <VideoDetail
+            selectedVideo={selectedVideo}
+            channelInfo={channelInfo}
+          />
+        )}
+        <VideoList
+          videos={videos}
+          videoClick={videoClick}
+          selectedVideo={selectedVideo ? true : false}
+        />
       </div>
     </div>
   );
