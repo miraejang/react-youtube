@@ -8,7 +8,6 @@ function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [channelInfo, setChannelInfo] = useState(null);
 
   useEffect(() => {
     youtube
@@ -17,10 +16,7 @@ function App({ youtube }) {
   }, [youtube]);
 
   const videoClick = video => {
-    channel(video.snippet.channelId);
-    youtube
-      .getVideo(video.id.videoId || video.id) //
-      .then(VideoDetail => setSelectedVideo(VideoDetail));
+    videoAllData(video.id, video.snippet.channelId);
   };
 
   const searchSubmit = e => {
@@ -41,10 +37,10 @@ function App({ youtube }) {
       .then(videos => setVideos(videos));
   };
 
-  const channel = id => {
+  const videoAllData = (videoId, channelId) => {
     youtube
-      .getChannel(id) //
-      .then(channel => setChannelInfo(channel));
+      .getAllData(videoId, channelId) //
+      .then(data => setSelectedVideo(data));
   };
 
   const clearSelected = () => {
@@ -78,7 +74,6 @@ function App({ youtube }) {
         {selectedVideo && (
           <VideoDetail
             selectedVideo={selectedVideo}
-            channelInfo={channelInfo}
             formatDate={formatDate}
             formatNumber={formatNumber}
           />

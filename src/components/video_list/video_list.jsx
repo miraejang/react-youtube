@@ -15,12 +15,13 @@ const VideoList = ({
       videos.map((video, idx) => (
         <VideoItem
           youtube={youtube}
-          video={video}
+          videoId={video.id}
+          channelId={video.snippet.channelId}
           videoClick={videoClick}
           formatDate={formatDate}
           formatNumber={formatNumber}
           selectedVideo={selectedVideo}
-          key={`${video.id}${idx}`}
+          key={video.snippet.title}
         />
       ))}
   </ul>

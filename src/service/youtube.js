@@ -48,6 +48,10 @@ class Youtube {
     });
     return response.data.items[0];
   }
+
+  getAllData(videoId, channelId) {
+    return Promise.all([this.getVideo(videoId), this.getChannel(channelId)]);
+  }
 }
 
 export default Youtube;
