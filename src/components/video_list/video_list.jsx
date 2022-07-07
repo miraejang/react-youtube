@@ -5,7 +5,7 @@ import styles from './video_list.module.css';
 const VideoList = ({
   youtube,
   videos,
-  videoClick,
+  clickVideo,
   formatDate,
   formatNumber,
   selectedVideo,
@@ -17,7 +17,7 @@ const VideoList = ({
           youtube={youtube}
           videoId={video.id.videoId || video.id}
           channelId={video.snippet.channelId}
-          videoClick={videoClick}
+          clickVideo={clickVideo}
           formatDate={formatDate}
           formatNumber={formatNumber}
           selectedVideo={selectedVideo}

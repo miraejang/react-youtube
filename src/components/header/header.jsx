@@ -5,13 +5,13 @@ import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Search from '../search/search';
 
-const Header = ({ searchTerm, searchSubmit, valueChange, clearSelected }) => (
+const Header = ({ searchTerm, searchSubmit, valueChange, clickLogo }) => (
   <header className={styles.header}>
     <div className={styles.menuBox}>
       <div className={styles.menuBtn}>
         <FontAwesomeIcon icon={faBars} />
       </div>
-      <div className={styles.logo} onClick={clearSelected}>
+      <div className={styles.logo} onClick={clickLogo}>
         <div className={styles.logoIcon}>
           <FontAwesomeIcon icon={faYoutube} />
         </div>

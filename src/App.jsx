@@ -10,22 +10,19 @@ function App({ youtube }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
+    getPopularVideo();
+  }, [youtube]);
+
+  const getPopularVideo = () => {
     youtube
       .mostPopular() //
       .then(videos => setVideos(videos));
-  }, [youtube]);
-
-  const videoClick = video => {
-    youtube
-      .getAllData(video.id, video.snippet.channelId) //
-      .then(data => setSelectedVideo({ video: data[0], channel: data[1] }));
   };
 
   const searchSubmit = e => {
     e.preventDefault();
     setSelectedVideo(null);
     searchVideo(searchTerm);
-    setSearchTerm('');
   };
 
   const valueChange = e => {
@@ -39,8 +36,17 @@ function App({ youtube }) {
       .then(videos => setVideos(videos));
   };
 
-  const clearSelected = () => {
+  const clickVideo = (videoId, channelId) => {
+    setSearchTerm('');
+    youtube
+      .getAllData(videoId, channelId) //
+      .then(data => setSelectedVideo({ video: data[0], channel: data[1] }));
+  };
+
+  const clickLogo = () => {
     setSelectedVideo(null);
+    setSearchTerm('');
+    getPopularVideo();
   };
 
   const formatDate = date => {
@@ -63,7 +69,7 @@ function App({ youtube }) {
         searchTerm={searchTerm}
         searchSubmit={searchSubmit}
         valueChange={valueChange}
-        clearSelected={clearSelected}
+        clickLogo={clickLogo}
       />
       <div className={styles.content}>
         {selectedVideo && (
@@ -76,7 +82,7 @@ function App({ youtube }) {
         <VideoList
           youtube={youtube}
           videos={videos}
-          videoClick={videoClick}
+          clickVideo={clickVideo}
           formatDate={formatDate}
           formatNumber={formatNumber}
           selectedVideo={selectedVideo ? true : false}

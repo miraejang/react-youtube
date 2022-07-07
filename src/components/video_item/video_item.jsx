@@ -7,7 +7,7 @@ const VideoItem = ({
   youtube,
   videoId,
   channelId,
-  videoClick,
+  clickVideo,
   formatDate,
   formatNumber,
   selectedVideo,
@@ -28,7 +28,7 @@ const VideoItem = ({
   return (
     <>
       {video && channel && (
-        <li className={display} onClick={() => videoClick(video)}>
+        <li className={display} onClick={() => clickVideo(videoId, channelId)}>
           <div className={styles.imgBox}>
             <div className={styles.imgViewBox}>
               <img
