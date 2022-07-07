@@ -40,7 +40,6 @@ function App({ youtube }) {
   };
 
   const clearSelected = () => {
-    console.log('clear');
     setSelectedVideo(null);
   };
 

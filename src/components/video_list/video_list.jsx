@@ -12,10 +12,10 @@ const VideoList = ({
 }) => (
   <ul className={styles.list}>
     {videos &&
-      videos.map((video, idx) => (
+      videos.map(video => (
         <VideoItem
           youtube={youtube}
-          videoId={video.id}
+          videoId={video.id.videoId || video.id}
           channelId={video.snippet.channelId}
           videoClick={videoClick}
           formatDate={formatDate}
