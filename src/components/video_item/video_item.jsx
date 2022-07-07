@@ -27,7 +27,7 @@ const VideoItem = ({
 
   return (
     <>
-      {channel && (
+      {video && channel && (
         <li className={display} onClick={() => videoClick(video)}>
           <div className={styles.imgBox}>
             <div className={styles.imgViewBox}>

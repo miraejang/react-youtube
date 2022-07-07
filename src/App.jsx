@@ -16,7 +16,9 @@ function App({ youtube }) {
   }, [youtube]);
 
   const videoClick = video => {
-    videoAllData(video.id, video.snippet.channelId);
+    youtube
+      .getAllData(video.id, video.snippet.channelId) //
+      .then(data => setSelectedVideo({ video: data[0], channel: data[1] }));
   };
 
   const searchSubmit = e => {
@@ -35,12 +37,6 @@ function App({ youtube }) {
     youtube
       .search(query) //
       .then(videos => setVideos(videos));
-  };
-
-  const videoAllData = (videoId, channelId) => {
-    youtube
-      .getAllData(videoId, channelId) //
-      .then(data => setSelectedVideo(data));
   };
 
   const clearSelected = () => {
