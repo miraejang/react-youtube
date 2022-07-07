@@ -19,8 +19,8 @@ function App({ youtube }) {
   const videoClick = video => {
     channel(video.snippet.channelId);
     youtube
-      .videos(video.id.videoId || video.id) //
-      .then(VideoDetail => setSelectedVideo(VideoDetail[0]));
+      .getVideo(video.id.videoId || video.id) //
+      .then(VideoDetail => setSelectedVideo(VideoDetail));
   };
 
   const searchSubmit = e => {
@@ -43,8 +43,8 @@ function App({ youtube }) {
 
   const channel = id => {
     youtube
-      .channels(id) //
-      .then(channel => setChannelInfo(channel[0]));
+      .getChannel(id) //
+      .then(channel => setChannelInfo(channel));
   };
 
   const clearSelected = () => {
@@ -68,6 +68,7 @@ function App({ youtube }) {
           />
         )}
         <VideoList
+          youtube={youtube}
           videos={videos}
           videoClick={videoClick}
           selectedVideo={selectedVideo ? true : false}
