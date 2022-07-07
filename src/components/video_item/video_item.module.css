@@ -31,26 +31,32 @@ li {
   overflow: hidden;
   width: 2.25em;
   height: 2.25em;
+  margin-right: 0.75em;
   border-radius: 50%;
-  background-color: pink;
 }
 .logoImage {
   width: 100%;
   height: 100%;
 }
 .infoBox {
+  line-height: 1.4;
   color: #aaa;
   flex: 1 1 80%;
 }
 .title {
   overflow: hidden;
-  margin-bottom: 0.5em;
-  font-weight: 500;
+  margin-bottom: 0.25em;
+  font-weight: 600;
+  font-size: 1rem;
   color: #fff;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+}
+.channel {
+  font-size: 0.875rem;
+  align-self: #aaa;
 }
 .menuBox {
   flex: 1 1 4%;

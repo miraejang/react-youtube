@@ -6,8 +6,10 @@ import styles from './video_item.module.css';
 const VideoItem = ({
   youtube,
   video,
-  video: { snippet },
+  video: { snippet, statistics },
   videoClick,
+  formatDate,
+  formatNumber,
   selectedVideo,
 }) => {
   const [channel, setChannel] = useState(null);
@@ -43,6 +45,12 @@ const VideoItem = ({
             <div className={styles.infoBox}>
               <h4 className={styles.title}>{snippet.title}</h4>
               <p className={styles.channel}>{snippet.channelTitle}</p>
+              {snippet && statistics && (
+                <p className={styles.channel}>
+                  <span>조회수 {formatNumber(statistics.viewCount)} • </span>
+                  <span>{formatDate(snippet.publishedAt)}</span>
+                </p>
+              )}
             </div>
             <div className={styles.menuBox}>
               <FontAwesomeIcon icon={faEllipsisV} className={styles.iconMenu} />

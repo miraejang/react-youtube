@@ -3,21 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import styles from './video_detail.module.css';
 
-const VideoDetail = ({ selectedVideo, channelInfo }) => {
-  const formatDate = date => {
-    const arr = date.split(/[-, T]/gi);
-    const year = Number(arr[0]);
-    const month = Number(arr[1]);
-    const day = Number(arr[2]);
-    return `${year}. ${month}. ${day}.`;
-  };
-
-  const formatNumber = number => {
-    number = Number(number);
-    if (number > 10000) return `${number / 10000}만`;
-    return `${number.toLocaleString('en-IN')}`;
-  };
-
+const VideoDetail = ({
+  selectedVideo,
+  channelInfo,
+  formatDate,
+  formatNumber,
+}) => {
   return (
     <div className={styles.detail}>
       <div className={styles.videoBox}>
@@ -42,26 +33,45 @@ const VideoDetail = ({ selectedVideo, channelInfo }) => {
           <h3 className={styles.videoTitle}>{selectedVideo.snippet.title}</h3>
           <div className={styles.videoPrimary}>
             <p className={styles.videoDetails}>
-              {selectedVideo.statistics && selectedVideo.statistics.viewCount && (
-                <span className={styles.viewCount}>
-                  조회수 {Number(selectedVideo.statistics.viewCount).toLocaleString('en-US')}회 •{' '}
-                </span>
-              )}
-              <span className={styles.published}> {formatDate(selectedVideo.snippet.publishedAt)}</span>
+              {selectedVideo.statistics &&
+                selectedVideo.statistics.viewCount && (
+                  <span className={styles.viewCount}>
+                    조회수{' '}
+                    {Number(selectedVideo.statistics.viewCount).toLocaleString(
+                      'en-US'
+                    )}
+                    회 •{' '}
+                  </span>
+                )}
+              <span className={styles.published}>
+                {' '}
+                {formatDate(selectedVideo.snippet.publishedAt)}
+              </span>
             </p>
             <div className={styles.rightBox}>
               {selectedVideo.statistics && selectedVideo.statistics.likeCount && (
                 <div className={styles.like}>
-                  <FontAwesomeIcon icon={faThumbsUp} className={styles.thumbsUp} />
-                  <span className={styles.likeCount}>{formatNumber(selectedVideo.statistics.likeCount)}</span>
+                  <FontAwesomeIcon
+                    icon={faThumbsUp}
+                    className={styles.thumbsUp}
+                  />
+                  <span className={styles.likeCount}>
+                    {formatNumber(selectedVideo.statistics.likeCount)}
+                  </span>
                 </div>
               )}
-              {selectedVideo.statistics && selectedVideo.statistics.dislikeCount && (
-                <div className={styles.dislike}>
-                  <FontAwesomeIcon icon={faThumbsDown} className={styles.thumbsDown} />
-                  <span className={styles.dislikeCount}>{formatNumber(selectedVideo.statistics.dislikeCount)}</span>
-                </div>
-              )}
+              {selectedVideo.statistics &&
+                selectedVideo.statistics.dislikeCount && (
+                  <div className={styles.dislike}>
+                    <FontAwesomeIcon
+                      icon={faThumbsDown}
+                      className={styles.thumbsDown}
+                    />
+                    <span className={styles.dislikeCount}>
+                      {formatNumber(selectedVideo.statistics.dislikeCount)}
+                    </span>
+                  </div>
+                )}
             </div>
           </div>
         </div>
@@ -69,13 +79,21 @@ const VideoDetail = ({ selectedVideo, channelInfo }) => {
           <div className={styles.channelBox}>
             <div className={styles.logoBox}>
               {channelInfo && channelInfo.snippet.thumbnails && (
-                <img className={styles.logo} src={channelInfo.snippet.thumbnails.default.url} alt="channel logo" />
+                <img
+                  className={styles.logo}
+                  src={channelInfo.snippet.thumbnails.default.url}
+                  alt="channel logo"
+                />
               )}
             </div>
             <div className={styles.channelInfo}>
-              <h4 className={styles.channel}>{selectedVideo.snippet.channelTitle}</h4>
+              <h4 className={styles.channel}>
+                {selectedVideo.snippet.channelTitle}
+              </h4>
               {channelInfo && channelInfo.statistics.subscriberCount && (
-                <p className={styles.subscriber}>구독자 {formatNumber(channelInfo.statistics.subscriberCount)}</p>
+                <p className={styles.subscriber}>
+                  구독자 {formatNumber(channelInfo.statistics.subscriberCount)}
+                </p>
               )}
             </div>
           </div>
