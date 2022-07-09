@@ -1,0 +1,9 @@
+.content {
+  overflow-y: auto;
+  display: flex;
+  position: relative;
+  width: 100%;
+  padding: 0 5%;
+  box-sizing: border-box;
+  flex: 1 1 100%;
+}

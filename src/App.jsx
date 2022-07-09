@@ -1,13 +1,13 @@
-import VideoList from './components/video_list/video_list';
 import { useEffect, useState } from 'react';
-import VideoDetail from './components/video_detail/video_detail';
 import styles from './app.module.css';
 import Header from './components/header/header';
+import Content from './components/content/content';
 
 function App({ youtube }) {
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [navIsOpen, setNavIsOpen] = useState(false);
 
   useEffect(() => {
     getPopularVideo();
@@ -49,6 +49,11 @@ function App({ youtube }) {
     getPopularVideo();
   };
 
+  const clickNavBtn = status => {
+    console.log('click');
+    setNavIsOpen(!status);
+  };
+
   const formatDate = date => {
     const arr = date.split(/[-, T]/gi);
     const year = Number(arr[0]);
@@ -62,6 +67,9 @@ function App({ youtube }) {
     if (number > 10000) return `${number / 10000}만`;
     return `${number.toLocaleString('en-IN')}`;
   };
+  const onClickMenu = e => {
+    console.log(e.currentTarget.className);
+  };
 
   return (
     <div className={styles.youtube}>
@@ -70,24 +78,17 @@ function App({ youtube }) {
         searchSubmit={searchSubmit}
         valueChange={valueChange}
         clickLogo={clickLogo}
+        clickNavBtn={clickNavBtn}
       />
-      <div className={styles.content}>
-        {selectedVideo && (
-          <VideoDetail
-            selectedVideo={selectedVideo}
-            formatDate={formatDate}
-            formatNumber={formatNumber}
-          />
-        )}
-        <VideoList
-          youtube={youtube}
-          videos={videos}
-          clickVideo={clickVideo}
-          formatDate={formatDate}
-          formatNumber={formatNumber}
-          selectedVideo={selectedVideo ? true : false}
-        />
-      </div>
+      <Content
+        youtube={youtube}
+        videos={videos}
+        selectedVideo={selectedVideo}
+        formatDate={formatDate}
+        formatNumber={formatNumber}
+        clickVideo={clickVideo}
+        onClickMenu={onClickMenu}
+      />
     </div>
   );
 }

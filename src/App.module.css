@@ -32,15 +32,6 @@ body {
   height: 100vh;
   flex-direction: column;
 }
-.content {
-  display: flex;
-  overflow-y: auto;
-  width: 100%;
-  padding: 0 5%;
-  box-sizing: border-box;
-  flex: 1 1 100%;
-}
-
 @media screen and (max-width: 991px) {
   .content {
     flex-direction: column;
