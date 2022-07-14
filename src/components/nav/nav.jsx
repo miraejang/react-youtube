@@ -1,25 +1,40 @@
-import React from 'react';
+import {
+  faClock,
+  faFolder,
+  faHistory,
+  faHome,
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './nav.module.css';
 
-const Nav = ({ onClickMenu }) => {
+const Nav = ({ navOpen, selectedVideo }) => {
+  // const type
+  const navRef = useRef();
+
+  useEffect(() => {
+    navRef.current.style.display = navOpen ? 'block' : 'none';
+  }, [navOpen]);
+
   return (
-    <nav className={styles.nav}>
-      <p onClick={onClickMenu} className="home">
-        {/* <FontAwesomeIcon icon={faHouse} /> */}
-        <span className="text">home</span>
-      </p>
-      <p onClick={onClickMenu} className="history">
-        {/* <FontAwesomeIcon icon={faClockRotateLeft} /> */}
-        <span className="text">시청 기록</span>
-      </p>
-      <p onClick={onClickMenu} className="later">
-        {/* <FontAwesomeIcon icon={faClock} /> */}
-        <span className="text">나중에 볼 동영상</span>
-      </p>
-      <p onClick={onClickMenu} className="plyalist">
-        {/* <FontAwesomeIcon icon={'folder'}> */}
-        <span className="text">재생목록</span>
-      </p>
+    <nav ref={navRef}>
+      <Link to={'/'} className={styles.item}>
+        <FontAwesomeIcon icon={faHome} className={styles.icon} />
+        <span className={styles.text}>홈</span>
+      </Link>
+      <Link to={'/history'} className={styles.item}>
+        <FontAwesomeIcon icon={faHistory} className={styles.icon} />
+        <span className={styles.text}>시청 기록</span>
+      </Link>
+      <Link to={'/saved-video'} className={styles.item}>
+        <FontAwesomeIcon icon={faClock} className={styles.icon} />
+        <span className={styles.text}>나중에 볼 동영상</span>
+      </Link>
+      <Link to={'/plyalist'} className={styles.item}>
+        <FontAwesomeIcon icon={faFolder} className={styles.icon} />
+        <span className={styles.text}>재생목록</span>
+      </Link>
     </nav>
   );
 };

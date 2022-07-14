@@ -15,7 +15,7 @@ const Content = ({
 }) => {
   return (
     <div className={styles.content}>
-      <Nav onClickMenu={onClickMenu} />
+      <Nav selectedVideo={selectedVideo} onClickMenu={onClickMenu} />
       {selectedVideo && (
         <VideoDetail
           selectedVideo={selectedVideo}

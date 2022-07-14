@@ -3,7 +3,7 @@
   width: 100%;
   background-color: #252321;
   align-items: center;
-  flex: 1 1 60px;
+  flex: 0;
 }
 .menuBox {
   display: flex;

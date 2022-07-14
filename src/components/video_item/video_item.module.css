@@ -2,7 +2,10 @@ li {
   box-sizing: border-box;
   cursor: pointer;
 }
-.imgBox {
+li a {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 .imgViewBox {
   position: relative;
@@ -78,9 +81,11 @@ li:hover .iconMenu {
   margin-top: 1em;
 }
 .list {
-  display: flex;
   width: 100%;
   margin: 0.5em 0;
+}
+.list a {
+  display: flex;
   flex-direction: row;
 }
 .list .logoBox {

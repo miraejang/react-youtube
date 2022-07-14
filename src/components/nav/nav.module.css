@@ -1,9 +1,19 @@
-.nav {
+nav {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
-  /* background-color: #212121; */
-  background: pink;
+  background-color: #212121;
   z-index: 10;
+}
+nav .item {
+  display: block;
+  padding: 0 1.5em;
+  line-height: 2.5em;
+}
+.icon {
+  margin-right: 1.5em;
+}
+.text {
+  font-size: 0.875rem;
 }

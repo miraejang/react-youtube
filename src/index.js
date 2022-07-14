@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app';
+import App from './App';
 import Youtube from './service/youtube';
 import axios from 'axios';
+import { BrowserRouter } from 'react-router-dom';
 
 const httpClient = axios.create({
   baseURL: 'https://www.googleapis.com/youtube/v3/',
@@ -14,7 +15,9 @@ const youtube = new Youtube(httpClient);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App youtube={youtube} />
+    <BrowserRouter>
+      <App youtube={youtube} />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
