@@ -30,7 +30,7 @@ const VideoItem = ({
     <>
       {video && channel && (
         <li className={display} onClick={() => clickVideo(videoId, channelId)}>
-          <Link to={`watch/${videoId}`}>
+          <Link to={`/watch/${videoId}`}>
             <div className={styles.imgBox}>
               <div className={styles.imgViewBox}>
                 <img
