@@ -6,7 +6,7 @@ import Watch from './screens/watch/watch';
 import styles from './App.module.css';
 import Nav from './components/nav/nav';
 
-function App({ youtube }) {
+function App({ youtube, authService }) {
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
@@ -80,6 +80,7 @@ function App({ youtube }) {
   return (
     <div className={styles.youtube}>
       <Header
+        authService={authService}
         searchTerm={searchTerm}
         searchSubmit={searchSubmit}
         valueChange={valueChange}
