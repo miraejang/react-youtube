@@ -15,7 +15,9 @@ const VideoItem = ({
 }) => {
   const [video, setvideo] = useState(null);
   const [channel, setChannel] = useState(null);
-  const display = selectedVideo ? styles.list : styles.grid;
+  const display = selectedVideo
+    ? `${styles.item} ${styles.list}`
+    : `${styles.item} ${styles.grid}`;
 
   useEffect(() => {
     youtube

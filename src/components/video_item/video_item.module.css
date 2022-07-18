@@ -1,8 +1,8 @@
-li {
+.item {
   box-sizing: border-box;
   cursor: pointer;
 }
-li a {
+.item a {
   display: block;
   width: 100%;
   height: 100%;
@@ -69,7 +69,7 @@ li a {
   display: none;
   margin-top: 0.3em;
 }
-li:hover .iconMenu {
+.item:hover .iconMenu {
   display: inline-block;
 }
 
