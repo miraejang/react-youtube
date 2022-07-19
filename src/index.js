@@ -19,7 +19,7 @@ const youtube = new Youtube(httpClient);
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/react-youtube">
       <App youtube={youtube} authService={authService} />
     </BrowserRouter>
   </React.StrictMode>,
