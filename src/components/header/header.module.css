@@ -59,6 +59,53 @@
   line-height: 30px;
   color: #fff;
 }
-.settingBox {
+.accountBox {
   flex: 1 1 30%;
+  position: relative;
+  height: 100%;
+  margin-right: 30px;
+}
+.loginBtn {
+  padding: 0.5em 1.5em;
+  border: 1px solid #3ea6ff;
+  background-color: transparent;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3ea6ff;
+}
+.icon {
+  margin-right: 0.3em;
+}
+.account {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+}
+.accountBtn {
+  padding: 0 1em;
+  border-radius: 2em;
+  background-color: orangered;
+  font-weight: 600;
+  color: #fff;
+  line-height: 3;
+  word-break: keep-all;
+}
+.settings {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: rgba(48, 48, 48, 0.5);
+  z-index: 100;
+}
+.settings li {
+  padding: 0.5em 1.5em;
+  border: 1px solid rgba(136, 136, 136, 0.1);
+}
+.logoutBtn {
+  background-color: transparent;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
 }
