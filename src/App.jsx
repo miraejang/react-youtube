@@ -53,7 +53,7 @@ function App({ youtube, authService }) {
       .then(() => setLoading(false));
   };
 
-  const clickLogo = () => {
+  const clearSelectedVideo = () => {
     setSelectedVideo(null);
     setSearchTerm('');
     getPopularVideo();
@@ -84,11 +84,11 @@ function App({ youtube, authService }) {
         searchTerm={searchTerm}
         searchSubmit={searchSubmit}
         valueChange={valueChange}
-        clickLogo={clickLogo}
+        clearSelectedVideo={clearSelectedVideo}
         clickNavBtn={clickNavBtn}
       />
       <div className={styles.content}>
-        <Nav navOpen={navOpen} selectedVideo={selectedVideo} />
+        <Nav navOpen={navOpen} clearSelectedVideo={clearSelectedVideo} />
         <Routes>
           <Route
             path="/"

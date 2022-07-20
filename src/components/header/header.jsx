@@ -15,7 +15,7 @@ const Header = ({
   searchTerm,
   searchSubmit,
   valueChange,
-  clickLogo,
+  clearSelectedVideo,
   clickNavBtn,
 }) => {
   const settingsRef = useRef();
@@ -45,7 +45,7 @@ const Header = ({
         <div className={styles.navBtn} onClick={clickNavBtn}>
           <FontAwesomeIcon icon={faBars} />
         </div>
-        <div className={styles.logo} onClick={clickLogo}>
+        <div className={styles.logo} onClick={clearSelectedVideo}>
           <Link to={'/'}>
             <div className={styles.logoIcon}>
               <FontAwesomeIcon icon={faYoutube} />
