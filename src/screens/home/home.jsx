@@ -6,7 +6,6 @@ const Home = ({
   youtube,
   loading,
   videos,
-  selectedVideo,
   clickVideo,
   formatDate,
   formatNumber,
@@ -22,7 +21,7 @@ const Home = ({
           clickVideo={clickVideo}
           formatDate={formatDate}
           formatNumber={formatNumber}
-          selectedVideo={selectedVideo}
+          isGrid={true}
         />
       )}
     </>

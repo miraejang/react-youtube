@@ -1,13 +1,14 @@
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { connect } from 'react-redux';
 import styles from './video_detail.module.css';
 
-const VideoDetail = ({
-  selectedVideo: { video, channel },
-  formatDate,
-  formatNumber,
-}) => {
+const VideoDetail = ({ selectedVideo, formatDate, formatNumber }) => {
+  const {
+    data: { video, channel },
+  } = selectedVideo;
+
   return (
     <div className={styles.detail}>
       <div className={styles.videoBox}>
@@ -105,4 +106,9 @@ const VideoDetail = ({
   );
 };
 
-export default VideoDetail;
+const mapStateToProps = state => {
+  console.log('detila state', state);
+  return { selectedVideo: state };
+};
+
+export default connect(mapStateToProps)(VideoDetail);

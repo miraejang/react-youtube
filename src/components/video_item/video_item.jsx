@@ -1,23 +1,25 @@
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { set } from '../../store';
 import styles from './video_item.module.css';
 
 const VideoItem = ({
   youtube,
   videoId,
   channelId,
-  clickVideo,
   formatDate,
   formatNumber,
-  selectedVideo,
+  isGrid,
+  setSelected,
 }) => {
   const [video, setvideo] = useState(null);
   const [channel, setChannel] = useState(null);
-  const display = selectedVideo
-    ? `${styles.item} ${styles.list}`
-    : `${styles.item} ${styles.grid}`;
+  const display = isGrid
+    ? `${styles.item} ${styles.grid}`
+    : `${styles.item} ${styles.list}`;
 
   useEffect(() => {
     youtube
@@ -28,10 +30,14 @@ const VideoItem = ({
       });
   }, [youtube, videoId, channelId]);
 
+  const clickVideo = () => {
+    setSelected({ video, channel });
+  };
+
   return (
     <>
       {video && channel && (
-        <li className={display} onClick={() => clickVideo(videoId, channelId)}>
+        <li className={display} onClick={clickVideo}>
           <Link to={`/watch/${videoId}`}>
             <div className={styles.imgBox}>
               <div className={styles.imgViewBox}>
@@ -78,4 +84,8 @@ const VideoItem = ({
   );
 };
 
-export default VideoItem;
+const mapDispatchToProps = dispatch => {
+  return { setSelected: data => dispatch(set(data)) };
+};
+
+export default connect(null, mapDispatchToProps)(VideoItem);

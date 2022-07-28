@@ -8,7 +8,6 @@ import Nav from './components/nav/nav';
 
 function App({ youtube, authService }) {
   const [videos, setVideos] = useState([]);
-  const [selectedVideo, setSelectedVideo] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [navOpen, setNavOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -27,7 +26,6 @@ function App({ youtube, authService }) {
 
   const searchSubmit = e => {
     e.preventDefault();
-    setSelectedVideo(null);
     searchVideo(searchTerm);
   };
 
@@ -42,21 +40,6 @@ function App({ youtube, authService }) {
       .search(query) //
       .then(videos => setVideos(videos))
       .then(() => setLoading(false));
-  };
-
-  const clickVideo = (videoId, channelId) => {
-    setLoading(true);
-    setSearchTerm('');
-    youtube
-      .getAllData(videoId, channelId) //
-      .then(data => setSelectedVideo({ video: data[0], channel: data[1] }))
-      .then(() => setLoading(false));
-  };
-
-  const clearSelectedVideo = () => {
-    setSelectedVideo(null);
-    setSearchTerm('');
-    getPopularVideo();
   };
 
   const clickNavBtn = () => {
@@ -84,11 +67,10 @@ function App({ youtube, authService }) {
         searchTerm={searchTerm}
         searchSubmit={searchSubmit}
         valueChange={valueChange}
-        clearSelectedVideo={clearSelectedVideo}
         clickNavBtn={clickNavBtn}
       />
       <div className={styles.content}>
-        <Nav navOpen={navOpen} clearSelectedVideo={clearSelectedVideo} />
+        <Nav navOpen={navOpen} />
         <Routes>
           <Route
             path="/"
@@ -97,8 +79,6 @@ function App({ youtube, authService }) {
                 youtube={youtube}
                 loading={loading}
                 videos={videos}
-                selectedVideo={selectedVideo}
-                clickVideo={clickVideo}
                 formatDate={formatDate}
                 formatNumber={formatNumber}
               />
@@ -112,8 +92,6 @@ function App({ youtube, authService }) {
                   youtube={youtube}
                   loading={loading}
                   videos={videos}
-                  selectedVideo={selectedVideo}
-                  clickVideo={clickVideo}
                   formatDate={formatDate}
                   formatNumber={formatNumber}
                 />
