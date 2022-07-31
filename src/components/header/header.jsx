@@ -12,9 +12,7 @@ import { Link } from 'react-router-dom';
 
 const Header = ({
   authService,
-  searchTerm,
-  searchSubmit,
-  valueChange,
+  searchVideo,
   clearSelectedVideo,
   clickNavBtn,
 }) => {
@@ -54,11 +52,7 @@ const Header = ({
           </Link>
         </div>
       </div>
-      <Search
-        searchSubmit={searchSubmit}
-        searchTerm={searchTerm}
-        valueChange={valueChange}
-      />
+      <Search searchVideo={searchVideo} />
       <div className={styles.accountBox}>
         <div className={styles.account}>
           {!user && (

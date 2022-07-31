@@ -8,7 +8,6 @@ import Nav from './components/nav/nav';
 
 function App({ youtube, authService }) {
   const [videos, setVideos] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [navOpen, setNavOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -20,26 +19,20 @@ function App({ youtube, authService }) {
     setLoading(true);
     youtube
       .mostPopular() //
-      .then(videos => setVideos(videos))
-      .then(() => setLoading(false));
-  };
-
-  const searchSubmit = e => {
-    e.preventDefault();
-    searchVideo(searchTerm);
-  };
-
-  const valueChange = e => {
-    const term = e.target.value;
-    setSearchTerm(term);
+      .then(videos => {
+        setVideos(videos);
+        setLoading(false);
+      });
   };
 
   const searchVideo = query => {
     setLoading(true);
     youtube
       .search(query) //
-      .then(videos => setVideos(videos))
-      .then(() => setLoading(false));
+      .then(videos => {
+        setVideos(videos);
+        setLoading(false);
+      });
   };
 
   const clickNavBtn = () => {
@@ -64,9 +57,7 @@ function App({ youtube, authService }) {
     <div className={styles.youtube}>
       <Header
         authService={authService}
-        searchTerm={searchTerm}
-        searchSubmit={searchSubmit}
-        valueChange={valueChange}
+        searchVideo={searchVideo}
         clickNavBtn={clickNavBtn}
       />
       <div className={styles.content}>
@@ -84,20 +75,18 @@ function App({ youtube, authService }) {
               />
             }
           />
-          <Route path="/watch">
-            <Route
-              path=":id"
-              element={
-                <Watch
-                  youtube={youtube}
-                  loading={loading}
-                  videos={videos}
-                  formatDate={formatDate}
-                  formatNumber={formatNumber}
-                />
-              }
-            />
-          </Route>
+          <Route
+            path="/watch/:id"
+            element={
+              <Watch
+                youtube={youtube}
+                loading={loading}
+                videos={videos}
+                formatDate={formatDate}
+                formatNumber={formatNumber}
+              />
+            }
+          />
         </Routes>
       </div>
     </div>
