@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { set } from '../../store';
+import { setVideo } from '../../store';
 import styles from './video_item.module.css';
 
 const VideoItem = ({
@@ -85,7 +85,7 @@ const VideoItem = ({
 };
 
 const mapDispatchToProps = dispatch => {
-  return { setSelected: data => dispatch(set(data)) };
+  return { setSelected: data => dispatch(setVideo(data)) };
 };
 
 export default connect(null, mapDispatchToProps)(VideoItem);

@@ -4,14 +4,16 @@ const selectedSlice = createSlice({
   name: 'selected',
   initialState: { data: null },
   reducers: {
-    set: (state, action) => {
+    setVideo: (state, action) => {
       state.data = action.payload;
     },
   },
 });
 
-const store = configureStore({ reducer: selectedSlice.reducer });
+const store = configureStore({
+  reducer: { selected: selectedSlice.reducer },
+});
 
-export const { set } = selectedSlice.actions;
+export const { setVideo } = selectedSlice.actions;
 
 export default store;

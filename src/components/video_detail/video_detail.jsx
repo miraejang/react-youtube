@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import styles from './video_detail.module.css';
 
 const VideoDetail = ({ selectedVideo, formatDate, formatNumber }) => {
-  const {
-    data: { video, channel },
-  } = selectedVideo;
+  const { video, channel } = selectedVideo;
 
   return (
     <div className={styles.detail}>
@@ -107,8 +105,7 @@ const VideoDetail = ({ selectedVideo, formatDate, formatNumber }) => {
 };
 
 const mapStateToProps = state => {
-  console.log('detila state', state);
-  return { selectedVideo: state };
+  return { selectedVideo: state.selected.data };
 };
 
 export default connect(mapStateToProps)(VideoDetail);
