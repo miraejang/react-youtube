@@ -2,14 +2,7 @@ import React from 'react';
 import VideoItem from '../video_item/video_item';
 import styles from './video_list.module.css';
 
-const VideoList = ({
-  youtube,
-  videos,
-  clickVideo,
-  formatDate,
-  formatNumber,
-  selectedVideo,
-}) => (
+const VideoList = ({ youtube, videos, formatDate, formatNumber, isGrid }) => (
   <ul className={styles.list}>
     {videos &&
       videos.map(video => (
@@ -17,10 +10,9 @@ const VideoList = ({
           youtube={youtube}
           videoId={video.id.videoId || video.id}
           channelId={video.snippet.channelId}
-          clickVideo={clickVideo}
           formatDate={formatDate}
           formatNumber={formatNumber}
-          selectedVideo={selectedVideo}
+          isGrid={isGrid}
           key={video.snippet.title}
         />
       ))}

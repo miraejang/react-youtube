@@ -10,14 +10,7 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Search from '../search/search';
 import { Link } from 'react-router-dom';
 
-const Header = ({
-  authService,
-  searchTerm,
-  searchSubmit,
-  valueChange,
-  clearSelectedVideo,
-  clickNavBtn,
-}) => {
+const Header = ({ authService, searchVideo, clickNavBtn }) => {
   const settingsRef = useRef();
   const [user, setUser] = useState(null);
   const [settingsDisplay, setSettingsDisplay] = useState(false);
@@ -45,7 +38,7 @@ const Header = ({
         <div className={styles.navBtn} onClick={clickNavBtn}>
           <FontAwesomeIcon icon={faBars} />
         </div>
-        <div className={styles.logo} onClick={clearSelectedVideo}>
+        <div className={styles.logo}>
           <Link to={'/'}>
             <div className={styles.logoIcon}>
               <FontAwesomeIcon icon={faYoutube} />
@@ -54,11 +47,7 @@ const Header = ({
           </Link>
         </div>
       </div>
-      <Search
-        searchSubmit={searchSubmit}
-        searchTerm={searchTerm}
-        valueChange={valueChange}
-      />
+      <Search searchVideo={searchVideo} />
       <div className={styles.accountBox}>
         <div className={styles.account}>
           {!user && (
