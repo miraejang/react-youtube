@@ -1,11 +1,11 @@
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './video_detail.module.css';
 
-const VideoDetail = ({ selectedVideo, formatDate, formatNumber }) => {
-  const { video, channel } = selectedVideo;
+const VideoDetail = ({ formatDate, formatNumber }) => {
+  const { video, channel } = useSelector(state => state.selected.data);
 
   return (
     <div className={styles.detail}>
@@ -104,8 +104,4 @@ const VideoDetail = ({ selectedVideo, formatDate, formatNumber }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return { selectedVideo: state.selected.data };
-};
-
-export default connect(mapStateToProps)(VideoDetail);
+export default VideoDetail;

@@ -1,7 +1,7 @@
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setVideo } from '../../store';
 import styles from './video_item.module.css';
@@ -13,8 +13,8 @@ const VideoItem = ({
   formatDate,
   formatNumber,
   isGrid,
-  setSelected,
 }) => {
+  const dispatch = useDispatch();
   const [video, setvideo] = useState(null);
   const [channel, setChannel] = useState(null);
   const display = isGrid
@@ -31,7 +31,7 @@ const VideoItem = ({
   }, [youtube, videoId, channelId]);
 
   const clickVideo = () => {
-    setSelected({ video, channel });
+    dispatch(setVideo({ video, channel }));
   };
 
   return (
@@ -84,8 +84,4 @@ const VideoItem = ({
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return { setSelected: data => dispatch(setVideo(data)) };
-};
-
-export default connect(null, mapDispatchToProps)(VideoItem);
+export default VideoItem;
