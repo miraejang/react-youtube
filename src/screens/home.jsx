@@ -1,6 +1,6 @@
 import React from 'react';
-import VideoList from '../../components/video_list/video_list';
-import Loading from '../loading/loading';
+import VideoList from '../components/video_list/video_list';
+import Loading from '../components/loading/loading';
 
 const Home = ({
   youtube,

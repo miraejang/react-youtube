@@ -11,7 +11,7 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  padding-bottom: 56%;
+  padding-bottom: 56.25%;
 }
 .img {
   position: absolute;
@@ -92,6 +92,8 @@
   display: none;
 }
 .list .imgBox {
+  max-width: 360px;
+  min-width: 240px;
   margin-right: 1em;
   flex: 1 1 40%;
 }

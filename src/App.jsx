@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/header';
-import Home from './screens/home/home';
-import Watch from './screens/watch/watch';
+import Home from './screens/home';
+import Watch from './screens/watch';
 import styles from './App.module.css';
 import Nav from './components/nav/nav';
+import Results from './screens/results';
 
 function App({ youtube, authService }) {
   const [videos, setVideos] = useState([]);
@@ -79,6 +80,18 @@ function App({ youtube, authService }) {
             path="/watch/:id"
             element={
               <Watch
+                youtube={youtube}
+                loading={loading}
+                videos={videos}
+                formatDate={formatDate}
+                formatNumber={formatNumber}
+              />
+            }
+          />
+          <Route
+            path="/results"
+            element={
+              <Results
                 youtube={youtube}
                 loading={loading}
                 videos={videos}
