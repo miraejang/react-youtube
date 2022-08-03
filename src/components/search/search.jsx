@@ -1,16 +1,19 @@
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { setSearchTerm } from '../../store';
 import styles from './search.module.css';
 
-const Search = ({ searchVideo }) => {
+const Search = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [term, setTerm] = useState('');
 
   const onSubmit = e => {
     e.preventDefault();
-    searchVideo(term);
+    dispatch(setSearchTerm(term));
     navigate({ pathname: '/results', search: `?search_query=${term}` });
     setTerm('');
   };

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setVideo } from '../../store';
+import { setSelectedVideo } from '../../store';
 import styles from './video_item.module.css';
 
 const VideoItem = ({
@@ -31,7 +31,7 @@ const VideoItem = ({
   }, [youtube, videoId, channelId]);
 
   const clickVideo = () => {
-    dispatch(setVideo({ video, channel }));
+    dispatch(setSelectedVideo({ video, channel }));
   };
 
   return (

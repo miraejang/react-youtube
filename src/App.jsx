@@ -6,35 +6,10 @@ import Watch from './screens/watch';
 import styles from './App.module.css';
 import Nav from './components/nav/nav';
 import Results from './screens/results';
+import { useSelector } from 'react-redux';
 
 function App({ youtube, authService }) {
-  const [videos, setVideos] = useState([]);
   const [navOpen, setNavOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getPopularVideo();
-  }, [youtube]);
-
-  const getPopularVideo = () => {
-    setLoading(true);
-    youtube
-      .mostPopular() //
-      .then(videos => {
-        setVideos(videos);
-        setLoading(false);
-      });
-  };
-
-  const searchVideo = query => {
-    setLoading(true);
-    youtube
-      .search(query) //
-      .then(videos => {
-        setVideos(videos);
-        setLoading(false);
-      });
-  };
 
   const clickNavBtn = () => {
     setNavOpen(!navOpen);
@@ -56,11 +31,7 @@ function App({ youtube, authService }) {
 
   return (
     <div className={styles.youtube}>
-      <Header
-        authService={authService}
-        searchVideo={searchVideo}
-        clickNavBtn={clickNavBtn}
-      />
+      <Header authService={authService} clickNavBtn={clickNavBtn} />
       <div className={styles.content}>
         <Nav navOpen={navOpen} />
         <Routes>
@@ -69,8 +40,6 @@ function App({ youtube, authService }) {
             element={
               <Home
                 youtube={youtube}
-                loading={loading}
-                videos={videos}
                 formatDate={formatDate}
                 formatNumber={formatNumber}
               />
@@ -81,8 +50,6 @@ function App({ youtube, authService }) {
             element={
               <Watch
                 youtube={youtube}
-                loading={loading}
-                videos={videos}
                 formatDate={formatDate}
                 formatNumber={formatNumber}
               />
@@ -93,8 +60,6 @@ function App({ youtube, authService }) {
             element={
               <Results
                 youtube={youtube}
-                loading={loading}
-                videos={videos}
                 formatDate={formatDate}
                 formatNumber={formatNumber}
               />

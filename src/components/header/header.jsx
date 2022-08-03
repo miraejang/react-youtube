@@ -10,7 +10,7 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Search from '../search/search';
 import { Link } from 'react-router-dom';
 
-const Header = ({ authService, searchVideo, clickNavBtn }) => {
+const Header = ({ authService, clickNavBtn }) => {
   const settingsRef = useRef();
   const [user, setUser] = useState(null);
   const [settingsDisplay, setSettingsDisplay] = useState(false);
@@ -47,7 +47,7 @@ const Header = ({ authService, searchVideo, clickNavBtn }) => {
           </Link>
         </div>
       </div>
-      <Search searchVideo={searchVideo} />
+      <Search />
       <div className={styles.accountBox}>
         <div className={styles.account}>
           {!user && (
