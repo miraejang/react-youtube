@@ -13,6 +13,7 @@ const Search = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+    localStorage.setItem('searchTerm', term);
     dispatch(setSearchTerm(term));
     navigate({ pathname: '/results', search: `?search_query=${term}` });
     setTerm('');

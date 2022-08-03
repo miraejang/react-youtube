@@ -10,6 +10,7 @@ const Home = ({ youtube, clickVideo, formatDate, formatNumber }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    localStorage.setItem('searchTerm', '');
     youtube.mostPopular().then(videos => {
       dispatch(setVideoList(videos));
       setLoading(false);
