@@ -33,39 +33,41 @@ function App({ youtube, authService }) {
     <div className={styles.youtube}>
       <Header authService={authService} clickNavBtn={clickNavBtn} />
       <div className={styles.content}>
-        <Nav navOpen={navOpen} />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                youtube={youtube}
-                formatDate={formatDate}
-                formatNumber={formatNumber}
-              />
-            }
-          />
-          <Route
-            path="/watch/:id"
-            element={
-              <Watch
-                youtube={youtube}
-                formatDate={formatDate}
-                formatNumber={formatNumber}
-              />
-            }
-          />
-          <Route
-            path="/results"
-            element={
-              <Results
-                youtube={youtube}
-                formatDate={formatDate}
-                formatNumber={formatNumber}
-              />
-            }
-          />
-        </Routes>
+        <div className={styles.container}>
+          <Nav navOpen={navOpen} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  youtube={youtube}
+                  formatDate={formatDate}
+                  formatNumber={formatNumber}
+                />
+              }
+            />
+            <Route
+              path="/watch/:id"
+              element={
+                <Watch
+                  youtube={youtube}
+                  formatDate={formatDate}
+                  formatNumber={formatNumber}
+                />
+              }
+            />
+            <Route
+              path="/results"
+              element={
+                <Results
+                  youtube={youtube}
+                  formatDate={formatDate}
+                  formatNumber={formatNumber}
+                />
+              }
+            />
+          </Routes>
+        </div>
       </div>
     </div>
   );

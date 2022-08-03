@@ -6,13 +6,16 @@
   flex-direction: column;
 }
 .content {
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
+  flex: 1 1 100%;
   position: relative;
   width: 100%;
+}
+.container {
+  overflow-y: auto;
+  display: flex;
   padding: 0 5%;
-  box-sizing: border-box;
-  flex: 1 1 100%;
 }
 
 @media screen and (max-width: 991px) {
