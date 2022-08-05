@@ -35,7 +35,7 @@ function App({ youtube, authService }) {
       <Header authService={authService} clickNavBtn={clickNavBtn} />
       <div className={styles.content}>
         <div className={styles.container}>
-          <Nav navOpen={navOpen} />
+          <Nav navOpen={navOpen} authService={authService} />
           <Routes>
             <Route
               path="/"
@@ -67,7 +67,10 @@ function App({ youtube, authService }) {
                 />
               }
             />
-            <Route path="/history" element={<History />} />
+            <Route
+              path="/history"
+              element={<History authService={authService} />}
+            />
             <Route path="/playlist" element={<Playlist />} />
           </Routes>
         </div>

@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import Login from '../login/login';
 import styles from './nav.module.css';
 
-const Nav = ({ navOpen }) => {
+const Nav = ({ navOpen, authService }) => {
   const navRef = useRef();
   const user = useSelector(state => state.user.data);
 
@@ -46,7 +46,7 @@ const Nav = ({ navOpen }) => {
           <p className={styles.loginText}>
             로그인하면 저장된 동영상 리스트를 볼 수 있습니다.
           </p>
-          <Login />
+          <Login authService={authService} />
         </div>
       )}
     </nav>
