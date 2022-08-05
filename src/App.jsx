@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './screens/home';
@@ -8,9 +8,22 @@ import Nav from './components/nav/nav';
 import Results from './screens/results';
 import Playlist from './screens/playlist';
 import History from './screens/history';
+import { useDispatch } from 'react-redux';
+import { setUser } from './store';
 
 function App({ youtube, authService }) {
   const [navOpen, setNavOpen] = useState(false);
+  const [init, setInit] = useState(false);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    authService.onAuthChange(user => {
+      if (user) {
+        dispatch(setUser({ name: user.displayName, email: user.email }));
+        setInit(true);
+      }
+    });
+  }, []);
 
   const clickNavBtn = () => {
     setNavOpen(!navOpen);
@@ -31,51 +44,55 @@ function App({ youtube, authService }) {
   };
 
   return (
-    <div className={styles.youtube}>
-      <Header authService={authService} clickNavBtn={clickNavBtn} />
-      <div className={styles.content}>
-        <div className={styles.container}>
-          <Nav navOpen={navOpen} authService={authService} />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  youtube={youtube}
-                  formatDate={formatDate}
-                  formatNumber={formatNumber}
+    <>
+      {init && (
+        <div className={styles.youtube}>
+          <Header authService={authService} clickNavBtn={clickNavBtn} />
+          <div className={styles.content}>
+            <div className={styles.container}>
+              <Nav navOpen={navOpen} authService={authService} />
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <Home
+                      youtube={youtube}
+                      formatDate={formatDate}
+                      formatNumber={formatNumber}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/watch/:id"
-              element={
-                <Watch
-                  youtube={youtube}
-                  formatDate={formatDate}
-                  formatNumber={formatNumber}
+                <Route
+                  path="/watch/:id"
+                  element={
+                    <Watch
+                      youtube={youtube}
+                      formatDate={formatDate}
+                      formatNumber={formatNumber}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/results"
-              element={
-                <Results
-                  youtube={youtube}
-                  formatDate={formatDate}
-                  formatNumber={formatNumber}
+                <Route
+                  path="/results"
+                  element={
+                    <Results
+                      youtube={youtube}
+                      formatDate={formatDate}
+                      formatNumber={formatNumber}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/history"
-              element={<History authService={authService} />}
-            />
-            <Route path="/playlist" element={<Playlist />} />
-          </Routes>
+                <Route
+                  path="/history"
+                  element={<History authService={authService} />}
+                />
+                <Route path="/playlist" element={<Playlist />} />
+              </Routes>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

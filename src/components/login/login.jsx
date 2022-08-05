@@ -11,11 +11,15 @@ const Login = ({ authService }) => {
 
   const login = () => {
     authService
-      .login()
-      .then(data =>
-        dispatch(
-          setUser({ name: data.user.displayName, email: data.user.email })
-        )
+      .persistence()
+      .then(() =>
+        authService
+          .login()
+          .then(data =>
+            dispatch(
+              setUser({ name: data.user.displayName, email: data.user.email })
+            )
+          )
       );
   };
 
