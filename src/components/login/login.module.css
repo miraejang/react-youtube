@@ -1,0 +1,11 @@
+.loginBtn {
+  padding: 0.5em 1.5em;
+  border: 1px solid #3ea6ff;
+  background-color: transparent;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #3ea6ff;
+}
+.icon {
+  margin-right: 0.3em;
+}

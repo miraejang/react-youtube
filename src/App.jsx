@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './screens/home';
@@ -6,7 +6,8 @@ import Watch from './screens/watch';
 import styles from './App.module.css';
 import Nav from './components/nav/nav';
 import Results from './screens/results';
-import { useSelector } from 'react-redux';
+import Playlist from './screens/playlist';
+import History from './screens/history';
 
 function App({ youtube, authService }) {
   const [navOpen, setNavOpen] = useState(false);
@@ -66,6 +67,8 @@ function App({ youtube, authService }) {
                 />
               }
             />
+            <Route path="/history" element={<History />} />
+            <Route path="/playlist" element={<Playlist />} />
           </Routes>
         </div>
       </div>

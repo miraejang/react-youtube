@@ -1,35 +1,25 @@
 import React, { useRef, useState } from 'react';
 import styles from './header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faBars,
-  faSignOutAlt,
-  faUser,
-} from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Search from '../search/search';
 import { Link } from 'react-router-dom';
+import Login from '../login/login';
+import { useSelector } from 'react-redux';
 
 const Header = ({ authService, clickNavBtn }) => {
   const settingsRef = useRef();
-  const [user, setUser] = useState(null);
   const [settingsDisplay, setSettingsDisplay] = useState(false);
-
-  const login = () => {
-    authService
-      .login()
-      .then(data =>
-        setUser({ email: data.user.email, name: data.user.displayName })
-      );
-  };
-
-  const logout = () => {
-    authService.logout();
-  };
+  const user = useSelector(state => state.user.data);
 
   const clickAccount = () => {
     settingsRef.current.style.display = settingsDisplay ? 'none' : 'block';
     setSettingsDisplay(!settingsDisplay);
+  };
+
+  const logout = () => {
+    authService.logout();
   };
 
   return (
@@ -50,17 +40,8 @@ const Header = ({ authService, clickNavBtn }) => {
       <Search />
       <div className={styles.accountBox}>
         <div className={styles.account}>
-          {!user && (
-            <button className={styles.loginBtn} onClick={login}>
-              <FontAwesomeIcon className={styles.icon} icon={faUser} />
-              로그인
-            </button>
-          )}
-          {user && (
-            <button className={styles.accountBtn} onClick={clickAccount}>
-              {user.name}
-            </button>
-          )}
+          {!user && <Login authService={authService} />}
+          {user && <button className={styles.accountBtn}>{user.name}</button>}
         </div>
         <ul ref={settingsRef} className={styles.settings}>
           <li>
