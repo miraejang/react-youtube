@@ -6,12 +6,14 @@ import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import Search from '../search/search';
 import { Link } from 'react-router-dom';
 import Login from '../login/login';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUser } from '../../store';
 
 const Header = ({ authService, clickNavBtn }) => {
   const settingsRef = useRef();
   const [settingsDisplay, setSettingsDisplay] = useState(false);
   const user = useSelector(state => state.user.data);
+  const dispatch = useDispatch();
 
   const clickAccount = () => {
     settingsRef.current.style.display = settingsDisplay ? 'none' : 'block';
@@ -19,7 +21,7 @@ const Header = ({ authService, clickNavBtn }) => {
   };
 
   const logout = () => {
-    authService.logout();
+    authService.logout().then(() => dispatch(setUser(null)));
   };
 
   return (
@@ -39,18 +41,29 @@ const Header = ({ authService, clickNavBtn }) => {
       </div>
       <Search />
       <div className={styles.accountBox}>
-        <div className={styles.account}>
-          {!user && <Login authService={authService} />}
-          {user && <button className={styles.accountBtn}>{user.name}</button>}
-        </div>
-        <ul ref={settingsRef} className={styles.settings}>
-          <li>
-            <button className={styles.logoutBtn} onClick={logout}>
-              <FontAwesomeIcon className={styles.icon} icon={faSignOutAlt} />
-              로그아웃
+        {!user && (
+          <div className={styles.account}>
+            <Login authService={authService} />
+          </div>
+        )}
+        {user && (
+          <div className={styles.account}>
+            <button className={styles.accountBtn} onClick={clickAccount}>
+              {user.name}
             </button>
-          </li>
-        </ul>
+            <ul ref={settingsRef} className={styles.settings}>
+              <li>
+                <button className={styles.logoutBtn} onClick={logout}>
+                  <FontAwesomeIcon
+                    className={styles.icon}
+                    icon={faSignOutAlt}
+                  />
+                  로그아웃
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </header>
   );

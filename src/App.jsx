@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './screens/home';
 import Watch from './screens/watch';
@@ -20,8 +20,8 @@ function App({ youtube, authService }) {
     authService.onAuthChange(user => {
       if (user) {
         dispatch(setUser({ name: user.displayName, email: user.email }));
-        setInit(true);
       }
+      setInit(true);
     });
   }, []);
 
