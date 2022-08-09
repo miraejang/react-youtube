@@ -15,7 +15,9 @@
 .container {
   overflow-y: auto;
   display: flex;
+  width: 100%;
   padding: 0 5%;
+  justify-content: center;
 }
 
 @media screen and (max-width: 991px) {
