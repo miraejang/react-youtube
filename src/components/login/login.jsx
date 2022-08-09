@@ -2,25 +2,26 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser } from '../../store';
 import styles from './login.module.css';
 
-const Login = ({ authService }) => {
+const Login = ({ authService, videoRepository }) => {
   const dispatch = useDispatch();
 
   const login = () => {
-    authService
-      .persistence()
-      .then(() =>
-        authService
-          .login()
-          .then(data =>
-            dispatch(
-              setUser({ name: data.user.displayName, email: data.user.email })
-            )
-          )
-      );
+    authService.persistence().then(() =>
+      authService.login().then(data => {
+        const uid = data.user.uid;
+        dispatch(
+          setUser({
+            uid,
+            name: data.user.displayName,
+            email: data.user.email,
+          })
+        );
+      })
+    );
   };
 
   return (

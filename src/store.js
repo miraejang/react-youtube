@@ -40,12 +40,23 @@ const userSlice = createSlice({
   },
 });
 
+const historySlice = createSlice({
+  name: 'history',
+  initialState: { data: null },
+  reducers: {
+    setHistory: (state, action) => {
+      state.data = action.payload;
+    },
+  },
+});
+
 const store = configureStore({
   reducer: {
     selected: selectedSlice.reducer,
     search: searchSlice.reducer,
     videoList: videoListSlice.reducer,
     user: userSlice.reducer,
+    history: historySlice.reducer,
   },
 });
 
@@ -53,5 +64,6 @@ export const { setSelectedVideo } = selectedSlice.actions;
 export const { setSearchTerm } = searchSlice.actions;
 export const { setVideoList } = videoListSlice.actions;
 export const { setUser } = userSlice.actions;
+export const { setHistory } = historySlice.actions;
 
 export default store;

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setSelectedVideo, setVideoList } from '../store';
 
-const Watch = ({ youtube, formatDate, formatNumber }) => {
+const Watch = ({ youtube, formatDate, formatNumber, videoRepository }) => {
   const [loading, setLoading] = useState(true);
   const selectedVideo = useSelector(state => state.selected.data);
   const videos = useSelector(state => state.videoList.data);
@@ -59,6 +59,7 @@ const Watch = ({ youtube, formatDate, formatNumber }) => {
             formatDate={formatDate}
             formatNumber={formatNumber}
             isGrid={false}
+            videoRepository={videoRepository}
           />
         </>
       )}

@@ -1,0 +1,27 @@
+.history {
+  display: flex;
+  flex-direction: column;
+}
+.logout {
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 4rem;
+  text-align: center;
+}
+.title {
+  width: 100%;
+  margin-top: 1.5em;
+  font-weight: 400;
+}
+.desc {
+  margin: 1.2em 0;
+  font-size: 0.9.5rem;
+}
+
+.historyBox {
+  margin-top: 1em;
+}
+.dateTitle {
+  margin-top: 3em;
+  margin-bottom: 1em;
+}

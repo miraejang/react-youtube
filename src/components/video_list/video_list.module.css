@@ -3,3 +3,6 @@
   flex: 1 1 20%;
   flex-wrap: wrap;
 }
+.history {
+  display: inline-block;
+}

@@ -4,7 +4,7 @@ import Loading from '../components/loading/loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { setVideoList } from '../store';
 
-const Home = ({ youtube, formatDate, formatNumber }) => {
+const Home = ({ youtube, formatDate, formatNumber, videoRepository }) => {
   const [loading, setLoading] = useState(true);
   const videos = useSelector(state => state.videoList.data);
   const dispatch = useDispatch();
@@ -28,6 +28,7 @@ const Home = ({ youtube, formatDate, formatNumber }) => {
           formatDate={formatDate}
           formatNumber={formatNumber}
           isGrid={true}
+          videoRepository={videoRepository}
         />
       )}
     </>

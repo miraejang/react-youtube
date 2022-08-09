@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './screens/home';
 import Watch from './screens/watch';
@@ -7,11 +7,11 @@ import styles from './App.module.css';
 import Nav from './components/nav/nav';
 import Results from './screens/results';
 import Playlist from './screens/playlist';
-import History from './screens/history';
+import History from './screens/history/history';
 import { useDispatch } from 'react-redux';
-import { setUser } from './store';
+import { setHistory, setUser } from './store';
 
-function App({ youtube, authService }) {
+function App({ youtube, authService, videoRepository }) {
   const [navOpen, setNavOpen] = useState(false);
   const [init, setInit] = useState(false);
   const dispatch = useDispatch();
@@ -19,7 +19,12 @@ function App({ youtube, authService }) {
   useEffect(() => {
     authService.onAuthChange(user => {
       if (user) {
-        dispatch(setUser({ name: user.displayName, email: user.email }));
+        dispatch(
+          setUser({ uid: user.uid, name: user.displayName, email: user.email })
+        );
+        videoRepository.syncVideo(user.uid, video => {
+          dispatch(setHistory({ ...video }));
+        });
       }
       setInit(true);
     });
@@ -59,6 +64,7 @@ function App({ youtube, authService }) {
                       youtube={youtube}
                       formatDate={formatDate}
                       formatNumber={formatNumber}
+                      videoRepository={videoRepository}
                     />
                   }
                 />
@@ -69,6 +75,7 @@ function App({ youtube, authService }) {
                       youtube={youtube}
                       formatDate={formatDate}
                       formatNumber={formatNumber}
+                      videoRepository={videoRepository}
                     />
                   }
                 />
@@ -79,12 +86,21 @@ function App({ youtube, authService }) {
                       youtube={youtube}
                       formatDate={formatDate}
                       formatNumber={formatNumber}
+                      videoRepository={videoRepository}
                     />
                   }
                 />
                 <Route
                   path="/history"
-                  element={<History authService={authService} />}
+                  element={
+                    <History
+                      youtube={youtube}
+                      formatDate={formatDate}
+                      formatNumber={formatNumber}
+                      authService={authService}
+                      videoRepository={videoRepository}
+                    />
+                  }
                 />
                 <Route path="/playlist" element={<Playlist />} />
               </Routes>

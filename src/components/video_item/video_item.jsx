@@ -1,7 +1,7 @@
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setSelectedVideo } from '../../store';
 import styles from './video_item.module.css';
@@ -13,6 +13,7 @@ const VideoItem = ({
   formatDate,
   formatNumber,
   isGrid,
+  videoRepository,
 }) => {
   const dispatch = useDispatch();
   const [video, setvideo] = useState(null);
@@ -20,6 +21,8 @@ const VideoItem = ({
   const display = isGrid
     ? `${styles.item} ${styles.grid}`
     : `${styles.item} ${styles.list}`;
+  const user = useSelector(state => state.user.data);
+  const history = useSelector(state => state.history.data);
 
   useEffect(() => {
     youtube
@@ -32,6 +35,28 @@ const VideoItem = ({
 
   const clickVideo = () => {
     dispatch(setSelectedVideo({ video, channel }));
+    if (user) {
+      saveHistory();
+    }
+  };
+
+  const saveHistory = () => {
+    const date = new Date()
+      .toLocaleDateString()
+      .split(' ')
+      .map(num => `${parseInt(num)}`.padStart(2, '0'))
+      .join('');
+
+    const todayHistory =
+      (history &&
+        history[date] &&
+        history[date].filter(video => video.videoId !== videoId)) ||
+      [];
+
+    videoRepository.saveVideo(user.uid, [
+      { videoId, videoTitle: video.snippet.title, channelId },
+      ...todayHistory,
+    ]);
   };
 
   return (
