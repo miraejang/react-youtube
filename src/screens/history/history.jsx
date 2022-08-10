@@ -21,13 +21,13 @@ const History = ({
   const transformDate = date => {
     const t = new Date();
     const y = t.getFullYear();
-    const m = t.getMonth() + 1;
+    const m = t.getMonth();
     const d = t.getDate();
 
     const savedY = parseInt(date.slice(0, 4));
     const savedM = parseInt(date.slice(4, 6));
     const savedD = parseInt(date.slice(6, 8));
-    const savedDate = `${new Date(savedY, savedM, savedD)}`;
+    const savedDate = `${new Date(savedY, savedM - 1, savedD)}`;
 
     const dayMaker = day => {
       switch (day) {
@@ -55,12 +55,12 @@ const History = ({
         return '오늘';
       case `${new Date(y, m, d - 1)}`:
         return '어제';
-      case `${new Date(y, m, d - 2)}` ||
-        `${new Date(y, m, d - 3)}` ||
-        `${new Date(y, m, d - 4)}` ||
-        `${new Date(y, m, d - 5)}` ||
-        `${new Date(y, m, d - 6)}` ||
-        `${new Date(y, m, d - 7)}`:
+      case `${new Date(y, m, d - 2)}`:
+      case `${new Date(y, m, d - 3)}`:
+      case `${new Date(y, m, d - 4)}`:
+      case `${new Date(y, m, d - 5)}`:
+      case `${new Date(y, m, d - 6)}`:
+      case `${new Date(y, m, d - 7)}`:
         return dayMaker(savedDate.slice(0, 3));
       default:
         if (y === savedY) {
