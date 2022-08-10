@@ -40,8 +40,6 @@
   font-size: 0.875em;
   color: #aaa;
 }
-.published {
-}
 .rightBox {
   display: flex;
   flex-direction: row;
@@ -59,6 +57,10 @@
 .dislikeCount {
   font-size: 0.875em;
   vertical-align: middle;
+}
+.saveVideoBtn {
+  background-color: transparent;
+  color: #fff;
 }
 .infoDetails {
   padding: 0.5em 0;

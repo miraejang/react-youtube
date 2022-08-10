@@ -1,0 +1,50 @@
+.form {
+  display: flex;
+  padding: 1em 0;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.hide {
+  display: none;
+}
+.inputBox {
+  width: 100%;
+  padding: 1em 1.5em;
+}
+.label {
+  font-size: 0.9rem;
+}
+.input {
+  margin-top: 0.5em;
+  margin-bottom: 1px;
+  padding: 0.2em;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-bottom: 1px solid #aaa;
+  background-color: transparent;
+  color: #fff;
+}
+.letterLength {
+  margin-top: 0.1em;
+  text-align: right;
+}
+.letterLength span {
+  font-size: 0.8rem;
+}
+.input:focus {
+  border-bottom: 2px solid #fff;
+  margin-bottom: 0px;
+}
+.btnBox {
+  padding: 1em 0;
+}
+.createBtn {
+  padding: 0.5em 1.5em;
+  font-size: 1rem;
+  background-color: transparent;
+  color: #3ea6ff;
+}
+.createBtn span {
+  font-size: 0.9rem;
+}

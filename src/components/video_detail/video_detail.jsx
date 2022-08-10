@@ -1,6 +1,8 @@
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-regular-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useState } from 'react';
+import SaveVideo from '../save_video/save_video';
 import styles from './video_detail.module.css';
 
 const VideoDetail = ({
@@ -8,6 +10,16 @@ const VideoDetail = ({
   formatDate,
   formatNumber,
 }) => {
+  const [saveVideoOpen, setSaveVideoOpen] = useState(false);
+
+  const toggleSaveVideo = () => {
+    setSaveVideoOpen(!saveVideoOpen);
+  };
+
+  const closePopup = () => {
+    setSaveVideoOpen(false);
+  };
+
   return (
     <div className={styles.detail}>
       <div className={styles.videoBox}>
@@ -67,6 +79,10 @@ const VideoDetail = ({
                   </span>
                 </div>
               )}
+              <button className={styles.saveVideoBtn} onClick={toggleSaveVideo}>
+                <FontAwesomeIcon icon={faPlus} /> 저장
+              </button>
+              {saveVideoOpen && <SaveVideo closePopup={closePopup} />}
             </div>
           </div>
         </div>
