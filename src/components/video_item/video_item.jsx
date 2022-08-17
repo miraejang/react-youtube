@@ -54,7 +54,7 @@ const VideoItem = ({
       [];
 
     videoRepository.saveVideo(user.uid, [
-      { videoId, videoTitle: video.snippet.title, channelId },
+      { videoId, channelId },
       ...todayHistory,
     ]);
   };

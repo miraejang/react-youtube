@@ -9,6 +9,7 @@ const VideoDetail = ({
   selectedVideo: { video, channel },
   formatDate,
   formatNumber,
+  videoRepository,
 }) => {
   const [saveVideoOpen, setSaveVideoOpen] = useState(false);
 
@@ -82,7 +83,15 @@ const VideoDetail = ({
               <button className={styles.saveVideoBtn} onClick={toggleSaveVideo}>
                 <FontAwesomeIcon icon={faPlus} /> 저장
               </button>
-              {saveVideoOpen && <SaveVideo closePopup={closePopup} />}
+              {saveVideoOpen && (
+                <SaveVideo
+                  videoId={video.id.videoId || video.id}
+                  videoTitle={video.snippet.title}
+                  channelId={video.snippet.channelId}
+                  closePopup={closePopup}
+                  videoRepository={videoRepository}
+                />
+              )}
             </div>
           </div>
         </div>

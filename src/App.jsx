@@ -22,8 +22,8 @@ function App({ youtube, authService, videoRepository }) {
         dispatch(
           setUser({ uid: user.uid, name: user.displayName, email: user.email })
         );
-        videoRepository.syncVideo(user.uid, video => {
-          dispatch(setHistory({ ...video }));
+        videoRepository.syncVideo(user.uid, history => {
+          dispatch(setHistory({ ...history }));
         });
       }
       setInit(true);
@@ -102,7 +102,10 @@ function App({ youtube, authService, videoRepository }) {
                     />
                   }
                 />
-                <Route path="/playlist" element={<Playlist />} />
+                <Route
+                  path="/playlist"
+                  element={<Playlist videoRepository={videoRepository} />}
+                />
               </Routes>
             </div>
           </div>

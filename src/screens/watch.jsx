@@ -52,6 +52,7 @@ const Watch = ({ youtube, formatDate, formatNumber, videoRepository }) => {
             selectedVideo={selectedVideo}
             formatDate={formatDate}
             formatNumber={formatNumber}
+            videoRepository={videoRepository}
           />
           <VideoList
             youtube={youtube}

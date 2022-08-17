@@ -11,8 +11,6 @@ class VideoRepository {
       if (snapshot.exists()) {
         const data = snapshot.val();
         data && onUpdate(data);
-      } else {
-        snapshot.exists();
       }
     });
     return () => off();
@@ -26,6 +24,21 @@ class VideoRepository {
       .join('');
 
     set(ref(this.db, `users/${uid}/history/${date}`), data);
+  };
+
+  syncPlaylist(uid, onUpdate) {
+    const starCountRef = ref(this.db, `users/${uid}/playlist`);
+    onValue(starCountRef, snapshot => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        data && onUpdate(data);
+      }
+    });
+    return () => off();
+  }
+
+  savePlaylist = (uid, listId, data) => {
+    set(ref(this.db, `users/${uid}/playlist/${listId}`), data);
   };
 }
 

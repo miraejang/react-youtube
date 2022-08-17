@@ -1,12 +1,35 @@
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useRef, useState } from 'react';
-import CreatePlaylis from '../create_playlist/create_playlis';
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import CreatePlaylistFolder from '../create_playlist_folder/create_playlist_folder';
 import styles from './save_video.module.css';
 
-const SaveVideo = ({ closePopup }) => {
-  const [createFormOpen, setCreateFormOpen] = useState(false);
+const SaveVideo = ({ closePopup, videoRepository, videoId, channelId }) => {
   const popupRef = useRef();
+  const [createFormOpen, setCreateFormOpen] = useState(false);
+  const user = useSelector(state => state.user.data);
+  const [playlist, setPlaylist] = useState({});
+
+  useEffect(() => {
+    videoRepository.syncPlaylist(user.uid, playlist => {
+      setPlaylist(playlist);
+    });
+  }, []);
+
+  const createFolder = (id, folderName) => {
+    const alreadyUsed = Object.keys(playlist).find(
+      listId => playlist[listId].name === folderName
+    );
+
+    if (!alreadyUsed) {
+      videoRepository.savePlaylist(user.uid, id, {
+        name: folderName,
+      });
+    } else {
+      console.log('이미 사용된 이름');
+    }
+  };
 
   const onClick = e => {
     e.stopPropagation();
@@ -21,6 +44,34 @@ const SaveVideo = ({ closePopup }) => {
     setCreateFormOpen(!createFormOpen);
   };
 
+  const onChange = e => {
+    const checked = e.currentTarget.checked;
+    const id = e.currentTarget.value;
+    const name = e.currentTarget.parentNode.querySelector('label').innerText;
+
+    const videos =
+      (playlist &&
+        playlist[id] &&
+        playlist[id].list &&
+        playlist[id].list.filter(video => video.videoId !== videoId)) ||
+      [];
+
+    if (checked) {
+      videoRepository.savePlaylist(user.uid, id, {
+        name,
+        videos: [
+          {
+            videoId,
+            channelId,
+          },
+          ...videos,
+        ],
+      });
+    } else {
+      videoRepository.savePlaylist(user.uid, id, { name, videos: [...videos] });
+    }
+  };
+
   return (
     <div className={styles.saveVideoPopup} onClick={onClick}>
       <div className={styles.popupContainer}>
@@ -33,33 +84,40 @@ const SaveVideo = ({ closePopup }) => {
           </div>
           <div className={styles.content}>
             <ul className={styles.folderList}>
-              <li className={styles.playlist}>
-                <input
-                  className={styles.checkbox}
-                  type="checkbox"
-                  name="WL"
-                  id="WL"
-                />
-                <label className={styles.label} htmlFor="WL">
-                  나중에 볼 동영상
-                </label>
-              </li>
-              <li className={styles.playlist}>
-                <input
-                  className={styles.checkbox}
-                  type="checkbox"
-                  name="sample"
-                  id="sample"
-                />
-                <label className={styles.label} htmlFor="sample">
-                  일할 때 듣기 좋은 음악
-                </label>
-              </li>
+              {playlist &&
+                Object.keys(playlist)
+                  .reverse()
+                  .map(listId => (
+                    <li className={styles.playlist} key={listId}>
+                      <input
+                        onChange={onChange}
+                        className={styles.checkbox}
+                        type="checkbox"
+                        name={listId}
+                        id={listId}
+                        value={listId}
+                        checked={
+                          playlist[listId].videos &&
+                          playlist[listId].videos.find(
+                            video => video.videoId === videoId
+                          )
+                            ? true
+                            : false
+                        }
+                      />
+                      <label className={styles.label} htmlFor={listId}>
+                        {playlist[listId].name}
+                      </label>
+                    </li>
+                  ))}
             </ul>
           </div>
           <div className={styles.footer}>
             {createFormOpen ? (
-              <CreatePlaylis createFormOpen={createFormOpen} />
+              <CreatePlaylistFolder
+                createFormOpen={createFormOpen}
+                createFolder={createFolder}
+              />
             ) : (
               <button className={styles.addFolderBtn} onClick={toggleForm}>
                 <FontAwesomeIcon className={styles.plusIcon} icon={faPlus} />

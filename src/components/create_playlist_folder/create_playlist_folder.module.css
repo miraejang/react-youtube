@@ -4,9 +4,6 @@
   flex-direction: column;
   align-items: flex-end;
 }
-.hide {
-  display: none;
-}
 .inputBox {
   width: 100%;
   padding: 1em 1.5em;
@@ -25,11 +22,16 @@
   background-color: transparent;
   color: #fff;
 }
-.letterLength {
+.inputInfo {
+  display: flex;
   margin-top: 0.1em;
+  justify-content: space-between;
+}
+.countBox {
+  margin-left: 0.1em;
   text-align: right;
 }
-.letterLength span {
+.countBox span {
   font-size: 0.8rem;
 }
 .input:focus {
@@ -47,4 +49,12 @@
 }
 .createBtn span {
   font-size: 0.9rem;
+}
+
+.error .input {
+  border-color: red;
+}
+.errorText {
+  color: red;
+  font-size: 0.8rem;
 }

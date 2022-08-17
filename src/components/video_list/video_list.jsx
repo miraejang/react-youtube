@@ -32,7 +32,7 @@ const VideoList = ({
             formatDate={formatDate}
             formatNumber={formatNumber}
             isGrid={isGrid}
-            key={video.videoTitle || video.snippet.title}
+            key={video.videoId || video.id.videoId || video.id}
             videoRepository={videoRepository}
             page="history"
           />
