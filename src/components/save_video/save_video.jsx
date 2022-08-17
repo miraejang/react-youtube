@@ -2,7 +2,7 @@ import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import CreatePlaylistFolder from '../create_playlist_folder/create_playlist_folder';
+import CreatePlaylistGroup from '../create_playlist_group/create_playlist_group';
 import styles from './save_video.module.css';
 
 const SaveVideo = ({ closePopup, videoRepository, videoId, channelId }) => {
@@ -114,7 +114,7 @@ const SaveVideo = ({ closePopup, videoRepository, videoId, channelId }) => {
           </div>
           <div className={styles.footer}>
             {createFormOpen ? (
-              <CreatePlaylistFolder
+              <CreatePlaylistGroup
                 createFormOpen={createFormOpen}
                 createFolder={createFolder}
               />

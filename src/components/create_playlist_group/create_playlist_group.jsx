@@ -1,8 +1,8 @@
 import { faThermometerFull } from '@fortawesome/free-solid-svg-icons';
 import React, { useRef, useState } from 'react';
-import styles from './create_playlist_folder.module.css';
+import styles from './create_playlist_group.module.css';
 
-const CreatePlaylistFolder = ({ createFolder }) => {
+const CreatePlaylistGroup = ({ createFolder }) => {
   const formRef = useRef();
   const [count, setCount] = useState(0);
   const [folderName, setFolderName] = useState('');
@@ -53,4 +53,4 @@ const CreatePlaylistFolder = ({ createFolder }) => {
   );
 };
 
-export default CreatePlaylistFolder;
+export default CreatePlaylistGroup;
