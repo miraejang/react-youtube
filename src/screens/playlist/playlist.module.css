@@ -1,0 +1,26 @@
+.playlist {
+  width: 100%;
+  background-color: #0f0f0f;
+}
+.playlist .container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.listInfoBox {
+  background-color: #181818;
+  flex: 0;
+  padding: 1.5rem;
+}
+.imgBox {
+  width: 320px;
+  margin-bottom: 1rem;
+}
+.info {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #aaa;
+}
+.content .container {
+  padding-top: 0.5rem;
+}

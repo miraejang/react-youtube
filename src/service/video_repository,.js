@@ -29,10 +29,8 @@ class VideoRepository {
   syncPlaylist(uid, onUpdate) {
     const starCountRef = ref(this.db, `users/${uid}/playlist`);
     onValue(starCountRef, snapshot => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        data && onUpdate(data);
-      }
+      const data = snapshot.val();
+      onUpdate(data);
     });
     return () => off();
   }

@@ -86,7 +86,7 @@ const VideoDetail = ({
               {saveVideoOpen && (
                 <SaveVideo
                   videoId={video.id.videoId || video.id}
-                  videoTitle={video.snippet.title}
+                  thumbnail={video.snippet.thumbnails.medium.url}
                   channelId={video.snippet.channelId}
                   closePopup={closePopup}
                   videoRepository={videoRepository}

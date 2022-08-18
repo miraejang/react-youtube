@@ -5,19 +5,19 @@ import { useSelector } from 'react-redux';
 import CreatePlaylistGroup from '../create_playlist_group/create_playlist_group';
 import styles from './save_video.module.css';
 
-const SaveVideo = ({ closePopup, videoRepository, videoId, channelId }) => {
+const SaveVideo = ({
+  closePopup,
+  videoRepository,
+  videoId,
+  thumbnail,
+  channelId,
+}) => {
   const popupRef = useRef();
   const [createFormOpen, setCreateFormOpen] = useState(false);
   const user = useSelector(state => state.user.data);
-  const [playlist, setPlaylist] = useState({});
+  const playlist = useSelector(state => state.playlist.data);
 
-  useEffect(() => {
-    videoRepository.syncPlaylist(user.uid, playlist => {
-      setPlaylist(playlist);
-    });
-  }, []);
-
-  const createFolder = (id, folderName) => {
+  const createGroup = (id, folderName) => {
     const alreadyUsed = Object.keys(playlist).find(
       listId => playlist[listId].name === folderName
     );
@@ -52,23 +52,30 @@ const SaveVideo = ({ closePopup, videoRepository, videoId, channelId }) => {
     const videos =
       (playlist &&
         playlist[id] &&
-        playlist[id].list &&
-        playlist[id].list.filter(video => video.videoId !== videoId)) ||
+        playlist[id].videos &&
+        playlist[id].videos.filter(video => video.videoId !== videoId)) ||
       [];
 
     if (checked) {
       videoRepository.savePlaylist(user.uid, id, {
         name,
+        lastUpdate: new Date().toLocaleDateString(),
         videos: [
           {
             videoId,
+            thumbnail,
             channelId,
           },
           ...videos,
         ],
       });
     } else {
-      videoRepository.savePlaylist(user.uid, id, { name, videos: [...videos] });
+      videoRepository.savePlaylist(user.uid, id, {
+        name,
+        lastUpdate: playlist[id].lastUpdate,
+        thumbnail: playlist[id].thumbnail,
+        videos: [...videos],
+      });
     }
   };
 
@@ -116,7 +123,7 @@ const SaveVideo = ({ closePopup, videoRepository, videoId, channelId }) => {
             {createFormOpen ? (
               <CreatePlaylistGroup
                 createFormOpen={createFormOpen}
-                createFolder={createFolder}
+                createGroup={createGroup}
               />
             ) : (
               <button className={styles.addFolderBtn} onClick={toggleForm}>

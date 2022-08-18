@@ -6,10 +6,10 @@ import Watch from './screens/watch';
 import styles from './App.module.css';
 import Nav from './components/nav/nav';
 import Results from './screens/results';
-import Playlist from './screens/playlist';
+import Playlist from './screens/playlist/playlist';
 import History from './screens/history/history';
 import { useDispatch } from 'react-redux';
-import { setHistory, setUser } from './store';
+import { setHistory, setPlaylist, setUser } from './store';
 
 function App({ youtube, authService, videoRepository }) {
   const [navOpen, setNavOpen] = useState(false);
@@ -24,6 +24,13 @@ function App({ youtube, authService, videoRepository }) {
         );
         videoRepository.syncVideo(user.uid, history => {
           dispatch(setHistory({ ...history }));
+        });
+        videoRepository.syncPlaylist(user.uid, playlist => {
+          if (playlist === null) {
+            dispatch(setPlaylist({ WL: { name: '나중에 볼 동영상' } }));
+          } else {
+            dispatch(setPlaylist({ ...playlist }));
+          }
         });
       }
       setInit(true);
@@ -104,7 +111,15 @@ function App({ youtube, authService, videoRepository }) {
                 />
                 <Route
                   path="/playlist"
-                  element={<Playlist videoRepository={videoRepository} />}
+                  element={
+                    <Playlist
+                      youtube={youtube}
+                      formatDate={formatDate}
+                      formatNumber={formatNumber}
+                      authService={authService}
+                      videoRepository={videoRepository}
+                    />
+                  }
                 />
               </Routes>
             </div>

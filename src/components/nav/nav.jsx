@@ -14,6 +14,7 @@ import styles from './nav.module.css';
 const Nav = ({ navOpen, authService }) => {
   const navRef = useRef();
   const user = useSelector(state => state.user.data);
+  const playlist = useSelector(state => state.playlist.data);
 
   useEffect(() => {
     navRef.current.style.display = navOpen ? 'block' : 'none';
@@ -31,14 +32,41 @@ const Nav = ({ navOpen, authService }) => {
       </Link>
       {user && (
         <>
-          <Link to={'/plyalist?list=WL'} className={styles.item}>
+          <Link
+            to={{
+              pathname: '/playlist',
+              search: `?list=WL`,
+            }}
+            className={styles.item}
+          >
             <FontAwesomeIcon icon={faClock} className={styles.icon} />
             <span className={styles.text}>나중에 볼 동영상</span>
           </Link>
-          <Link to={'/plyalist'} className={styles.item}>
-            <FontAwesomeIcon icon={faFolder} className={styles.icon} />
-            <span className={styles.text}>재생목록</span>
-          </Link>
+          {playlist &&
+            Object.keys(playlist)
+              .reverse()
+              .map(listId => {
+                if (listId !== 'WL') {
+                  return (
+                    <Link
+                      to={{
+                        pathname: '/playlist',
+                        search: `?list=${listId}`,
+                      }}
+                      className={styles.item}
+                      key={listId}
+                    >
+                      <FontAwesomeIcon
+                        icon={faFolder}
+                        className={styles.icon}
+                      />
+                      <span className={styles.text}>
+                        {playlist[listId].name}
+                      </span>
+                    </Link>
+                  );
+                }
+              })}
         </>
       )}
       {!user && (

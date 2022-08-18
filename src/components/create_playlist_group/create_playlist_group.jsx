@@ -1,8 +1,7 @@
-import { faThermometerFull } from '@fortawesome/free-solid-svg-icons';
 import React, { useRef, useState } from 'react';
 import styles from './create_playlist_group.module.css';
 
-const CreatePlaylistGroup = ({ createFolder }) => {
+const CreatePlaylistGroup = ({ createGroup }) => {
   const formRef = useRef();
   const [count, setCount] = useState(0);
   const [folderName, setFolderName] = useState('');
@@ -15,8 +14,8 @@ const CreatePlaylistGroup = ({ createFolder }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    const id = Date.now();
-    createFolder(id, folderName);
+    const id = `PLgr${Date.now()}`;
+    createGroup(id, folderName);
     setFolderName('');
   };
 
