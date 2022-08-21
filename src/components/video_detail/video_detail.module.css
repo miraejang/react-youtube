@@ -1,7 +1,3 @@
-.detail {
-  flex: 1 1 60%;
-  padding: 2em;
-}
 .videoBox {
   position: relative;
   padding-bottom: 56.25%;
@@ -76,8 +72,6 @@
   height: auto;
   margin-right: 1em;
   border-radius: 50%;
-}
-.channel {
 }
 .subscriber {
   margin-top: 0.15em;

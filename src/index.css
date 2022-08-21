@@ -23,6 +23,7 @@ li {
 }
 button {
   border: 0;
+  color: inherit;
   word-break: keep-all;
   white-space: nowrap;
   cursor: pointer;
@@ -33,9 +34,4 @@ input:focus {
 a {
   color: inherit;
   text-decoration: none;
-}
-
-body {
-  background-color: #181818;
-  color: #fff;
 }

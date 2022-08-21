@@ -72,38 +72,41 @@ const History = ({
   };
 
   return (
-    <>
-      {user && (
-        <div className={styles.history}>
-          <h3 className={styles.title}>시청 기록</h3>
-          {history &&
-            sortedDate.map(date => (
-              <div className={styles.hsitoryBox} key={date}>
-                <p className={styles.dateTitle}>{transformDate(date)}</p>
-                <VideoList
-                  youtube={youtube}
-                  videos={history[date]}
-                  formatDate={formatDate}
-                  formatNumber={formatNumber}
-                  isGrid={false}
-                  videoRepository={videoRepository}
-                  page="history"
-                />
-              </div>
-            ))}
-        </div>
-      )}
-      {!user && (
-        <div className={`${styles.history} ${styles.logout}`}>
-          <FontAwesomeIcon icon={faHistory} size={'5x'} />
-          <h2 className={styles.title}>시청한 동영상을 확인하세요.</h2>
-          <p className={styles.desc}>
-            로그아웃하면 시청 기록을 볼 수 없습니다.
-          </p>
-          <Login authService={authService} />
-        </div>
-      )}
-    </>
+    <div className={`${styles.history} ${!user && styles.logout}`}>
+      <div className={styles.container}>
+        {user && (
+          <>
+            <div className={styles.title}>
+              <h3>시청 기록</h3>
+            </div>
+            {history &&
+              sortedDate.map(date => (
+                <div className={styles.dayHistory} key={date}>
+                  <p className={styles.dateTitle}>{transformDate(date)}</p>
+                  <VideoList
+                    youtube={youtube}
+                    videos={history[date]}
+                    formatDate={formatDate}
+                    formatNumber={formatNumber}
+                    page="history"
+                    videoRepository={videoRepository}
+                  />
+                </div>
+              ))}
+          </>
+        )}
+        {!user && (
+          <>
+            <FontAwesomeIcon icon={faHistory} size={'5x'} />
+            <h2 className={styles.title}>시청한 동영상을 확인하세요.</h2>
+            <p className={styles.desc}>
+              로그아웃하면 시청 기록을 볼 수 없습니다.
+            </p>
+            <Login authService={authService} />
+          </>
+        )}
+      </div>
+    </div>
   );
 };
 

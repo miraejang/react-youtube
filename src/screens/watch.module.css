@@ -1,0 +1,11 @@
+.watch {
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  max-width: 110rem;
+}
+.list {
+  width: 25rem;
+}

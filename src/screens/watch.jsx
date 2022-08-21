@@ -5,6 +5,7 @@ import Loading from '../components/loading/loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { setSelectedVideo, setVideoList } from '../store';
+import styles from './watch.module.css';
 
 const Watch = ({ youtube, formatDate, formatNumber, videoRepository }) => {
   const [loading, setLoading] = useState(true);
@@ -47,22 +48,28 @@ const Watch = ({ youtube, formatDate, formatNumber, videoRepository }) => {
       {loading ? (
         <Loading />
       ) : (
-        <>
-          <VideoDetail
-            selectedVideo={selectedVideo}
-            formatDate={formatDate}
-            formatNumber={formatNumber}
-            videoRepository={videoRepository}
-          />
-          <VideoList
-            youtube={youtube}
-            videos={videos}
-            formatDate={formatDate}
-            formatNumber={formatNumber}
-            isGrid={false}
-            videoRepository={videoRepository}
-          />
-        </>
+        <div className={styles.watch}>
+          <div className={styles.container}>
+            <div className={styles.detail}>
+              <VideoDetail
+                selectedVideo={selectedVideo}
+                formatDate={formatDate}
+                formatNumber={formatNumber}
+                videoRepository={videoRepository}
+              />
+            </div>
+            <div className={styles.list}>
+              <VideoList
+                youtube={youtube}
+                videos={videos}
+                formatDate={formatDate}
+                formatNumber={formatNumber}
+                page="watch"
+                videoRepository={videoRepository}
+              />
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

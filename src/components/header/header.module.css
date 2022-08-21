@@ -1,75 +1,34 @@
 .header {
-  display: flex;
+  position: fixed;
   width: 100%;
-  background-color: #252321;
-  align-items: center;
-  flex: 0;
+  z-index: 1000;
+  background-color: rgba(33, 33, 33, 0.98);
 }
-.menuBox {
+.container {
   display: flex;
-  margin-left: 30px;
-  flex: 1 1 30%;
+  height: 60px;
+  justify-content: space-between;
   align-items: center;
-  cursor: pointer;
 }
-.menuBtn {
-  padding: 10px;
-  font-size: 20px;
-}
-.logo {
-  margin-left: 20px;
-  cursor: pointer;
-}
-.logoIcon {
-  display: inline-block;
-  position: relative;
-  z-index: 0;
-  font-size: 30px;
-  color: red;
-  text-align: center;
-  vertical-align: middle;
-}
-.logoIcon::before {
-  content: '';
-  display: block;
-  position: absolute;
-  left: 35%;
-  top: 35%;
-  z-index: -1;
-  width: 30%;
-  height: 30%;
-  background-color: #fff;
-}
-.logoTxt {
-  font-weight: bold;
-  vertical-align: middle;
-  margin-left: 4px;
-}
-.logoImg {
-  display: inline-block;
-  position: relative;
-  width: 40px;
-  background-color: red;
-  border-radius: 20%;
-  text-align: center;
-  line-height: 30px;
-}
-.logoImg::after {
-  content: '▶';
-  line-height: 30px;
-  color: #fff;
-}
-.accountBox {
-  flex: 1 1 30%;
-  position: relative;
+.left,
+.right {
+  display: flex;
   height: 100%;
-  margin-right: 30px;
+  flex: 1 1 25%;
+}
+.right {
+  padding-right: 30px;
+  justify-content: end;
+}
+.center {
+  flex: 50%;
 }
 .account {
   display: flex;
+  position: relative;
+  height: 100%;
   justify-content: flex-end;
   align-items: center;
-  height: 100%;
 }
 .accountBtn {
   padding: 0 1em;

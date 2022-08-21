@@ -1,6 +1,11 @@
 .history {
   display: flex;
-  flex-direction: column;
+  overflow: auto;
+  justify-content: center;
+}
+.container {
+  width: 67rem;
+  padding-top: 1.5em;
 }
 .logout {
   justify-content: center;
@@ -10,18 +15,18 @@
 }
 .title {
   width: 100%;
-  margin-top: 1.5em;
+  margin-bottom: 3em;
+}
+.title h3 {
   font-weight: 400;
 }
 .desc {
   margin: 1.2em 0;
   font-size: 0.9.5rem;
 }
-
-.historyBox {
-  margin-top: 1em;
+.dayHistory {
+  padding-bottom: 3em;
 }
 .dateTitle {
-  margin-top: 3em;
   margin-bottom: 1em;
 }

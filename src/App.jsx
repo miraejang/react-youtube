@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './screens/home';
 import Watch from './screens/watch';
@@ -12,9 +12,13 @@ import { useDispatch } from 'react-redux';
 import { setHistory, setPlaylist, setUser } from './store';
 
 function App({ youtube, authService, videoRepository }) {
-  const [navOpen, setNavOpen] = useState(false);
   const [init, setInit] = useState(false);
+  const [navInit, setNavInit] = useState(false);
+  const [isWatch, setIsWatch] = useState(false);
+  const [navExpand, setNavExpand] = useState(false);
+  const [sliderNavExpand, setSliderNavExpand] = useState(false);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     authService.onAuthChange(user => {
@@ -37,10 +41,6 @@ function App({ youtube, authService, videoRepository }) {
     });
   }, []);
 
-  const clickNavBtn = () => {
-    setNavOpen(!navOpen);
-  };
-
   const formatDate = date => {
     const arr = date.split(/[-, T]/gi);
     const year = Number(arr[0]);
@@ -55,14 +55,46 @@ function App({ youtube, authService, videoRepository }) {
     return `${number.toLocaleString('en-IN')}`;
   };
 
+  useEffect(() => {
+    if (location.pathname && location.pathname.search(/^\/watch/) >= 0) {
+      setNavInit(false);
+      setIsWatch(true);
+    } else {
+      setIsWatch(false);
+    }
+  }, [location]);
+
+  const setNavType = state => {
+    if (navInit === false) setNavInit(true);
+
+    if (isWatch) {
+      setSliderNavExpand(state);
+    } else {
+      setNavExpand(state);
+    }
+  };
+
   return (
     <>
       {init && (
         <div className={styles.youtube}>
-          <Header authService={authService} clickNavBtn={clickNavBtn} />
+          <Header
+            authService={authService}
+            isWatch={isWatch}
+            navExpand={navExpand}
+            sliderNavExpand={sliderNavExpand}
+            setNavType={setNavType}
+          />
           <div className={styles.content}>
+            <Nav
+              authService={authService}
+              navInit={navInit}
+              isWatch={isWatch}
+              navExpand={navExpand}
+              sliderNavExpand={sliderNavExpand}
+              setNavType={setNavType}
+            />
             <div className={styles.container}>
-              <Nav navOpen={navOpen} authService={authService} />
               <Routes>
                 <Route
                   path="/"

@@ -7,22 +7,11 @@ const VideoList = ({
   videos,
   formatDate,
   formatNumber,
-  isGrid,
-  videoRepository,
   page,
+  videoRepository,
 }) => {
-  const ulClassMaker = page => {
-    switch (page) {
-      case 'history':
-        return `${styles.list} ${styles.history}`;
-      default:
-        return `${styles.list}`;
-    }
-  };
-  const ulClass = ulClassMaker(page);
-
   return (
-    <ul className={ulClass}>
+    <ul className={styles.list}>
       {videos &&
         videos.map(video => (
           <VideoItem
@@ -31,10 +20,9 @@ const VideoList = ({
             channelId={video.channelId || video.snippet.channelId}
             formatDate={formatDate}
             formatNumber={formatNumber}
-            isGrid={isGrid}
+            page={page}
             key={video.videoId || video.id.videoId || video.id}
             videoRepository={videoRepository}
-            page="history"
           />
         ))}
     </ul>

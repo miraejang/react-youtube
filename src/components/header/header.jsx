@@ -1,15 +1,20 @@
 import React, { useRef, useState } from 'react';
 import styles from './header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
-import { faYoutube } from '@fortawesome/free-brands-svg-icons';
+import { faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 import Search from '../search/search';
-import { Link } from 'react-router-dom';
 import Login from '../login/login';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../store';
+import NavHeader from '../nav_header/nav_header';
 
-const Header = ({ authService, clickNavBtn }) => {
+const Header = ({
+  authService,
+  isWatch,
+  navExpand,
+  sliderNavExpand,
+  setNavType,
+}) => {
   const settingsRef = useRef();
   const [settingsDisplay, setSettingsDisplay] = useState(false);
   const user = useSelector(state => state.user.data);
@@ -26,44 +31,43 @@ const Header = ({ authService, clickNavBtn }) => {
 
   return (
     <header className={styles.header}>
-      <div className={styles.menuBox}>
-        <div className={styles.navBtn} onClick={clickNavBtn}>
-          <FontAwesomeIcon icon={faBars} />
+      <div className={styles.container}>
+        <div className={styles.left}>
+          <NavHeader
+            isWatch={isWatch}
+            navExpand={navExpand}
+            sliderNavExpand={sliderNavExpand}
+            setNavType={setNavType}
+          />
         </div>
-        <div className={styles.logo}>
-          <Link to={'/'}>
-            <div className={styles.logoIcon}>
-              <FontAwesomeIcon icon={faYoutube} />
+        <div className={styles.center}>
+          <Search />
+        </div>
+        <div className={styles.right}>
+          {!user && (
+            <div className={styles.account}>
+              <Login authService={authService} />
             </div>
-            <span className={styles.logoTxt}>Youtube</span>
-          </Link>
+          )}
+          {user && (
+            <div className={styles.account}>
+              <button className={styles.accountBtn} onClick={clickAccount}>
+                {user.name}
+              </button>
+              <ul ref={settingsRef} className={styles.settings}>
+                <li>
+                  <button className={styles.logoutBtn} onClick={logout}>
+                    <FontAwesomeIcon
+                      className={styles.icon}
+                      icon={faSignOutAlt}
+                    />
+                    로그아웃
+                  </button>
+                </li>
+              </ul>
+            </div>
+          )}
         </div>
-      </div>
-      <Search />
-      <div className={styles.accountBox}>
-        {!user && (
-          <div className={styles.account}>
-            <Login authService={authService} />
-          </div>
-        )}
-        {user && (
-          <div className={styles.account}>
-            <button className={styles.accountBtn} onClick={clickAccount}>
-              {user.name}
-            </button>
-            <ul ref={settingsRef} className={styles.settings}>
-              <li>
-                <button className={styles.logoutBtn} onClick={logout}>
-                  <FontAwesomeIcon
-                    className={styles.icon}
-                    icon={faSignOutAlt}
-                  />
-                  로그아웃
-                </button>
-              </li>
-            </ul>
-          </div>
-        )}
       </div>
     </header>
   );

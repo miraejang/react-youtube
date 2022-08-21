@@ -27,7 +27,7 @@ const Home = ({ youtube, formatDate, formatNumber, videoRepository }) => {
           videos={videos}
           formatDate={formatDate}
           formatNumber={formatNumber}
-          isGrid={true}
+          page="home"
           videoRepository={videoRepository}
         />
       )}

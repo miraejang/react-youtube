@@ -12,17 +12,30 @@ const VideoItem = ({
   channelId,
   formatDate,
   formatNumber,
-  isGrid,
+  page,
   videoRepository,
 }) => {
   const dispatch = useDispatch();
   const [video, setvideo] = useState(null);
   const [channel, setChannel] = useState(null);
-  const display = isGrid
-    ? `${styles.item} ${styles.grid}`
-    : `${styles.item} ${styles.list}`;
   const user = useSelector(state => state.user.data);
   const history = useSelector(state => state.history.data);
+  const listType = page => {
+    switch (page) {
+      case 'home':
+        return `${styles.item} ${styles.grid} ${styles.home}`;
+      case 'watch':
+        return `${styles.item} ${styles.list} ${styles.watch}`;
+      case 'results':
+        return `${styles.item} ${styles.list} ${styles.results}`;
+      case 'history':
+        return `${styles.item} ${styles.list} ${styles.history}`;
+      case 'playlist':
+        return `${styles.item} ${styles.list} ${styles.playlist}`;
+      default:
+        return `${styles.item} ${styles.list}`;
+    }
+  };
 
   useEffect(() => {
     youtube
@@ -62,7 +75,7 @@ const VideoItem = ({
   return (
     <>
       {video && channel && (
-        <li className={display} onClick={clickVideo}>
+        <li className={listType(page)} onClick={clickVideo}>
           <Link to={`/watch/${videoId}`}>
             <div className={styles.imgBox}>
               <div className={styles.imgViewBox}>

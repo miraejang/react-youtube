@@ -1,8 +1,6 @@
 .list {
+  overflow: auto;
   display: flex;
-  flex: 1 1 20%;
   flex-wrap: wrap;
-}
-.history {
-  display: inline-block;
+  justify-content: center;
 }

@@ -30,7 +30,7 @@ const Results = ({ youtube, formatDate, formatNumber, videoRepository }) => {
           videos={videos}
           formatDate={formatDate}
           formatNumber={formatNumber}
-          isGrid={false}
+          page="results"
           videoRepository={videoRepository}
         />
       )}

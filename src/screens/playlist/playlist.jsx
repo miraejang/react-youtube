@@ -44,7 +44,7 @@ const Playlist = ({ youtube, formatDate, formatNumber, videoRepository }) => {
                 videos={group.videos}
                 formatDate={formatDate}
                 formatNumber={formatNumber}
-                isGrid={false}
+                page="palylist"
                 videoRepository={videoRepository}
               />
             )}
