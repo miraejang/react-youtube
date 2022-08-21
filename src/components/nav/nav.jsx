@@ -4,9 +4,9 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { faClock, faHistory, faHome } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Login from '../login/login';
 import NavHeader from '../nav_header/nav_header';
 import styles from './nav.module.css';
