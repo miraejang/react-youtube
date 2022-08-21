@@ -16,7 +16,7 @@ function App({ youtube, authService, videoRepository }) {
   const [navInit, setNavInit] = useState(false);
   const [isWatch, setIsWatch] = useState(false);
   const [navExpand, setNavExpand] = useState(false);
-  const [sliderNavExpand, setSliderNavExpand] = useState(false);
+  const [sliderNavOpen, setSliderNavOpen] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -68,7 +68,7 @@ function App({ youtube, authService, videoRepository }) {
     if (navInit === false) setNavInit(true);
 
     if (isWatch) {
-      setSliderNavExpand(state);
+      setSliderNavOpen(state);
     } else {
       setNavExpand(state);
     }
@@ -82,7 +82,7 @@ function App({ youtube, authService, videoRepository }) {
             authService={authService}
             isWatch={isWatch}
             navExpand={navExpand}
-            sliderNavExpand={sliderNavExpand}
+            sliderNavOpen={sliderNavOpen}
             setNavType={setNavType}
           />
           <div className={styles.content}>
@@ -91,7 +91,7 @@ function App({ youtube, authService, videoRepository }) {
               navInit={navInit}
               isWatch={isWatch}
               navExpand={navExpand}
-              sliderNavExpand={sliderNavExpand}
+              sliderNavOpen={sliderNavOpen}
               setNavType={setNavType}
             />
             <div className={styles.container}>

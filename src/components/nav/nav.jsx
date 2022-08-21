@@ -16,7 +16,7 @@ const Nav = ({
   navInit,
   isWatch,
   navExpand,
-  sliderNavExpand,
+  sliderNavOpen,
   setNavType,
 }) => {
   const user = useSelector(state => state.user.data);
@@ -26,8 +26,8 @@ const Nav = ({
   const typeClass = () => {
     const type = [];
     if (isWatch) {
-      type.push(styles.slider);
-      type.push(sliderNavExpand ? styles.expand : styles.compact);
+      type.push(styles.slider, styles.expand);
+      type.push(sliderNavOpen ? styles.open : styles.close);
       if (navInit) {
         type.push(styles.show);
       } else {
@@ -55,7 +55,7 @@ const Nav = ({
           <NavHeader
             isWatch={isWatch}
             navExpand={navExpand}
-            sliderNavExpand={sliderNavExpand}
+            sliderNavOpen={sliderNavOpen}
             setNavType={setNavType}
           />
           <div className={styles.content}>

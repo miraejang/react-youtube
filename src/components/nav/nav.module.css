@@ -1,6 +1,5 @@
 .nav {
   overflow: hidden;
-  width: 15rem;
   height: 100vh;
   background-color: #212121;
 }
@@ -11,13 +10,10 @@
 .link {
   display: block;
   padding: 0 1.5em;
-  line-height: 2.5em;
-}
-.icon {
-  margin-right: 1.5em;
 }
 .text {
   font-size: 0.875rem;
+  word-break: keep-all;
 }
 
 /* Type : compact */
@@ -35,10 +31,21 @@
 .compact .icon {
   display: block;
   width: 100%;
-  margin: 0;
+  margin-bottom: 0.625em;
 }
 .compact .text {
   font-size: 0.625rem;
+}
+
+/* Type : expand */
+.expand .nav {
+  width: 15rem;
+}
+.expand .link {
+  line-height: 2.5em;
+}
+.expand .icon {
+  margin-right: 1.5em;
 }
 
 /* Type : slider */
@@ -52,7 +59,7 @@
 .hide.slider {
   display: none;
 }
-.slider.expand .container {
+.slider.open .container {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -64,13 +71,14 @@
   position: absolute;
   width: 15rem;
 }
-.slider.expand .nav {
+.slider.open .nav {
   animation: slideIn 0.3s forwards;
 }
-.slider.compact .nav {
+.slider.close .nav {
   animation: slideOut 0.3s forwards;
 }
 
+/* login box */
 .loginBox {
   padding: 2em 1.5em;
   margin-top: 1em;
@@ -82,6 +90,7 @@
   margin-bottom: 1em;
 }
 
+/* keyframes */
 @keyframes slideIn {
   0% {
     transform: translateX(-100%);

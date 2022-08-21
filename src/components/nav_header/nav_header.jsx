@@ -5,13 +5,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './nav_header.module.css';
 
-const NavHeader = ({ isWatch, navExpand, sliderNavExpand, setNavType }) => {
+const NavHeader = ({ isWatch, navExpand, sliderNavOpen, setNavType }) => {
   return (
     <div className={styles.navHeader}>
       <div className={styles.navBtnBox}>
         <button
           className={styles.navBtn}
-          onClick={() => setNavType(isWatch ? !sliderNavExpand : !navExpand)}
+          onClick={() => setNavType(isWatch ? !sliderNavOpen : !navExpand)}
         >
           <FontAwesomeIcon icon={faBars} />
         </button>

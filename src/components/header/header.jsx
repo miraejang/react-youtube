@@ -12,7 +12,7 @@ const Header = ({
   authService,
   isWatch,
   navExpand,
-  sliderNavExpand,
+  sliderNavOpen,
   setNavType,
 }) => {
   const settingsRef = useRef();
@@ -36,7 +36,7 @@ const Header = ({
           <NavHeader
             isWatch={isWatch}
             navExpand={navExpand}
-            sliderNavExpand={sliderNavExpand}
+            sliderNavOpen={sliderNavOpen}
             setNavType={setNavType}
           />
         </div>
