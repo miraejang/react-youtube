@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './screens/home';
@@ -19,6 +19,7 @@ function App({ youtube, authService, videoRepository }) {
   const [sliderNavOpen, setSliderNavOpen] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
+  const containerRef = useRef(null);
 
   useEffect(() => {
     authService.onAuthChange(user => {
@@ -56,6 +57,7 @@ function App({ youtube, authService, videoRepository }) {
   };
 
   useEffect(() => {
+    containerRef.current && containerRef.current.scrollTo(0, 0);
     if (location.pathname && location.pathname.search(/^\/watch/) >= 0) {
       setNavInit(false);
       setIsWatch(true);
@@ -94,7 +96,7 @@ function App({ youtube, authService, videoRepository }) {
               sliderNavOpen={sliderNavOpen}
               setNavType={setNavType}
             />
-            <div className={styles.container}>
+            <div ref={containerRef} className={styles.container}>
               <Routes>
                 <Route
                   path="/"
