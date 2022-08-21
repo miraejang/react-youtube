@@ -84,9 +84,10 @@
 /* login box */
 .loginBox {
   padding: 2em 1.5em;
-  margin-top: 1em;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.compact .loginBox {
+  display: none;
 }
 .loginText {
   font-size: 0.9rem;
