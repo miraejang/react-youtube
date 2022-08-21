@@ -36,6 +36,9 @@
 .compact .text {
   font-size: 0.625rem;
 }
+.compact .playlist {
+  display: none;
+}
 
 /* Type : expand */
 .expand .nav {

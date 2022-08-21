@@ -102,7 +102,10 @@ const Nav = ({
                     .map(listId => {
                       if (listId !== 'WL') {
                         return (
-                          <li className={styles.item} key={listId}>
+                          <li
+                            className={`${styles.item} ${styles.playlist}`}
+                            key={listId}
+                          >
                             <Link
                               to={{
                                 pathname: '/playlist',
