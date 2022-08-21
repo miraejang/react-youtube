@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import VideoDetail from '../components/video_detail/video_detail';
-import VideoList from '../components/video_list/video_list';
-import Loading from '../components/loading/loading';
+import VideoDetail from '../../components/video_detail/video_detail';
+import VideoList from '../../components/video_list/video_list';
+import Loading from '../../components/loading/loading';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setSelectedVideo, setVideoList } from '../store';
+import { setSelectedVideo, setVideoList } from '../../store';
 import styles from './watch.module.css';
 
 const Watch = ({ youtube, formatDate, formatNumber, videoRepository }) => {

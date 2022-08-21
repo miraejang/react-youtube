@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/header/header';
 import Home from './screens/home';
-import Watch from './screens/watch';
+import Watch from './screens/watch/watch';
 import styles from './App.module.css';
 import Nav from './components/nav/nav';
 import Results from './screens/results';
