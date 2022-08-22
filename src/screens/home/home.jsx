@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import VideoList from '../components/video_list/video_list';
-import Loading from '../components/loading/loading';
+import VideoList from '../../components/video_list/video_list';
+import Loading from '../../components/loading/loading';
 import { useDispatch, useSelector } from 'react-redux';
-import { setVideoList } from '../store';
+import { setVideoList } from '../../store';
 
 const Home = ({ youtube, formatDate, formatNumber, videoRepository }) => {
   const [loading, setLoading] = useState(true);
