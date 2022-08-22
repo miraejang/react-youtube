@@ -23,6 +23,7 @@ li {
 }
 button {
   border: 0;
+  background-color: transparent;
   color: inherit;
   word-break: keep-all;
   white-space: nowrap;

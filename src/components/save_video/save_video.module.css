@@ -7,13 +7,11 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.85);
 }
-
 .popupContainer {
   position: relative;
   width: 100%;
   height: 100%;
 }
-
 .popup {
   position: absolute;
   top: 50%;
@@ -34,7 +32,6 @@
   font-size: 1.2rem;
 }
 .closeBtn {
-  background-color: transparent;
   font-size: 1.1em;
   color: #fff;
 }
@@ -51,18 +48,13 @@
 .playlist {
   padding: 0.5em 0;
 }
-.checkbox {
-}
 .label {
   margin-left: 0.5em;
-}
-.footer {
 }
 .addFolderBtn {
   display: block;
   width: 100%;
   padding: 1em 1.5em;
-  background-color: transparent;
   font-size: 1rem;
   color: #fff;
 }
