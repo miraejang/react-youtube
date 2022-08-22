@@ -4,19 +4,19 @@ import styles from './create_playlist_group.module.css';
 const CreatePlaylistGroup = ({ createGroup }) => {
   const formRef = useRef();
   const [count, setCount] = useState(0);
-  const [folderName, setFolderName] = useState('');
+  const [groupName, setGroupName] = useState('');
 
   const letterCount = e => {
     const name = e.target.value;
     setCount(name.length);
-    setFolderName(name);
+    setGroupName(name);
   };
 
   const onSubmit = e => {
     e.preventDefault();
     const id = `PLgr${Date.now()}`;
-    createGroup(id, folderName);
-    setFolderName('');
+    createGroup(id, groupName);
+    setGroupName('');
   };
 
   return (
@@ -32,7 +32,7 @@ const CreatePlaylistGroup = ({ createGroup }) => {
           id="PlaylistName"
           name="PlaylistName"
           placeholder="재생목록 이름"
-          value={folderName}
+          value={groupName}
           minLength={1}
           maxLength={20}
         />
