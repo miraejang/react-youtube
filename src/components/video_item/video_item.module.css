@@ -155,10 +155,18 @@
   padding: 1rem 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+.playlist:hover .link {
+  border: 0;
+}
 .playlist .thumbnail {
   flex: 0 0 7.5rem;
   margin-right: 0.5rem;
 }
 .playlist .videoInfo {
   flex: 1 1;
+}
+.playlist .menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
