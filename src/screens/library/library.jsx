@@ -21,14 +21,13 @@ const Library = ({ youtube, formatDate, formatNumber, videoRepository }) => {
         // 이미 있는 동영상 제거
         const dayVideos = history[date].reduce(
           (day, video) =>
-            all.find(el => el.videoId === video.videoId)
+            all.length >= 10 || all.find(el => el.videoId === video.videoId)
               ? day
-              : [{ ...video }, ...day],
+              : [...day, { ...video }],
           []
         );
-        return [...dayVideos, ...all];
-      }, [])
-      .slice(0, 10);
+        return [...all, ...dayVideos];
+      }, []);
 
   return (
     <div className={styles.library}>
