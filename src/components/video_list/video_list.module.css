@@ -1,15 +1,22 @@
-.list {
+.ul {
   overflow: auto;
-  display: flex;
+  display: grid;
   width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
+}
+
+.list {
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 0.5rem;
+}
+
+.home {
+  width: 94rem;
+  margin: 1.5rem auto;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem 1rem;
 }
 
 .library {
-  display: grid;
-  width: 100%;
   grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem 0.25rem;
 }

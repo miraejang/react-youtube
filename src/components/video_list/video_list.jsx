@@ -13,19 +13,19 @@ const VideoList = ({
   const type = page => {
     switch (page) {
       case 'home':
-        return `${styles.list} ${styles.home}`;
+        return `${styles.ul} ${styles.grid} ${styles.home}`;
       case 'watch':
-        return `${styles.list} ${styles.watch}`;
+        return `${styles.ul} ${styles.list} ${styles.watch}`;
       case 'results':
-        return `${styles.list} ${styles.results}`;
+        return `${styles.ul} ${styles.list} ${styles.results}`;
       case 'history':
-        return `${styles.list} ${styles.history}`;
+        return `${styles.ul} ${styles.list} ${styles.history}`;
       case 'playlist':
-        return `${styles.list} ${styles.playlist}`;
+        return `${styles.ul} ${styles.list} ${styles.playlist}`;
       case 'library':
-        return `${styles.list} ${styles.library}`;
+        return `${styles.ul} ${styles.grid} ${styles.library}`;
       default:
-        return `${styles.list}`;
+        return `${styles.ul}`;
     }
   };
 

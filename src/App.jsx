@@ -107,7 +107,6 @@ function App({ youtube, authService, videoRepository }) {
                       youtube={youtube}
                       formatDate={formatDate}
                       formatNumber={formatNumber}
-                      navExpand={navExpand}
                       videoRepository={videoRepository}
                     />
                   }

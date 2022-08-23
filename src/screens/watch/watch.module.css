@@ -6,6 +6,12 @@
   display: flex;
   max-width: 110rem;
 }
+.video {
+  flex: 1 1 75%;
+  padding: 1.5rem;
+}
 .list {
+  flex: 0 0 25%;
   width: 25rem;
+  padding: 1.5rem 1.5rem 1.5rem 0;
 }

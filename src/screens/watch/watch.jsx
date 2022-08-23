@@ -50,7 +50,7 @@ const Watch = ({ youtube, formatDate, formatNumber, videoRepository }) => {
       ) : (
         <div className={styles.watch}>
           <div className={styles.container}>
-            <div className={styles.detail}>
+            <div className={styles.video}>
               <VideoDetail
                 selectedVideo={selectedVideo}
                 formatDate={formatDate}
