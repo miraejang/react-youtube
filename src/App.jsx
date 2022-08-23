@@ -52,10 +52,17 @@ function App({ youtube, authService, videoRepository }) {
     return `${year}. ${month}. ${day}.`;
   };
 
-  const formatNumber = number => {
-    number = Number(number);
-    if (number > 10000) return `${number / 10000}만`;
-    return `${number.toLocaleString('en-IN')}`;
+  const formatNumber = countNum => {
+    const count = Number(countNum);
+    if (count > 1000) {
+      const tenT = count > 10000 ? true : false;
+      const div = tenT ? count / 10000 : count / 1000;
+      const num = div > 10 ? div.toFixed(0) : div.toFixed(1);
+      const str = parseFloat(num).toLocaleString('en-IN');
+      return tenT ? `${str}만` : `${str}천`;
+    } else {
+      return `${count}`;
+    }
   };
 
   useEffect(() => {
