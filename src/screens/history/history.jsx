@@ -14,7 +14,7 @@ const History = ({
   videoRepository,
 }) => {
   const user = useSelector(state => state.user.data);
-  const history = useSelector(state => state.history.data);
+  const history = useSelector(state => state.userFeeds.history);
   const sortedDate =
     history && Object.keys(history).sort((a, b) => parseInt(b) - parseInt(a));
 

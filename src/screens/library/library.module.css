@@ -1,0 +1,36 @@
+.library {
+  display: flex;
+  overflow: auto;
+  justify-content: center;
+}
+.container {
+  width: 70rem;
+}
+.section {
+  padding: 1.5em 0;
+}
+.section + .section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title .icon {
+  margin-right: 1em;
+}
+.title h4 {
+  display: inline-block;
+  font-size: 1rem;
+}
+.moreBtn {
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  color: #3ea6ff;
+}
+.emptyTxt {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: #aaa;
+}

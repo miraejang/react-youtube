@@ -1,6 +1,6 @@
 import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import CreatePlaylistGroup from '../create_playlist_group/create_playlist_group';
 import styles from './save_video.module.css';
@@ -15,16 +15,17 @@ const SaveVideo = ({
   const popupRef = useRef();
   const [createFormOpen, setCreateFormOpen] = useState(false);
   const user = useSelector(state => state.user.data);
-  const playlist = useSelector(state => state.playlist.data);
+  const { wishList, playlist } = useSelector(state => state.userFeeds);
+  const groups = { WL: { ...wishList }, ...playlist };
 
-  const createGroup = (id, folderName) => {
-    const alreadyUsed = Object.keys(playlist).find(
-      listId => playlist[listId].name === folderName
-    );
+  const createGroup = (id, groupName) => {
+    const alreadyUsed =
+      groups &&
+      Object.keys(groups).find(groupId => groups[groupId].name === groupName);
 
     if (!alreadyUsed) {
       videoRepository.savePlaylist(user.uid, id, {
-        name: folderName,
+        name: groupName,
       });
     } else {
       console.log('이미 사용된 이름');
@@ -60,6 +61,7 @@ const SaveVideo = ({
       videoRepository.savePlaylist(user.uid, id, {
         name,
         lastUpdate: new Date().toLocaleDateString(),
+        thumbnail: (videos[0] && videos[0].thumbnail) || thumbnail,
         videos: [
           {
             videoId,
@@ -90,33 +92,32 @@ const SaveVideo = ({
             </button>
           </div>
           <div className={styles.content}>
-            <ul className={styles.folderList}>
-              {playlist &&
-                Object.keys(playlist)
-                  .reverse()
-                  .map(listId => (
-                    <li className={styles.playlist} key={listId}>
+            <ul className={styles.groups}>
+              {groups &&
+                Object.keys(groups).map(id => {
+                  const gorup = groups[id];
+                  return (
+                    <li className={styles.playlist} key={id}>
                       <input
                         onChange={onChange}
                         className={styles.checkbox}
                         type="checkbox"
-                        name={listId}
-                        id={listId}
-                        value={listId}
+                        name={id}
+                        id={id}
+                        value={id}
                         checked={
-                          playlist[listId].videos &&
-                          playlist[listId].videos.find(
-                            video => video.videoId === videoId
-                          )
+                          gorup.videos &&
+                          gorup.videos.find(video => video.videoId === videoId)
                             ? true
                             : false
                         }
                       />
-                      <label className={styles.label} htmlFor={listId}>
-                        {playlist[listId].name}
+                      <label className={styles.label} htmlFor={id}>
+                        {gorup.name}
                       </label>
                     </li>
-                  ))}
+                  );
+                })}
             </ul>
           </div>
           <div className={styles.footer}>

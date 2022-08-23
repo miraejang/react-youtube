@@ -10,8 +10,27 @@ const VideoList = ({
   page,
   videoRepository,
 }) => {
+  const type = page => {
+    switch (page) {
+      case 'home':
+        return `${styles.list} ${styles.home}`;
+      case 'watch':
+        return `${styles.list} ${styles.watch}`;
+      case 'results':
+        return `${styles.list} ${styles.results}`;
+      case 'history':
+        return `${styles.list} ${styles.history}`;
+      case 'playlist':
+        return `${styles.list} ${styles.playlist}`;
+      case 'library':
+        return `${styles.list} ${styles.library}`;
+      default:
+        return `${styles.list}`;
+    }
+  };
+
   return (
-    <ul className={styles.list}>
+    <ul className={type(page)}>
       {videos &&
         videos.map(video => (
           <VideoItem

@@ -36,7 +36,17 @@ class VideoRepository {
   }
 
   savePlaylist = (uid, listId, data) => {
-    set(ref(this.db, `users/${uid}/playlist/${listId}`), data);
+    const url = listId === 'WL' ? 'wishList' : `playlist/${listId}`;
+    set(ref(this.db, `users/${uid}/${url}`), data);
+  };
+
+  syncFeeds = (uid, onUpdate) => {
+    const starCountRef = ref(this.db, `users/${uid}`);
+    onValue(starCountRef, snapshot => {
+      const data = snapshot.val();
+      onUpdate(data);
+    });
+    return () => off();
   };
 }
 

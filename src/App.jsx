@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Header from './components/header/header';
-import Home from './screens/home';
+import Home from './screens/home/home';
 import Watch from './screens/watch/watch';
 import styles from './App.module.css';
 import Nav from './components/nav/nav';
@@ -9,13 +9,14 @@ import Results from './screens/results';
 import Playlist from './screens/playlist/playlist';
 import History from './screens/history/history';
 import { useDispatch } from 'react-redux';
-import { setHistory, setPlaylist, setUser } from './store';
+import { setUser, setUserFeeds } from './store';
+import Library from './screens/library/library';
 
 function App({ youtube, authService, videoRepository }) {
   const [init, setInit] = useState(false);
   const [navInit, setNavInit] = useState(false);
   const [isWatch, setIsWatch] = useState(false);
-  const [navExpand, setNavExpand] = useState(false);
+  const [navExpand, setNavExpand] = useState(true);
   const [sliderNavOpen, setSliderNavOpen] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -27,15 +28,16 @@ function App({ youtube, authService, videoRepository }) {
         dispatch(
           setUser({ uid: user.uid, name: user.displayName, email: user.email })
         );
-        videoRepository.syncVideo(user.uid, history => {
-          dispatch(setHistory({ ...history }));
-        });
-        videoRepository.syncPlaylist(user.uid, playlist => {
-          if (playlist === null) {
-            dispatch(setPlaylist({ WL: { name: '나중에 볼 동영상' } }));
-          } else {
-            dispatch(setPlaylist({ ...playlist }));
-          }
+        videoRepository.syncFeeds(user.uid, feeds => {
+          dispatch(
+            setUserFeeds({
+              history: feeds.history ? { ...feeds.history } : null,
+              wishList: feeds.wishList
+                ? { ...feeds.wishList }
+                : { name: '나중에 볼 동영상' },
+              playlist: feeds.playlist ? { ...feeds.playlist } : null,
+            })
+          );
         });
       }
       setInit(true);
@@ -96,7 +98,7 @@ function App({ youtube, authService, videoRepository }) {
               sliderNavOpen={sliderNavOpen}
               setNavType={setNavType}
             />
-            <div ref={containerRef} className={styles.container}>
+            <div className={styles.container}>
               <Routes>
                 <Route
                   path="/"
@@ -105,6 +107,7 @@ function App({ youtube, authService, videoRepository }) {
                       youtube={youtube}
                       formatDate={formatDate}
                       formatNumber={formatNumber}
+                      navExpand={navExpand}
                       videoRepository={videoRepository}
                     />
                   }
@@ -151,6 +154,17 @@ function App({ youtube, authService, videoRepository }) {
                       formatDate={formatDate}
                       formatNumber={formatNumber}
                       authService={authService}
+                      videoRepository={videoRepository}
+                    />
+                  }
+                />
+                <Route
+                  path="/library"
+                  element={
+                    <Library
+                      youtube={youtube}
+                      formatDate={formatDate}
+                      formatNumber={formatNumber}
                       videoRepository={videoRepository}
                     />
                   }

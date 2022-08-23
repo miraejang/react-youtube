@@ -19,7 +19,7 @@ const VideoItem = ({
   const [video, setvideo] = useState(null);
   const [channel, setChannel] = useState(null);
   const user = useSelector(state => state.user.data);
-  const history = useSelector(state => state.history.data);
+  const history = useSelector(state => state.userFeeds.history);
   const listType = page => {
     switch (page) {
       case 'home':
@@ -32,6 +32,8 @@ const VideoItem = ({
         return `${styles.item} ${styles.list} ${styles.history}`;
       case 'playlist':
         return `${styles.item} ${styles.list} ${styles.playlist}`;
+      case 'library':
+        return `${styles.item} ${styles.grid} ${styles.library}`;
       default:
         return `${styles.item} ${styles.list}`;
     }
@@ -76,43 +78,43 @@ const VideoItem = ({
     <>
       {video && channel && (
         <li className={listType(page)} onClick={clickVideo}>
-          <Link to={`/watch/${videoId}`}>
-            <div className={styles.imgBox}>
-              <div className={styles.imgViewBox}>
+          <Link className={styles.link} to={`/watch/${videoId}`}>
+            <div className={styles.thumbnail}>
+              <div className={styles.viewBox}>
                 <img
-                  className={styles.img}
                   src={video.snippet.thumbnails.high.url}
                   alt={`${video.snippet.title} thumbnail`}
                 />
               </div>
             </div>
-            <div className={styles.detailsBox}>
-              <div className={styles.logoBox}>
-                <div className={styles.logo}>
+            <div className={styles.videoInfo}>
+              <div className={styles.logo}>
+                <div className={styles.logoImg}>
                   <img
-                    className={styles.logoImage}
                     src={channel.snippet.thumbnails.default.url}
                     alt="channel logo"
                   />
                 </div>
               </div>
-              <div className={styles.infoBox}>
-                <h4 className={styles.title}>{video.snippet.title}</h4>
-                <p className={styles.channel}>{video.snippet.channelTitle}</p>
-                {video.snippet && video.statistics && (
-                  <p className={styles.channel}>
-                    <span>
-                      조회수 {formatNumber(video.statistics.viewCount)} •{' '}
-                    </span>
-                    <span>{formatDate(video.snippet.publishedAt)}</span>
-                  </p>
-                )}
+              <div className={styles.info}>
+                <div className={styles.title}>
+                  <h4>{video.snippet.title}</h4>
+                </div>
+                <div className={styles.meta}>
+                  <p className={styles.channel}>{video.snippet.channelTitle}</p>
+                  {video.snippet && video.statistics && (
+                    <p className={styles.popularity}>
+                      <span>
+                        조회수 {formatNumber(video.statistics.viewCount)}
+                      </span>
+                      <span> • </span>
+                      <span>{formatDate(video.snippet.publishedAt)}</span>
+                    </p>
+                  )}
+                </div>
               </div>
-              <div className={styles.menuBox}>
-                <FontAwesomeIcon
-                  icon={faEllipsisV}
-                  className={styles.iconMenu}
-                />
+              <div className={styles.menu}>
+                <FontAwesomeIcon icon={faEllipsisV} className={styles.icon} />
               </div>
             </div>
           </Link>

@@ -20,7 +20,7 @@ const Nav = ({
   setNavType,
 }) => {
   const user = useSelector(state => state.user.data);
-  const playlist = useSelector(state => state.playlist.data);
+  const playlist = useSelector(state => state.userFeeds.playlist);
   const navRef = useRef();
 
   const typeClass = () => {
@@ -85,46 +85,32 @@ const Nav = ({
                   </Link>
                 </li>
                 <li className={styles.item}>
-                  <Link
-                    to={{
-                      pathname: '/playlist',
-                      search: `?list=WL`,
-                    }}
-                    className={styles.link}
-                  >
+                  <Link to={'/playlist?list=WL'} className={styles.link}>
                     <FontAwesomeIcon icon={faClock} className={styles.icon} />
                     <span className={styles.text}>나중에 볼 동영상</span>
                   </Link>
                 </li>
                 {playlist &&
-                  Object.keys(playlist)
-                    .reverse()
-                    .map(listId => {
-                      if (listId !== 'WL') {
-                        return (
-                          <li
-                            className={`${styles.item} ${styles.playlist}`}
-                            key={listId}
-                          >
-                            <Link
-                              to={{
-                                pathname: '/playlist',
-                                search: `?list=${listId}`,
-                              }}
-                              className={styles.link}
-                            >
-                              <FontAwesomeIcon
-                                icon={faFolderClosed}
-                                className={styles.icon}
-                              />
-                              <span className={styles.text}>
-                                {playlist[listId].name}
-                              </span>
-                            </Link>
-                          </li>
-                        );
-                      }
-                    })}
+                  Object.keys(playlist).map(id => (
+                    <li
+                      className={`${styles.item} ${styles.playlist}`}
+                      key={id}
+                    >
+                      <Link
+                        to={{
+                          pathname: '/playlist',
+                          search: `?list=${id}`,
+                        }}
+                        className={styles.link}
+                      >
+                        <FontAwesomeIcon
+                          icon={faFolderClosed}
+                          className={styles.icon}
+                        />
+                        <span className={styles.text}>{playlist[id].name}</span>
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             )}
             {!user && (

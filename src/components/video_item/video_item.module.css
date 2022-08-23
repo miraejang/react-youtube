@@ -2,36 +2,36 @@
   box-sizing: border-box;
   cursor: pointer;
 }
-.item a {
+.link {
   display: block;
   width: 100%;
   height: 100%;
 }
-.imgBox {
+.thumbnail {
   overflow: hidden;
 }
-.imgViewBox {
+.viewBox {
   position: relative;
   width: 100%;
   padding-bottom: 56.25%;
 }
-.img {
+.viewBox img {
   position: absolute;
   top: 50%;
   left: 50%;
   max-width: 100%;
   transform: translate(-50%, -50%);
 }
-.detailsBox {
+.videoInfo {
   display: inline-flex;
   width: 100%;
   flex-direction: row;
 }
-.logoBox {
+.logo {
   flex: 1 1 14%;
   text-align: center;
 }
-.logo {
+.logoImg {
   display: inline-block;
   overflow: hidden;
   width: 2.25em;
@@ -39,16 +39,16 @@
   margin-right: 0.75em;
   border-radius: 50%;
 }
-.logoImage {
+.logoImg img {
   width: 100%;
   height: 100%;
 }
-.infoBox {
+.info {
   line-height: 1.4;
   color: #aaa;
   flex: 1 1 80%;
 }
-.title {
+.title h4 {
   overflow: hidden;
   margin-bottom: 0.25em;
   font-weight: 600;
@@ -59,19 +59,19 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.channel {
+.meta {
   font-size: 0.875rem;
-  align-self: #aaa;
+  color: #aaa;
 }
-.menuBox {
+.menu {
   flex: 1 1 4%;
   text-align: center;
 }
-.iconMenu {
+.menu .icon {
   display: none;
   margin-top: 0.3em;
 }
-.item:hover .iconMenu {
+.item:hover .menu .icon {
   display: inline-block;
 }
 
@@ -82,7 +82,7 @@
   /* width: 25%; */
   /* padding: 20px; */
 }
-.grid .detailsBox {
+.grid .videoInfo {
   margin-top: 1em;
 }
 .list {
@@ -93,24 +93,39 @@
   display: flex;
   flex-direction: row;
 }
-.list .logoBox {
+.list .logo {
   display: none;
 }
-.list .imgBox {
+.list .thumbnail {
   max-width: 360px;
   min-width: 240px;
   margin-right: 1em;
   flex: 1 1 40%;
 }
-.list .detailsBox {
+.list .videoInfo {
   flex: 1 1 60%;
 }
-.list .infoBox {
+.list .info {
   flex: 1 1 96%;
 }
-.list .title {
+.list .title h4 {
   font-size: 0.875em;
 }
 .list .channel {
   font-size: 0.75em;
+}
+
+/* page : library */
+.library {
+  width: auto;
+  margin: 0;
+}
+.library .logo {
+  display: none;
+}
+.library .title h4 {
+  font-size: 0.875rem;
+}
+.library .meta {
+  font-size: 0.75rem;
 }

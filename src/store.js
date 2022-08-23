@@ -40,22 +40,18 @@ const userSlice = createSlice({
   },
 });
 
-const historySlice = createSlice({
-  name: 'history',
-  initialState: { data: null },
-  reducers: {
-    setHistory: (state, action) => {
-      state.data = action.payload;
-    },
+const userFeedsSlice = createSlice({
+  name: 'userFeeds',
+  initialState: {
+    history: null,
+    wishList: null,
+    playlist: null,
   },
-});
-
-const playlistSlice = createSlice({
-  name: 'playlist',
-  initialState: { data: null },
   reducers: {
-    setPlaylist: (state, action) => {
-      state.data = action.payload;
+    setUserFeeds: (state, action) => {
+      state.history = action.payload.history;
+      state.wishList = action.payload.wishList;
+      state.playlist = action.payload.playlist;
     },
   },
 });
@@ -66,8 +62,7 @@ const store = configureStore({
     search: searchSlice.reducer,
     videoList: videoListSlice.reducer,
     user: userSlice.reducer,
-    history: historySlice.reducer,
-    playlist: playlistSlice.reducer,
+    userFeeds: userFeedsSlice.reducer,
   },
 });
 
@@ -75,7 +70,6 @@ export const { setSelectedVideo } = selectedSlice.actions;
 export const { setSearchTerm } = searchSlice.actions;
 export const { setVideoList } = videoListSlice.actions;
 export const { setUser } = userSlice.actions;
-export const { setHistory } = historySlice.actions;
-export const { setPlaylist } = playlistSlice.actions;
+export const { setUserFeeds } = userFeedsSlice.actions;
 
 export default store;

@@ -1,26 +1,55 @@
 .playlist {
-  width: 100%;
-  background-color: #0f0f0f;
-}
-.playlist .container {
   display: flex;
   width: 100%;
   height: 100%;
+  background-color: #0f0f0f;
 }
 .listInfoBox {
   background-color: #181818;
-  flex: 0;
+  flex: 0 0 23rem;
   padding: 1.5rem;
 }
+.content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  width: 68em;
+  padding: 1.5rem;
+  justify-content: center;
+}
 .imgBox {
-  width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 11rem;
   margin-bottom: 1rem;
+  background-color: #ccc;
+}
+.defaultImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8.75rem;
+  height: 6rem;
+  border-radius: 1.5em;
+  background-color: #868686;
+}
+.defaultImg .icon {
+  color: #ccc;
 }
 .info {
   margin-top: 0.5rem;
   font-size: 0.875rem;
   color: #aaa;
 }
-.content .container {
-  padding-top: 0.5rem;
+.emptyTxt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1rem;
+  min-height: 11rem;
 }

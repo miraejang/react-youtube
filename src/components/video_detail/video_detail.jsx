@@ -123,7 +123,7 @@ const VideoDetail = ({
                 </span>
               ))}
           </div>
-          <p className={styles.desc}>{video.snippet.description}</p>
+          <pre className={styles.desc}>{video.snippet.description}</pre>
         </div>
       </div>
     </div>
