@@ -34,3 +34,54 @@
   font-size: 0.875rem;
   color: #aaa;
 }
+
+/* 재생목록 */
+.groups {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin-top: 1.5rem;
+}
+.group {
+  overflow: hidden;
+}
+.group .link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.group .thumbnail {
+  overflow: hidden;
+}
+.group .viewBox {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+}
+.group .viewBox img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 100%;
+  transform: translate(-50%, -50%);
+}
+.groupInfo {
+  margin-top: 0.75rem;
+}
+.groupInfo .name {
+  margin-bottom: 0.75rem;
+}
+.groupInfo .name h4 {
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 0.875rem;
+  color: #fff;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.groupInfo .meta {
+  line-height: 1.5;
+  font-size: 0.75rem;
+  color: #aaa;
+}

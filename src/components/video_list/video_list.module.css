@@ -10,6 +10,7 @@
   row-gap: 0.5rem;
 }
 
+/* page : home */
 .home {
   width: 94rem;
   margin: 1.5rem auto;
@@ -17,7 +18,9 @@
   gap: 2.5rem 1rem;
 }
 
+/* page : library */
 .library {
+  margin-top: 1.5rem;
   grid-template-columns: repeat(5, 1fr);
   gap: 1.5rem 0.25rem;
 }

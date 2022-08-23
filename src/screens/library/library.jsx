@@ -99,13 +99,23 @@ const Library = ({ youtube, formatDate, formatNumber, videoRepository }) => {
           </div>
           <div className={styles.content}>
             {playlist && (
-              <ul>
+              <ul className={styles.groups}>
                 {Object.keys(playlist).map(id => (
-                  <li key={id}>
-                    <Link to={`/playlist?${id}`}>
-                      <img src={playlist[id].thumbnail} alt="thumbnail" />
-                      <p>{playlist[id].name}</p>
-                      <p>{playlist[id].lastUpdate}</p>
+                  <li className={styles.group} key={id}>
+                    <Link className={styles.link} to={`/playlist?${id}`}>
+                      <div className={styles.thumbnail}>
+                        <div className={styles.viewBox}>
+                          <img src={playlist[id].thumbnail} alt="thumbnail" />
+                        </div>
+                      </div>
+                      <div className={styles.groupInfo}>
+                        <div className={styles.name}>
+                          <h4>{playlist[id].name}</h4>
+                        </div>
+                        <div className={styles.meta}>
+                          <p>업데이트 : {playlist[id].lastUpdate}</p>
+                        </div>
+                      </div>
                     </Link>
                   </li>
                 ))}

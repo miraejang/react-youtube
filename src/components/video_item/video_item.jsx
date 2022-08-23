@@ -78,6 +78,14 @@ const VideoItem = ({
     <>
       {video && channel && (
         <li className={listType(page)} onClick={clickVideo}>
+          {page === 'playlist' && (
+            <div className={styles.grip}>
+              <div className={styles.icon}>
+                <div className={styles.bar}></div>
+                <div className={styles.bar}></div>
+              </div>
+            </div>
+          )}
           <Link className={styles.link} to={`/watch/${videoId}`}>
             <div className={styles.thumbnail}>
               <div className={styles.viewBox}>
@@ -113,11 +121,18 @@ const VideoItem = ({
                   )}
                 </div>
               </div>
-              <div className={styles.menu}>
-                <FontAwesomeIcon icon={faEllipsisV} className={styles.icon} />
-              </div>
+              {page !== 'playlist' && (
+                <div className={styles.menu}>
+                  <FontAwesomeIcon icon={faEllipsisV} className={styles.icon} />
+                </div>
+              )}
             </div>
           </Link>
+          {page === 'playlist' && (
+            <div className={styles.menu}>
+              <FontAwesomeIcon icon={faEllipsisV} className={styles.icon} />
+            </div>
+          )}
         </li>
       )}
     </>

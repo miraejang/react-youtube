@@ -1,3 +1,6 @@
+.item {
+  display: flex;
+}
 .link {
   display: block;
   width: 100%;
@@ -74,6 +77,24 @@
 .item:hover .menu .icon {
   display: inline-block;
 }
+.grip {
+  display: flex;
+  padding: 0 0.375rem;
+  justify-content: center;
+  align-items: center;
+}
+.grip .icon {
+  width: 2.25em;
+}
+.grip .bar {
+  width: 50%;
+  height: 1px;
+  margin: 0 auto;
+  background-color: #fff;
+}
+.grip .bar + .bar {
+  margin-top: 0.25rem;
+}
 
 /* type : list */
 .list {
@@ -127,6 +148,13 @@
 }
 
 /* page : playlist */
+.playlist:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.playlist .link {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 .playlist .thumbnail {
   flex: 0 0 7.5rem;
   margin-right: 0.5rem;
