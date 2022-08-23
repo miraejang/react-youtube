@@ -19,9 +19,9 @@ const Playlist = ({ youtube, formatDate, formatNumber, videoRepository }) => {
 
   return (
     <div className={styles.playlist}>
-      <div className={styles.listInfoBox}>
-        <div className={styles.listInfo}>
-          <div className={styles.imgBox}>
+      <div className={styles.groupInfo}>
+        <div className={styles.info}>
+          <div className={styles.thumbnail}>
             {group.thumbnail && <img src={group.thumbnail} alt="thumbnail" />}
             {!group.thumbnail && (
               <div className={styles.defaultImg}>
@@ -34,7 +34,7 @@ const Playlist = ({ youtube, formatDate, formatNumber, videoRepository }) => {
             )}
           </div>
           <h3>{group.name}</h3>
-          <div className={styles.info}>
+          <div className={styles.meta}>
             <span className={styles.vidoeCount}>
               동영상 {group.videos ? `${group.videos.length}개` : '없음'}
             </span>
@@ -50,23 +50,19 @@ const Playlist = ({ youtube, formatDate, formatNumber, videoRepository }) => {
         </div>
       </div>
       <div className={styles.content}>
-        <div className={styles.container}>
-          {group.videos && (
-            <VideoList
-              youtube={youtube}
-              videos={group.videos}
-              formatDate={formatDate}
-              formatNumber={formatNumber}
-              page="palylist"
-              videoRepository={videoRepository}
-            />
-          )}
-          {!group.videos && (
-            <p className={styles.emptyTxt}>
-              아직 재생목록에 동영상이 없습니다.
-            </p>
-          )}
-        </div>
+        {group.videos && (
+          <VideoList
+            youtube={youtube}
+            videos={group.videos}
+            formatDate={formatDate}
+            formatNumber={formatNumber}
+            page="playlist"
+            videoRepository={videoRepository}
+          />
+        )}
+        {!group.videos && (
+          <p className={styles.emptyTxt}>아직 재생목록에 동영상이 없습니다.</p>
+        )}
       </div>
     </div>
   );

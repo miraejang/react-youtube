@@ -2,6 +2,7 @@
   overflow: auto;
   display: grid;
   width: 100%;
+  align-items: start;
 }
 
 .list {

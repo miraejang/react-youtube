@@ -59,6 +59,7 @@
   -webkit-box-orient: vertical;
 }
 .meta {
+  line-height: 1.5;
   font-size: 0.875rem;
   color: #aaa;
 }
@@ -103,6 +104,12 @@
 }
 
 /* type : grid */
+.grid .videoInfo {
+  margin-top: 0.75rem;
+}
+.grid .title {
+  margin-bottom: 0.75rem;
+}
 
 /* page : library */
 .library {
@@ -117,4 +124,13 @@
 }
 .library .meta {
   font-size: 0.75rem;
+}
+
+/* page : playlist */
+.playlist .thumbnail {
+  flex: 0 0 7.5rem;
+  margin-right: 0.5rem;
+}
+.playlist .videoInfo {
+  flex: 1 1;
 }
