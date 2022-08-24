@@ -10,7 +10,6 @@ const VideoItem = ({
   youtube,
   videoId,
   channelId,
-  formatDate,
   formatNumber,
   page,
   videoRepository,
@@ -116,7 +115,10 @@ const VideoItem = ({
                         조회수 {formatNumber(video.statistics.viewCount)}
                       </span>
                       <span> • </span>
-                      <span>{formatDate(video.snippet.publishedAt)}</span>
+                      <span>
+                        {new Date(video.snippet.publishedAt) //
+                          .toLocaleDateString('ko-KR')}
+                      </span>
                     </p>
                   )}
                 </div>

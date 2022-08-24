@@ -7,7 +7,6 @@ import styles from './video_detail.module.css';
 
 const VideoDetail = ({
   selectedVideo: { video, channel },
-  formatDate,
   formatNumber,
   videoRepository,
 }) => {
@@ -53,8 +52,9 @@ const VideoDetail = ({
                 </span>
               )}
               <span className={styles.published}>
-                {' '}
-                {formatDate(video.snippet.publishedAt)}
+                {new Date(video.snippet.publishedAt).toLocaleDateString(
+                  'ko-KR'
+                )}
               </span>
             </p>
             <div className={styles.rightBox}>

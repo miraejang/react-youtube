@@ -5,7 +5,6 @@ import styles from './video_list.module.css';
 const VideoList = ({
   youtube,
   videos,
-  formatDate,
   formatNumber,
   page,
   videoRepository,
@@ -37,7 +36,6 @@ const VideoList = ({
             youtube={youtube}
             videoId={video.videoId || video.id.videoId || video.id}
             channelId={video.channelId || video.snippet.channelId}
-            formatDate={formatDate}
             formatNumber={formatNumber}
             page={page}
             key={video.videoId || video.id.videoId || video.id}

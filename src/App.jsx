@@ -44,14 +44,6 @@ function App({ youtube, authService, videoRepository }) {
     });
   }, []);
 
-  const formatDate = date => {
-    const arr = date.split(/[-, T]/gi);
-    const year = Number(arr[0]);
-    const month = Number(arr[1]);
-    const day = Number(arr[2]);
-    return `${year}. ${month}. ${day}.`;
-  };
-
   const formatNumber = countNum => {
     const count = Number(countNum);
     if (count > 1000) {
@@ -112,7 +104,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <Home
                       youtube={youtube}
-                      formatDate={formatDate}
                       formatNumber={formatNumber}
                       videoRepository={videoRepository}
                     />
@@ -123,7 +114,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <Watch
                       youtube={youtube}
-                      formatDate={formatDate}
                       formatNumber={formatNumber}
                       videoRepository={videoRepository}
                     />
@@ -134,7 +124,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <Results
                       youtube={youtube}
-                      formatDate={formatDate}
                       formatNumber={formatNumber}
                       videoRepository={videoRepository}
                     />
@@ -145,7 +134,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <History
                       youtube={youtube}
-                      formatDate={formatDate}
                       formatNumber={formatNumber}
                       authService={authService}
                       videoRepository={videoRepository}
@@ -157,7 +145,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <Playlist
                       youtube={youtube}
-                      formatDate={formatDate}
                       formatNumber={formatNumber}
                       authService={authService}
                       videoRepository={videoRepository}
@@ -169,7 +156,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <Library
                       youtube={youtube}
-                      formatDate={formatDate}
                       formatNumber={formatNumber}
                       videoRepository={videoRepository}
                     />

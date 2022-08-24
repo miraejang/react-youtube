@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import VideoList from '../../components/video_list/video_list';
 import styles from './playlist.module.css';
 
-const Playlist = ({ youtube, formatDate, formatNumber, videoRepository }) => {
+const Playlist = ({ youtube, formatNumber, videoRepository }) => {
   const { wishList, playlist } = useSelector(state => state.userFeeds);
   const { search } = useLocation();
   const [group, setGroup] = useState({});
@@ -54,7 +54,6 @@ const Playlist = ({ youtube, formatDate, formatNumber, videoRepository }) => {
           <VideoList
             youtube={youtube}
             videos={group.videos}
-            formatDate={formatDate}
             formatNumber={formatNumber}
             page="playlist"
             videoRepository={videoRepository}

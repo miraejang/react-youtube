@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom';
 import { setSelectedVideo, setVideoList } from '../../store';
 import styles from './watch.module.css';
 
-const Watch = ({ youtube, formatDate, formatNumber, videoRepository }) => {
+const Watch = ({ youtube, formatNumber, videoRepository }) => {
   const [loading, setLoading] = useState(true);
   const selectedVideo = useSelector(state => state.selected.data);
   const videos = useSelector(state => state.videoList.data);
@@ -53,7 +53,6 @@ const Watch = ({ youtube, formatDate, formatNumber, videoRepository }) => {
             <div className={styles.video}>
               <VideoDetail
                 selectedVideo={selectedVideo}
-                formatDate={formatDate}
                 formatNumber={formatNumber}
                 videoRepository={videoRepository}
               />
@@ -62,7 +61,6 @@ const Watch = ({ youtube, formatDate, formatNumber, videoRepository }) => {
               <VideoList
                 youtube={youtube}
                 videos={videos}
-                formatDate={formatDate}
                 formatNumber={formatNumber}
                 page="watch"
                 videoRepository={videoRepository}
