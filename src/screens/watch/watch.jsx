@@ -53,7 +53,6 @@ const Watch = ({ youtube, formatNumber, videoRepository }) => {
             <div className={styles.video}>
               <VideoDetail
                 selectedVideo={selectedVideo}
-                formatNumber={formatNumber}
                 videoRepository={videoRepository}
               />
             </div>

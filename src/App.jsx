@@ -47,13 +47,13 @@ function App({ youtube, authService, videoRepository }) {
   const formatNumber = countNum => {
     const count = Number(countNum);
     if (count > 1000) {
-      const tenT = count > 10000 ? true : false;
+      const tenT = count > 10000;
       const div = tenT ? count / 10000 : count / 1000;
       const num = div > 10 ? div.toFixed(0) : div.toFixed(1);
       const str = parseFloat(num).toLocaleString('en-IN');
-      return tenT ? `${str}만` : `${str}천`;
+      return tenT ? `${str}만회` : `${str}천회`;
     } else {
-      return `${count}`;
+      return `${count}회`;
     }
   };
 

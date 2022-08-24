@@ -7,7 +7,6 @@ import styles from './video_detail.module.css';
 
 const VideoDetail = ({
   selectedVideo: { video, channel },
-  formatNumber,
   videoRepository,
 }) => {
   const [saveVideoOpen, setSaveVideoOpen] = useState(false);
@@ -18,6 +17,18 @@ const VideoDetail = ({
 
   const closePopup = () => {
     setSaveVideoOpen(false);
+  };
+
+  const transformCount = count => {
+    const num = Number(count);
+    if (count > 1000) {
+      const div = count / 10000;
+      const transNum =
+        div > 100 ? parseInt(div) : parseFloat(String(div).slice(0, 5));
+      return `${transNum.toLocaleString('en-IN')}만`;
+    } else {
+      return `${num}`;
+    }
   };
 
   return (
@@ -45,11 +56,14 @@ const VideoDetail = ({
           <div className={styles.videoPrimary}>
             <p className={styles.videoDetails}>
               {video.statistics && video.statistics.viewCount && (
-                <span className={styles.viewCount}>
-                  조회수{' '}
-                  {Number(video.statistics.viewCount).toLocaleString('en-US')}회
-                  •{' '}
-                </span>
+                <>
+                  <span className={styles.viewCount}>
+                    조회수{' '}
+                    {Number(video.statistics.viewCount).toLocaleString('en-US')}
+                    회
+                  </span>
+                  <span> • </span>
+                </>
               )}
               <span className={styles.published}>
                 {new Date(video.snippet.publishedAt).toLocaleDateString(
@@ -58,28 +72,20 @@ const VideoDetail = ({
               </span>
             </p>
             <div className={styles.rightBox}>
-              {video.statistics && video.statistics.likeCount && (
-                <div className={styles.like}>
-                  <FontAwesomeIcon
-                    icon={faThumbsUp}
-                    className={styles.thumbsUp}
-                  />
-                  <span className={styles.likeCount}>
-                    {formatNumber(video.statistics.likeCount)}
-                  </span>
-                </div>
-              )}
-              {video.statistics && video.statistics.dislikeCount && (
-                <div className={styles.dislike}>
-                  <FontAwesomeIcon
-                    icon={faThumbsDown}
-                    className={styles.thumbsDown}
-                  />
-                  <span className={styles.dislikeCount}>
-                    {formatNumber(video.statistics.dislikeCount)}
-                  </span>
-                </div>
-              )}
+              <div className={styles.like}>
+                <FontAwesomeIcon
+                  icon={faThumbsUp}
+                  className={styles.thumbsUp}
+                />
+                <span className={styles.likeCount}>좋아요</span>
+              </div>
+              <div className={styles.dislike}>
+                <FontAwesomeIcon
+                  icon={faThumbsDown}
+                  className={styles.thumbsDown}
+                />
+                <span className={styles.dislikeCount}>싫어요</span>
+              </div>
               <button className={styles.saveVideoBtn} onClick={toggleSaveVideo}>
                 <FontAwesomeIcon icon={faPlus} /> 저장
               </button>
@@ -110,7 +116,7 @@ const VideoDetail = ({
               <h4 className={styles.channel}>{video.snippet.channelTitle}</h4>
               {channel && channel.statistics.subscriberCount && (
                 <p className={styles.subscriber}>
-                  구독자 {formatNumber(channel.statistics.subscriberCount)}
+                  구독자 {transformCount(channel.statistics.subscriberCount)}명
                 </p>
               )}
             </div>
