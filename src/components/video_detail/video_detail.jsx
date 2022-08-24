@@ -66,24 +66,17 @@ const VideoDetail = ({
                 </>
               )}
               <span className={styles.published}>
-                {new Date(video.snippet.publishedAt).toLocaleDateString(
-                  'ko-KR'
-                )}
+                {new Date(video.snippet.publishedAt) //
+                  .toLocaleDateString('ko-KR')}
               </span>
             </p>
             <div className={styles.rightBox}>
               <div className={styles.like}>
-                <FontAwesomeIcon
-                  icon={faThumbsUp}
-                  className={styles.thumbsUp}
-                />
+                <FontAwesomeIcon icon={faThumbsUp} />
                 <span className={styles.likeCount}>좋아요</span>
               </div>
               <div className={styles.dislike}>
-                <FontAwesomeIcon
-                  icon={faThumbsDown}
-                  className={styles.thumbsDown}
-                />
+                <FontAwesomeIcon icon={faThumbsDown} />
                 <span className={styles.dislikeCount}>싫어요</span>
               </div>
               <button className={styles.saveVideoBtn} onClick={toggleSaveVideo}>
