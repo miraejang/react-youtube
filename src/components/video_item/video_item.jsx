@@ -6,14 +6,7 @@ import { Link } from 'react-router-dom';
 import { setSelectedVideo } from '../../store';
 import styles from './video_item.module.css';
 
-const VideoItem = ({
-  youtube,
-  videoId,
-  channelId,
-  formatNumber,
-  page,
-  videoRepository,
-}) => {
+const VideoItem = ({ youtube, videoId, channelId, page, videoRepository }) => {
   const dispatch = useDispatch();
   const [video, setvideo] = useState(null);
   const [channel, setChannel] = useState(null);
@@ -73,6 +66,19 @@ const VideoItem = ({
     ]);
   };
 
+  const compCount = count => {
+    const num = Number(count);
+    if (num > 1000) {
+      const tenT = num > 10000;
+      const div = tenT ? num / 10000 : num / 1000;
+      const compNum = div > 10 ? div.toFixed(0) : div.toFixed(1);
+      const str = parseFloat(compNum).toLocaleString('en-IN');
+      return tenT ? `${str}만회` : `${str}천회`;
+    } else {
+      return `${num}회`;
+    }
+  };
+
   return (
     <>
       {video && channel && (
@@ -112,7 +118,7 @@ const VideoItem = ({
                   {video.snippet && video.statistics && (
                     <p className={styles.popularity}>
                       <span>
-                        조회수 {formatNumber(video.statistics.viewCount)}
+                        조회수 {compCount(video.statistics.viewCount)}
                       </span>
                       <span> • </span>
                       <span>

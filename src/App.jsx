@@ -44,19 +44,6 @@ function App({ youtube, authService, videoRepository }) {
     });
   }, []);
 
-  const formatNumber = countNum => {
-    const count = Number(countNum);
-    if (count > 1000) {
-      const tenT = count > 10000;
-      const div = tenT ? count / 10000 : count / 1000;
-      const num = div > 10 ? div.toFixed(0) : div.toFixed(1);
-      const str = parseFloat(num).toLocaleString('en-IN');
-      return tenT ? `${str}만회` : `${str}천회`;
-    } else {
-      return `${count}회`;
-    }
-  };
-
   useEffect(() => {
     containerRef.current && containerRef.current.scrollTo(0, 0);
     if (location.pathname && location.pathname.search(/^\/watch/) >= 0) {
@@ -102,11 +89,7 @@ function App({ youtube, authService, videoRepository }) {
                 <Route
                   path="/"
                   element={
-                    <Home
-                      youtube={youtube}
-                      formatNumber={formatNumber}
-                      videoRepository={videoRepository}
-                    />
+                    <Home youtube={youtube} videoRepository={videoRepository} />
                   }
                 />
                 <Route
@@ -114,7 +97,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <Watch
                       youtube={youtube}
-                      formatNumber={formatNumber}
                       videoRepository={videoRepository}
                     />
                   }
@@ -124,7 +106,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <Results
                       youtube={youtube}
-                      formatNumber={formatNumber}
                       videoRepository={videoRepository}
                     />
                   }
@@ -134,7 +115,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <History
                       youtube={youtube}
-                      formatNumber={formatNumber}
                       authService={authService}
                       videoRepository={videoRepository}
                     />
@@ -145,7 +125,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <Playlist
                       youtube={youtube}
-                      formatNumber={formatNumber}
                       authService={authService}
                       videoRepository={videoRepository}
                     />
@@ -156,7 +135,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <Library
                       youtube={youtube}
-                      formatNumber={formatNumber}
                       videoRepository={videoRepository}
                     />
                   }
