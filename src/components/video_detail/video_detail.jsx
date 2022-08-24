@@ -19,7 +19,7 @@ const VideoDetail = ({
     setSaveVideoOpen(false);
   };
 
-  const transformCount = count => {
+  const compCount = count => {
     const num = Number(count);
     if (count > 1000) {
       const div = count / 10000;
@@ -116,7 +116,7 @@ const VideoDetail = ({
               <h4 className={styles.channel}>{video.snippet.channelTitle}</h4>
               {channel && channel.statistics.subscriberCount && (
                 <p className={styles.subscriber}>
-                  구독자 {transformCount(channel.statistics.subscriberCount)}명
+                  구독자 {compCount(channel.statistics.subscriberCount)}명
                 </p>
               )}
             </div>
