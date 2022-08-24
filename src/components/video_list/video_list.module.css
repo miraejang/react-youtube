@@ -18,6 +18,13 @@
   gap: 2.5rem 1rem;
 }
 
+/* page : results */
+.results {
+  max-width: 68.5rem;
+  margin: 1.5rem auto;
+  row-gap: 1rem;
+}
+
 /* page : library */
 .library {
   margin-top: 1.5rem;
