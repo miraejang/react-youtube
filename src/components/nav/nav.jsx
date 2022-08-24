@@ -41,7 +41,8 @@ const Nav = ({
 
   const closeNav = e => {
     e.stopPropagation();
-    const navOutside = e.target.contains(navRef.current);
+    const navOutside =
+      e.target !== navRef.current && e.target.contains(navRef.current);
 
     if (navOutside) {
       setNavType(false);
