@@ -4,8 +4,9 @@
   justify-content: center;
 }
 .container {
-  width: 68rem;
-  padding-top: 1.5em 1.5em 0;
+  width: 100%;
+  max-width: 68.5rem;
+  margin: 1.5rem;
 }
 .logout {
   justify-content: center;
