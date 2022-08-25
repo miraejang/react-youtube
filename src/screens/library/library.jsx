@@ -49,6 +49,7 @@ const Library = ({ youtube, videoRepository }) => {
                 videos={historyVideos}
                 page={page}
                 videoRepository={videoRepository}
+                listId="history"
               />
             )}
             {!historyVideos && (
@@ -75,6 +76,7 @@ const Library = ({ youtube, videoRepository }) => {
                 videos={wishList.videos.slice(0, 5)}
                 page={page}
                 videoRepository={videoRepository}
+                listId="wishList"
               />
             )}
             {!wishList && (

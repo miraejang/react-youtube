@@ -1,17 +1,31 @@
-import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setSelectedVideo } from '../../store';
+import VideoMenu from '../video_menu/video_menu';
 import styles from './video_item.module.css';
 
-const VideoItem = ({ youtube, videoId, channelId, page, videoRepository }) => {
-  const dispatch = useDispatch();
+const VideoItem = ({
+  youtube,
+  videoId,
+  channelId,
+  page,
+  videoRepository,
+  listId,
+}) => {
+  const RESULTS = page === 'results';
+  const HISTORY = page === 'history';
+  const PLAYLIST = page === 'playlist';
   const [video, setvideo] = useState(null);
   const [channel, setChannel] = useState(null);
+  const [hover, setHover] = useState(false);
   const user = useSelector(state => state.user.data);
   const history = useSelector(state => state.userFeeds.history);
+  const dispatch = useDispatch();
+  // video menu variables
+  const [videoMenuOpen, setVideoMenuOpen] = useState(false);
+  const videoMenu = useSelector(state => state.videoMenu);
+  // page type className
   const listType = page => {
     switch (page) {
       case 'home':
@@ -31,6 +45,7 @@ const VideoItem = ({ youtube, videoId, channelId, page, videoRepository }) => {
     }
   };
 
+  // functions
   useEffect(() => {
     youtube
       .getAllData(videoId, channelId) //
@@ -79,68 +94,103 @@ const VideoItem = ({ youtube, videoId, channelId, page, videoRepository }) => {
     }
   };
 
+  // video menu functions
+  useEffect(() => {
+    if (videoMenu.listId === listId && videoMenu.videoId === videoId) {
+      setVideoMenuOpen(true);
+    } else {
+      setVideoMenuOpen(false);
+    }
+  }, [videoMenu]);
+
+  const hoverContainer = e => {
+    if (e.type === 'mouseenter') setHover(true);
+    if (e.type === 'mouseleave' && !videoMenuOpen) setHover(false);
+  };
+
+  const clearHover = () => {
+    setHover(false);
+  };
+
+  // content
+  const videoMenuContent = (
+    <div className={styles.videoMenu}>
+      {video && channel && (
+        <VideoMenu
+          videoId={videoId}
+          thumbnail={video.snippet.thumbnails.medium.url}
+          channelId={channelId}
+          videoRepository={videoRepository}
+          clearHover={clearHover}
+          hover={hover}
+          listId={listId}
+          videoMenuOpen={videoMenuOpen}
+        />
+      )}
+    </div>
+  );
+
   return (
     <>
       {video && channel && (
         <li className={listType(page)} onClick={clickVideo}>
-          {page === 'playlist' && (
-            <div className={styles.grip}>
-              <div className={styles.icon}>
-                <div className={styles.bar}></div>
-                <div className={styles.bar}></div>
+          <div
+            className={`${styles.container} ${hover && styles.hover}`}
+            onMouseEnter={hoverContainer}
+            onMouseLeave={hoverContainer}
+          >
+            {PLAYLIST && (
+              <div className={styles.grip}>
+                <div className={styles.icon}>
+                  <div className={styles.bar}></div>
+                  <div className={styles.bar}></div>
+                </div>
               </div>
-            </div>
-          )}
-          <Link className={styles.link} to={`/watch/${videoId}`}>
-            <div className={styles.thumbnail}>
-              <div className={styles.viewBox}>
-                <img
-                  src={video.snippet.thumbnails.high.url}
-                  alt={`${video.snippet.title} thumbnail`}
-                />
-              </div>
-            </div>
-            <div className={styles.videoInfo}>
-              <div className={styles.logo}>
-                <div className={styles.logoImg}>
+            )}
+            <Link className={styles.link} to={`/watch/${videoId}`}>
+              <div className={styles.thumbnail}>
+                <div className={styles.viewBox}>
                   <img
-                    src={channel.snippet.thumbnails.default.url}
-                    alt="channel logo"
+                    src={video.snippet.thumbnails.high.url}
+                    alt={`${video.snippet.title} thumbnail`}
                   />
                 </div>
               </div>
-              <div className={styles.info}>
+              <div className={styles.videoInfo}>
                 <div className={styles.title}>
                   <h4>{video.snippet.title}</h4>
                 </div>
                 <div className={styles.meta}>
-                  <p className={styles.channel}>{video.snippet.channelTitle}</p>
-                  {video.snippet && video.statistics && (
-                    <p className={styles.popularity}>
-                      <span>
-                        조회수 {compCount(video.statistics.viewCount)}
-                      </span>
-                      <span> • </span>
-                      <span>
-                        {new Date(video.snippet.publishedAt) //
-                          .toLocaleDateString('ko-KR')}
-                      </span>
-                    </p>
-                  )}
+                  <div className={styles.channel}>
+                    <div className={styles.logo}>
+                      <div className={styles.logoImg}>
+                        <img
+                          src={channel.snippet.thumbnails.default.url}
+                          alt="channel logo"
+                        />
+                      </div>
+                    </div>
+                    <div className={styles.channelTitle}>
+                      {video.snippet.channelTitle}
+                    </div>
+                  </div>
+                  <p className={styles.popularity}>
+                    <span>조회수 {compCount(video.statistics.viewCount)}</span>
+                    <span> • </span>
+                    <span>
+                      {new Date(video.snippet.publishedAt) //
+                        .toLocaleDateString('ko-KR')}
+                    </span>
+                  </p>
+                  {/* {(RESULTS || HISTORY) && (
+                    <p className={styles.desc}>{video.snippet.description}</p>
+                  )} */}
                 </div>
+                {!PLAYLIST && videoMenuContent}
               </div>
-              {page !== 'playlist' && (
-                <div className={styles.menu}>
-                  <FontAwesomeIcon icon={faEllipsisV} className={styles.icon} />
-                </div>
-              )}
-            </div>
-          </Link>
-          {page === 'playlist' && (
-            <div className={styles.menu}>
-              <FontAwesomeIcon icon={faEllipsisV} className={styles.icon} />
-            </div>
-          )}
+            </Link>
+            {PLAYLIST && videoMenuContent}
+          </div>
         </li>
       )}
     </>

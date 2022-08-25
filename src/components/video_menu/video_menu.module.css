@@ -1,0 +1,40 @@
+.videoMenu {
+  position: relative;
+}
+.menuBtn {
+  display: none;
+  position: relative;
+  text-align: center;
+  line-height: 2rem;
+  padding: 0 0.6rem;
+}
+.menuBtn.show {
+  display: block;
+}
+.menuList {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #212121;
+}
+.list {
+  padding: 0.5rem 0;
+  z-index: 2000;
+  text-align: left;
+}
+.item {
+  padding: 0 0.75rem 0 1rem;
+  line-height: 2.25;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+.item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.icon {
+  margin-right: 1rem;
+}
+.txt {
+  display: inline-block;
+  font-size: 0.875rem;
+}

@@ -2,7 +2,13 @@ import React from 'react';
 import VideoItem from '../video_item/video_item';
 import styles from './video_list.module.css';
 
-const VideoList = ({ youtube, videos, page, videoRepository }) => {
+const VideoList = ({
+  youtube,
+  videos,
+  page,
+  videoRepository,
+  listId = null,
+}) => {
   const type = page => {
     switch (page) {
       case 'home':
@@ -33,6 +39,7 @@ const VideoList = ({ youtube, videos, page, videoRepository }) => {
             page={page}
             key={video.videoId || video.id.videoId || video.id}
             videoRepository={videoRepository}
+            listId={listId}
           />
         ))}
     </ul>

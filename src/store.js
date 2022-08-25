@@ -56,6 +56,17 @@ const userFeedsSlice = createSlice({
   },
 });
 
+const videoMenuSlice = createSlice({
+  name: 'videoMenu',
+  initialState: { listId: null, videoId: null },
+  reducers: {
+    setVideoMenu: (state, action) => {
+      state.listId = action.payload.listId;
+      state.videoId = action.payload.videoId;
+    },
+  },
+});
+
 const store = configureStore({
   reducer: {
     selected: selectedSlice.reducer,
@@ -63,6 +74,7 @@ const store = configureStore({
     videoList: videoListSlice.reducer,
     user: userSlice.reducer,
     userFeeds: userFeedsSlice.reducer,
+    videoMenu: videoMenuSlice.reducer,
   },
 });
 
@@ -71,5 +83,6 @@ export const { setSearchTerm } = searchSlice.actions;
 export const { setVideoList } = videoListSlice.actions;
 export const { setUser } = userSlice.actions;
 export const { setUserFeeds } = userFeedsSlice.actions;
+export const { setVideoMenu } = videoMenuSlice.actions;
 
 export default store;

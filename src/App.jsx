@@ -9,7 +9,7 @@ import Results from './screens/results';
 import Playlist from './screens/playlist/playlist';
 import History from './screens/history/history';
 import { useDispatch } from 'react-redux';
-import { setUser, setUserFeeds } from './store';
+import { setUser, setUserFeeds, setVideoMenu } from './store';
 import Library from './screens/library/library';
 
 function App({ youtube, authService, videoRepository }) {
@@ -51,6 +51,7 @@ function App({ youtube, authService, videoRepository }) {
       setIsWatch(true);
     } else {
       setIsWatch(false);
+      dispatch(setVideoMenu({ listId: null, videoId: null }));
     }
   }, [location]);
 

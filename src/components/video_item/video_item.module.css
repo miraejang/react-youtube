@@ -1,5 +1,6 @@
-.item {
+.container {
   display: flex;
+  width: 100%;
 }
 .link {
   display: block;
@@ -23,9 +24,27 @@
   transform: translate(-50%, -50%);
 }
 .videoInfo {
-  display: inline-flex;
-  width: 100%;
-  flex-direction: row;
+  position: relative;
+  padding-right: 1.5rem;
+}
+.title {
+  margin-bottom: 0.25rem;
+}
+.title h4 {
+  overflow: hidden;
+  line-height: 1.5;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #fff;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.meta {
+  line-height: 1.5;
+  font-size: 0.875rem;
+  color: #aaa;
 }
 .logo {
   flex: 1 1 14%;
@@ -43,39 +62,26 @@
   width: 100%;
   height: 100%;
 }
-.info {
-  line-height: 1.4;
-  color: #aaa;
-  flex: 1 1 80%;
-}
-.title {
-  margin-bottom: 0.25rem;
-}
-.title h4 {
+.desc {
   overflow: hidden;
-  font-weight: 500;
-  font-size: 1rem;
-  color: #fff;
+  white-space: nowrap;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
 }
-.meta {
-  line-height: 1.5;
-  font-size: 0.875rem;
-  color: #aaa;
-}
-.menu {
-  flex: 1 1 4%;
+.videoMenu {
+  position: absolute;
+  width: 1.5rem;
+  top: 0;
+  right: 0;
   text-align: center;
 }
-.menu .icon {
-  display: none;
-  margin-top: 0.3em;
+.item:hover .videoMenu {
 }
-.item:hover .menu .icon {
-  display: inline-block;
+.menuBtn {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
 }
 .grip {
   display: flex;
@@ -127,9 +133,41 @@
 /* type : grid */
 .grid .videoInfo {
   margin-top: 0.75rem;
+  padding-left: 3rem;
 }
-.grid .title {
-  margin-bottom: 0.75rem;
+.grid .channel .logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* page : results */
+.results .thumbnail {
+  flex: 0 0 33%;
+}
+.results .videoInfo {
+  flex: 1 1 67%;
+}
+.results .title h4 {
+  font-size: 1.125rem;
+}
+
+/* page : history */
+.history .title h4 {
+  font-size: 1.125rem;
+}
+.history .channel {
+  display: inline-block;
+}
+.history .desc {
+  display: block;
+  width: 100%;
+  margin-top: 0.8rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 /* page : library */
@@ -137,8 +175,14 @@
   width: auto;
   margin: 0;
 }
+.library .videoInfo {
+  padding-left: 0;
+}
 .library .logo {
   display: none;
+}
+.library .title {
+  margin-bottom: 0.75rem;
 }
 .library .title h4 {
   font-size: 0.875rem;
@@ -148,14 +192,23 @@
 }
 
 /* page : playlist */
-.playlist:hover {
+.playlist {
+  overflow: visible;
+  display: flex;
+}
+.playlist .container {
+  display: flex;
+  width: 100%;
+}
+.playlist .hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 .playlist .link {
   padding: 1rem 0;
+  margin-right: 1.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-.playlist:hover .link {
+.playlist .hover .link {
   border: 0;
 }
 .playlist .thumbnail {
@@ -165,8 +218,10 @@
 .playlist .videoInfo {
   flex: 1 1;
 }
-.playlist .menu {
+.playlist .videoMenu {
+  flex: 0 0 4%;
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
 }

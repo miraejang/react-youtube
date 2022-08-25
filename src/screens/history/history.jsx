@@ -82,6 +82,7 @@ const History = ({ youtube, authService, videoRepository }) => {
                     videos={history[date]}
                     page="history"
                     videoRepository={videoRepository}
+                    listId={`history${date}`}
                   />
                 </div>
               ))}
