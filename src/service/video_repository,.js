@@ -35,8 +35,8 @@ class VideoRepository {
     return () => off();
   }
 
-  savePlaylist = (uid, listId, data) => {
-    const url = listId === 'WL' ? 'wishList' : `playlist/${listId}`;
+  savePlaylist = (uid, groupId, data) => {
+    const url = groupId === 'WL' ? 'wishList' : `playlist/${groupId}`;
     set(ref(this.db, `users/${uid}/${url}`), data);
   };
 
