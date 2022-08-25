@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Loading from '../components/loading/loading';
 import VideoList from '../components/video_list/video_list';
 import { setVideoList } from '../store';
@@ -9,6 +10,7 @@ const Results = ({ youtube, videoRepository }) => {
   const term = useSelector(state => state.search.term);
   const videos = useSelector(state => state.videoList.data);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -17,7 +19,12 @@ const Results = ({ youtube, videoRepository }) => {
       .then(videos => {
         dispatch(setVideoList(videos));
         setLoading(false);
-      });
+      })
+      .catch(error =>
+        navigate({
+          pathname: `/error/${error.response.status}`,
+        })
+      );
   }, [term]);
 
   return (

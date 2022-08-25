@@ -11,6 +11,7 @@ import History from './screens/history/history';
 import { useDispatch } from 'react-redux';
 import { setUser, setUserFeeds, setVideoMenu } from './store';
 import Library from './screens/library/library';
+import Error from './screens/error/error';
 
 function App({ youtube, authService, videoRepository }) {
   const [init, setInit] = useState(false);
@@ -140,6 +141,7 @@ function App({ youtube, authService, videoRepository }) {
                     />
                   }
                 />
+                <Route path="/error/:code" element={<Error />} />
               </Routes>
             </div>
           </div>
