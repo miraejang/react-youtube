@@ -37,7 +37,7 @@ const SaveVideo = ({
     const popupOutside = e.target.contains(popupRef.current);
 
     if (popupOutside) {
-      closePopup();
+      closePopup(e);
     }
   };
 
@@ -51,17 +51,17 @@ const SaveVideo = ({
     const name = e.currentTarget.parentNode.querySelector('label').innerText;
 
     const videos =
-      (playlist &&
-        playlist[id] &&
-        playlist[id].videos &&
-        playlist[id].videos.filter(video => video.videoId !== videoId)) ||
+      (groups &&
+        groups[id] &&
+        groups[id].videos &&
+        groups[id].videos.filter(video => video.videoId !== videoId)) ||
       [];
 
     if (checked) {
       videoRepository.savePlaylist(user.uid, id, {
         name,
         lastUpdate: new Date().toLocaleDateString(),
-        thumbnail: (videos[0] && videos[0].thumbnail) || thumbnail,
+        thumbnail: videos.length > 0 ? videos[0].thumbnail : thumbnail,
         videos: [
           {
             videoId,
@@ -74,8 +74,8 @@ const SaveVideo = ({
     } else {
       videoRepository.savePlaylist(user.uid, id, {
         name,
-        lastUpdate: playlist[id].lastUpdate,
-        thumbnail: playlist[id].thumbnail,
+        lastUpdate: groups[id].lastUpdate,
+        thumbnail: videos.length > 0 ? groups[id].thumbnail : null,
         videos: [...videos],
       });
     }
@@ -96,6 +96,12 @@ const SaveVideo = ({
               {groups &&
                 Object.keys(groups).map(id => {
                   const gorup = groups[id];
+                  const checked =
+                    gorup.videos &&
+                    gorup.videos.find(video => video.videoId === videoId)
+                      ? true
+                      : false;
+
                   return (
                     <li className={styles.playlist} key={id}>
                       <input
@@ -105,12 +111,7 @@ const SaveVideo = ({
                         name={id}
                         id={id}
                         value={id}
-                        checked={
-                          gorup.videos &&
-                          gorup.videos.find(video => video.videoId === videoId)
-                            ? true
-                            : false
-                        }
+                        checked={checked}
                       />
                       <label className={styles.label} htmlFor={id}>
                         {gorup.name}

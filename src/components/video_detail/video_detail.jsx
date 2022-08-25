@@ -15,7 +15,8 @@ const VideoDetail = ({
     setSaveVideoOpen(!saveVideoOpen);
   };
 
-  const closePopup = () => {
+  const closePopup = e => {
+    e.preventDefault();
     setSaveVideoOpen(false);
   };
 
