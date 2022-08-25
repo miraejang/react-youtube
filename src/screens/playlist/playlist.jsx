@@ -13,9 +13,11 @@ const Playlist = ({ youtube, videoRepository }) => {
 
   useEffect(() => {
     const groupId = search.replace('?list=', '');
-    const group = groupId === 'WL' ? wishList : playlist[groupId];
-    playlist && setGroup({ ...group });
-  }, [search, playlist]);
+    if (wishList && playlist) {
+      const group = groupId === 'WL' ? wishList : playlist[groupId];
+      setGroup({ ...group });
+    }
+  }, [search, wishList, playlist]);
 
   return (
     <div className={styles.playlist}>
