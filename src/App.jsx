@@ -127,7 +127,6 @@ function App({ youtube, authService, videoRepository }) {
                   element={
                     <Playlist
                       youtube={youtube}
-                      authService={authService}
                       videoRepository={videoRepository}
                     />
                   }

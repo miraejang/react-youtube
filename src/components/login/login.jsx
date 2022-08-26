@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../store';
 import styles from './login.module.css';
 
-const Login = ({ authService, videoRepository }) => {
+const Login = ({ authService }) => {
   const dispatch = useDispatch();
 
   const login = () => {
