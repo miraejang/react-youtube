@@ -8,7 +8,7 @@ import styles from './login.module.css';
 
 const Login = ({}) => {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth.data);
+  const auth = useSelector(state => state.authService.auth);
 
   const login = () => {
     auth.persistence().then(() =>

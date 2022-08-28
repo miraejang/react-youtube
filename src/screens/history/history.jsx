@@ -7,8 +7,8 @@ import styles from './history.module.css';
 import VideoList from '../../components/video_list/video_list';
 
 const History = ({ youtube }) => {
-  const user = useSelector(state => state.user.data);
-  const history = useSelector(state => state.userFeeds.history);
+  const user = useSelector(state => state.authService.user);
+  const history = useSelector(state => state.videoRepository.feeds.history);
   const sortedDate =
     history && Object.keys(history).sort((a, b) => parseInt(b) - parseInt(a));
 

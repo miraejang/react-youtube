@@ -11,9 +11,8 @@ import NavHeader from '../nav_header/nav_header';
 const Header = ({ isWatch, navExpand, sliderNavOpen, setNavType }) => {
   const settingsRef = useRef();
   const [settingsDisplay, setSettingsDisplay] = useState(false);
-  const user = useSelector(state => state.user.data);
+  const { auth, user } = useSelector(state => state.authService);
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth.data);
 
   const clickAccount = () => {
     settingsRef.current.style.display = settingsDisplay ? 'none' : 'block';

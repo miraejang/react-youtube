@@ -28,8 +28,8 @@ function App({ youtube, authService, videoRepository }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const containerRef = useRef(null);
-  const auth = useSelector(state => state.auth.data);
-  const videoRepo = useSelector(state => state.videoRepo.data);
+  const auth = useSelector(state => state.authService.auth);
+  const videoRepo = useSelector(state => state.videoRepository.repository);
 
   useEffect(() => {
     dispatch(setAuthService(authService));

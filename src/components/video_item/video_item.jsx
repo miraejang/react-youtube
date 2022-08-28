@@ -12,11 +12,13 @@ const VideoItem = ({ youtube, videoId, channelId, page, listId }) => {
   const [video, setvideo] = useState(null);
   const [channel, setChannel] = useState(null);
   const [hover, setHover] = useState(false);
-  const user = useSelector(state => state.user.data);
-  const history = useSelector(state => state.userFeeds.history);
+  const user = useSelector(state => state.authService.user);
+  const {
+    repository: videoRepo,
+    feeds: { history },
+  } = useSelector(state => state.videoRepository);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const videoRepo = useSelector(state => state.videoRepo.data);
   // video menu variables
   const [videoMenuOpen, setVideoMenuOpen] = useState(false);
   const videoMenu = useSelector(state => state.videoMenu);

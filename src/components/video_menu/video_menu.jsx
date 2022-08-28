@@ -17,10 +17,12 @@ const VideoMenu = ({
   videoMenuOpen,
 }) => {
   const [saveVideoOpen, setSaveVideoOpen] = useState(false);
-  const user = useSelector(state => state.user.data);
-  const wishList = useSelector(state => state.userFeeds.wishList);
+  const user = useSelector(state => state.authService.user);
+  const {
+    repository: videoRepo,
+    feeds: { wishList },
+  } = useSelector(state => state.videoRepository);
   const dispatch = useDispatch();
-  const videoRepo = useSelector(state => state.videoRepo.data);
 
   const closePopup = e => {
     e.preventDefault();
@@ -32,7 +34,6 @@ const VideoMenu = ({
     const videos =
       wishList.videos &&
       (wishList.videos.filter(video => video.videoId !== videoId) || []);
-    console.log(videoRepo);
     videoRepo.savePlaylist(user.uid, 'WL', {
       name: wishList.name,
       lastUpdate: new Date().toLocaleDateString(),

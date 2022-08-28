@@ -12,7 +12,9 @@ import styles from './library.module.css';
 
 const Library = ({ youtube }) => {
   const page = 'library';
-  const { history, wishList, playlist } = useSelector(state => state.userFeeds);
+  const { history, wishList, playlist } = useSelector(
+    state => state.videoRepository.feeds
+  );
   const historyVideos =
     history &&
     Object.keys(history)

@@ -12,8 +12,8 @@ import NavHeader from '../nav_header/nav_header';
 import styles from './nav.module.css';
 
 const Nav = ({ navInit, isWatch, navExpand, sliderNavOpen, setNavType }) => {
-  const user = useSelector(state => state.user.data);
-  const playlist = useSelector(state => state.userFeeds.playlist);
+  const user = useSelector(state => state.authService.user);
+  const playlist = useSelector(state => state.videoRepository.feeds.playlist);
   const navRef = useRef();
 
   const typeClass = () => {

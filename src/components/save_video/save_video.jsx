@@ -8,10 +8,12 @@ import styles from './save_video.module.css';
 const SaveVideo = ({ closePopup, videoId, thumbnail, channelId }) => {
   const popupRef = useRef();
   const [createFormOpen, setCreateFormOpen] = useState(false);
-  const user = useSelector(state => state.user.data);
-  const { wishList, playlist } = useSelector(state => state.userFeeds);
+  const user = useSelector(state => state.authService.user);
+  const {
+    repository: videoRepo,
+    feeds: { wishList, playlist },
+  } = useSelector(state => state.videoRepository);
   const groups = { WL: { ...wishList }, ...playlist };
-  const videoRepo = useSelector(state => state.videoRepo.data);
 
   const createGroup = (id, groupName) => {
     const alreadyUsed =

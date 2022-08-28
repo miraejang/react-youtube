@@ -31,32 +31,6 @@ const searchSlice = createSlice({
   },
 });
 
-const userSlice = createSlice({
-  name: 'user',
-  initialState: { data: null },
-  reducers: {
-    setUser: (state, action) => {
-      state.data = action.payload;
-    },
-  },
-});
-
-const userFeedsSlice = createSlice({
-  name: 'userFeeds',
-  initialState: {
-    history: null,
-    wishList: null,
-    playlist: null,
-  },
-  reducers: {
-    setUserFeeds: (state, action) => {
-      state.history = action.payload.history;
-      state.wishList = action.payload.wishList;
-      state.playlist = action.payload.playlist;
-    },
-  },
-});
-
 const videoMenuSlice = createSlice({
   name: 'videoMenu',
   initialState: { listId: null, videoId: null },
@@ -69,21 +43,36 @@ const videoMenuSlice = createSlice({
 });
 
 const authServiceSlice = createSlice({
-  name: 'auth',
-  initialState: { data: null },
+  name: 'authService',
+  initialState: { auth: null, user: null },
   reducers: {
     setAuthService: (state, action) => {
-      state.data = action.payload;
+      state.auth = action.payload;
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
     },
   },
 });
 
 const videoRepositorySlice = createSlice({
   name: 'videoRepository',
-  initialState: { data: null },
+  initialState: {
+    repository: null,
+    feeds: {
+      history: null,
+      wishList: null,
+      playlist: null,
+    },
+  },
   reducers: {
     setvideoRepository: (state, action) => {
-      state.data = action.payload;
+      state.repository = action.payload;
+    },
+    setUserFeeds: (state, action) => {
+      state.feeds.history = action.payload.history;
+      state.feeds.wishList = action.payload.wishList;
+      state.feeds.playlist = action.payload.playlist;
     },
   },
 });
@@ -93,11 +82,9 @@ const store = configureStore({
     selected: selectedSlice.reducer,
     search: searchSlice.reducer,
     videoList: videoListSlice.reducer,
-    user: userSlice.reducer,
-    userFeeds: userFeedsSlice.reducer,
     videoMenu: videoMenuSlice.reducer,
-    auth: authServiceSlice.reducer,
-    videoRepo: videoRepositorySlice.reducer,
+    authService: authServiceSlice.reducer,
+    videoRepository: videoRepositorySlice.reducer,
   },
   middleware: [thunk],
 });
@@ -105,10 +92,9 @@ const store = configureStore({
 export const { setSelectedVideo } = selectedSlice.actions;
 export const { setSearchTerm } = searchSlice.actions;
 export const { setVideoList } = videoListSlice.actions;
-export const { setUser } = userSlice.actions;
-export const { setUserFeeds } = userFeedsSlice.actions;
 export const { setVideoMenu } = videoMenuSlice.actions;
-export const { setAuthService } = authServiceSlice.actions;
-export const { setvideoRepository } = videoRepositorySlice.actions;
+export const { setAuthService, setUser } = authServiceSlice.actions;
+export const { setvideoRepository, setUserFeeds } =
+  videoRepositorySlice.actions;
 
 export default store;

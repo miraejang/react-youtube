@@ -7,7 +7,9 @@ import VideoList from '../../components/video_list/video_list';
 import styles from './playlist.module.css';
 
 const Playlist = ({ youtube }) => {
-  const { wishList, playlist } = useSelector(state => state.userFeeds);
+  const { wishList, playlist } = useSelector(
+    state => state.videoRepository.feeds
+  );
   const { search } = useLocation();
   const [group, setGroup] = useState({});
 
