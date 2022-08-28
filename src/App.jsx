@@ -8,8 +8,14 @@ import Nav from './components/nav/nav';
 import Results from './screens/results';
 import Playlist from './screens/playlist/playlist';
 import History from './screens/history/history';
-import { useDispatch } from 'react-redux';
-import { setUser, setUserFeeds, setVideoMenu } from './store';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  setAuthService,
+  setUser,
+  setUserFeeds,
+  setVideoMenu,
+  setvideoRepository,
+} from './store';
 import Library from './screens/library/library';
 import Error from './screens/error/error';
 
@@ -22,28 +28,41 @@ function App({ youtube, authService, videoRepository }) {
   const dispatch = useDispatch();
   const location = useLocation();
   const containerRef = useRef(null);
+  const auth = useSelector(state => state.auth.data);
+  const videoRepo = useSelector(state => state.videoRepo.data);
 
   useEffect(() => {
-    authService.onAuthChange(user => {
-      if (user) {
-        dispatch(
-          setUser({ uid: user.uid, name: user.displayName, email: user.email })
-        );
-        videoRepository.syncFeeds(user.uid, feeds => {
+    dispatch(setAuthService(authService));
+    dispatch(setvideoRepository(videoRepository));
+  }, []);
+
+  useEffect(() => {
+    auth &&
+      auth.onAuthChange(user => {
+        if (user) {
           dispatch(
-            setUserFeeds({
-              history: feeds.history ? { ...feeds.history } : null,
-              wishList: feeds.wishList
-                ? { ...feeds.wishList }
-                : { name: '나중에 볼 동영상' },
-              playlist: feeds.playlist ? { ...feeds.playlist } : null,
+            setUser({
+              uid: user.uid,
+              name: user.displayName,
+              email: user.email,
             })
           );
-        });
-      }
-      setInit(true);
-    });
-  }, []);
+          videoRepo &&
+            videoRepo.syncFeeds(user.uid, feeds => {
+              dispatch(
+                setUserFeeds({
+                  history: feeds.history ? { ...feeds.history } : null,
+                  wishList: feeds.wishList
+                    ? { ...feeds.wishList }
+                    : { name: '나중에 볼 동영상' },
+                  playlist: feeds.playlist ? { ...feeds.playlist } : null,
+                })
+              );
+            });
+        }
+        setInit(true);
+      });
+  }, [auth, videoRepo]);
 
   useEffect(() => {
     containerRef.current && containerRef.current.scrollTo(0, 0);
@@ -71,7 +90,6 @@ function App({ youtube, authService, videoRepository }) {
       {init && (
         <div className={styles.youtube}>
           <Header
-            authService={authService}
             isWatch={isWatch}
             navExpand={navExpand}
             sliderNavOpen={sliderNavOpen}
@@ -79,7 +97,6 @@ function App({ youtube, authService, videoRepository }) {
           />
           <div className={styles.content}>
             <Nav
-              authService={authService}
               navInit={navInit}
               isWatch={isWatch}
               navExpand={navExpand}
@@ -88,57 +105,26 @@ function App({ youtube, authService, videoRepository }) {
             />
             <div className={styles.container}>
               <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <Home youtube={youtube} videoRepository={videoRepository} />
-                  }
-                />
+                <Route path="/" element={<Home youtube={youtube} />} />
                 <Route
                   path="/watch/:id"
-                  element={
-                    <Watch
-                      youtube={youtube}
-                      videoRepository={videoRepository}
-                    />
-                  }
+                  element={<Watch youtube={youtube} />}
                 />
                 <Route
                   path="/results"
-                  element={
-                    <Results
-                      youtube={youtube}
-                      videoRepository={videoRepository}
-                    />
-                  }
+                  element={<Results youtube={youtube} />}
                 />
                 <Route
                   path="/history"
-                  element={
-                    <History
-                      youtube={youtube}
-                      authService={authService}
-                      videoRepository={videoRepository}
-                    />
-                  }
+                  element={<History youtube={youtube} />}
                 />
                 <Route
                   path="/playlist"
-                  element={
-                    <Playlist
-                      youtube={youtube}
-                      videoRepository={videoRepository}
-                    />
-                  }
+                  element={<Playlist youtube={youtube} />}
                 />
                 <Route
                   path="/library"
-                  element={
-                    <Library
-                      youtube={youtube}
-                      videoRepository={videoRepository}
-                    />
-                  }
+                  element={<Library youtube={youtube} />}
                 />
                 <Route path="/error/:code" element={<Error />} />
               </Routes>

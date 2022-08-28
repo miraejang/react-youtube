@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { setSelectedVideo, setVideoList } from '../../store';
 import styles from './watch.module.css';
 
-const Watch = ({ youtube, videoRepository }) => {
+const Watch = ({ youtube }) => {
   const [loading, setLoading] = useState(true);
   const selectedVideo = useSelector(state => state.selected.data);
   const videos = useSelector(state => state.videoList.data);
@@ -76,18 +76,10 @@ const Watch = ({ youtube, videoRepository }) => {
         <div className={styles.watch}>
           <div className={styles.container}>
             <div className={styles.video}>
-              <VideoDetail
-                selectedVideo={selectedVideo}
-                videoRepository={videoRepository}
-              />
+              <VideoDetail selectedVideo={selectedVideo} />
             </div>
             <div className={styles.list}>
-              <VideoList
-                youtube={youtube}
-                videos={videos}
-                page="watch"
-                videoRepository={videoRepository}
-              />
+              <VideoList youtube={youtube} videos={videos} page="watch" />
             </div>
           </div>
         </div>

@@ -8,17 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../store';
 import NavHeader from '../nav_header/nav_header';
 
-const Header = ({
-  authService,
-  isWatch,
-  navExpand,
-  sliderNavOpen,
-  setNavType,
-}) => {
+const Header = ({ isWatch, navExpand, sliderNavOpen, setNavType }) => {
   const settingsRef = useRef();
   const [settingsDisplay, setSettingsDisplay] = useState(false);
   const user = useSelector(state => state.user.data);
   const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth.data);
 
   const clickAccount = () => {
     settingsRef.current.style.display = settingsDisplay ? 'none' : 'block';
@@ -26,7 +21,7 @@ const Header = ({
   };
 
   const logout = () => {
-    authService.logout().then(() => dispatch(setUser(null)));
+    auth.logout().then(() => dispatch(setUser(null)));
   };
 
   return (
@@ -46,7 +41,7 @@ const Header = ({
         <div className={styles.right}>
           {!user && (
             <div className={styles.account}>
-              <Login authService={authService} />
+              <Login />
             </div>
           )}
           {user && (

@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import VideoList from '../../components/video_list/video_list';
 import styles from './playlist.module.css';
 
-const Playlist = ({ youtube, videoRepository }) => {
+const Playlist = ({ youtube }) => {
   const { wishList, playlist } = useSelector(state => state.userFeeds);
   const { search } = useLocation();
   const [group, setGroup] = useState({});
@@ -53,12 +53,7 @@ const Playlist = ({ youtube, videoRepository }) => {
       </div>
       <div className={styles.content}>
         {group.videos && (
-          <VideoList
-            youtube={youtube}
-            videos={group.videos}
-            page="playlist"
-            videoRepository={videoRepository}
-          />
+          <VideoList youtube={youtube} videos={group.videos} page="playlist" />
         )}
         {!group.videos && (
           <p className={styles.emptyTxt}>아직 재생목록에 동영상이 없습니다.</p>

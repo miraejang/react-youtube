@@ -5,7 +5,7 @@ import Loading from '../components/loading/loading';
 import VideoList from '../components/video_list/video_list';
 import { setVideoList } from '../store';
 
-const Results = ({ youtube, videoRepository }) => {
+const Results = ({ youtube }) => {
   const [loading, setLoading] = useState(true);
   const term = useSelector(state => state.search.term);
   const videos = useSelector(state => state.videoList.data);
@@ -32,12 +32,7 @@ const Results = ({ youtube, videoRepository }) => {
       {loading ? (
         <Loading />
       ) : (
-        <VideoList
-          youtube={youtube}
-          videos={videos}
-          page="results"
-          videoRepository={videoRepository}
-        />
+        <VideoList youtube={youtube} videos={videos} page="results" />
       )}
     </>
   );

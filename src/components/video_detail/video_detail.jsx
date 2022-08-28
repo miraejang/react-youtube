@@ -5,10 +5,7 @@ import React, { useState } from 'react';
 import SaveVideo from '../save_video/save_video';
 import styles from './video_detail.module.css';
 
-const VideoDetail = ({
-  selectedVideo: { video, channel },
-  videoRepository,
-}) => {
+const VideoDetail = ({ selectedVideo: { video, channel } }) => {
   const [saveVideoOpen, setSaveVideoOpen] = useState(false);
 
   const toggleSaveVideo = () => {
@@ -89,7 +86,6 @@ const VideoDetail = ({
                   thumbnail={video.snippet.thumbnails.medium.url}
                   channelId={video.snippet.channelId}
                   closePopup={closePopup}
-                  videoRepository={videoRepository}
                 />
               )}
             </div>

@@ -12,7 +12,6 @@ const VideoMenu = ({
   videoId,
   thumbnail,
   channelId,
-  videoRepository,
   hover,
   listId,
   videoMenuOpen,
@@ -21,6 +20,7 @@ const VideoMenu = ({
   const user = useSelector(state => state.user.data);
   const wishList = useSelector(state => state.userFeeds.wishList);
   const dispatch = useDispatch();
+  const videoRepo = useSelector(state => state.videoRepo.data);
 
   const closePopup = e => {
     e.preventDefault();
@@ -32,8 +32,8 @@ const VideoMenu = ({
     const videos =
       wishList.videos &&
       (wishList.videos.filter(video => video.videoId !== videoId) || []);
-
-    videoRepository.savePlaylist(user.uid, 'WL', {
+    console.log(videoRepo);
+    videoRepo.savePlaylist(user.uid, 'WL', {
       name: wishList.name,
       lastUpdate: new Date().toLocaleDateString(),
       thumbnail: videos.length > 0 ? videos[0].thumbnail : thumbnail,
@@ -83,7 +83,6 @@ const VideoMenu = ({
                   thumbnail={thumbnail}
                   channelId={channelId}
                   closePopup={closePopup}
-                  videoRepository={videoRepository}
                 />
               )}
             </li>

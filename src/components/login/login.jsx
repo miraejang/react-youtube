@@ -2,16 +2,17 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../../store';
 import styles from './login.module.css';
 
-const Login = ({ authService }) => {
+const Login = ({}) => {
   const dispatch = useDispatch();
+  const auth = useSelector(state => state.auth.data);
 
   const login = () => {
-    authService.persistence().then(() =>
-      authService.login().then(data => {
+    auth.persistence().then(() =>
+      auth.login().then(data => {
         const uid = data.user.uid;
         dispatch(
           setUser({

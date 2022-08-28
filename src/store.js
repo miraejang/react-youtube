@@ -1,4 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
+import thunk from 'redux-thunk';
 
 const videoListSlice = createSlice({
   name: 'videoList',
@@ -67,6 +68,26 @@ const videoMenuSlice = createSlice({
   },
 });
 
+const authServiceSlice = createSlice({
+  name: 'auth',
+  initialState: { data: null },
+  reducers: {
+    setAuthService: (state, action) => {
+      state.data = action.payload;
+    },
+  },
+});
+
+const videoRepositorySlice = createSlice({
+  name: 'videoRepository',
+  initialState: { data: null },
+  reducers: {
+    setvideoRepository: (state, action) => {
+      state.data = action.payload;
+    },
+  },
+});
+
 const store = configureStore({
   reducer: {
     selected: selectedSlice.reducer,
@@ -75,7 +96,10 @@ const store = configureStore({
     user: userSlice.reducer,
     userFeeds: userFeedsSlice.reducer,
     videoMenu: videoMenuSlice.reducer,
+    auth: authServiceSlice.reducer,
+    videoRepo: videoRepositorySlice.reducer,
   },
+  middleware: [thunk],
 });
 
 export const { setSelectedVideo } = selectedSlice.actions;
@@ -84,5 +108,7 @@ export const { setVideoList } = videoListSlice.actions;
 export const { setUser } = userSlice.actions;
 export const { setUserFeeds } = userFeedsSlice.actions;
 export const { setVideoMenu } = videoMenuSlice.actions;
+export const { setAuthService } = authServiceSlice.actions;
+export const { setvideoRepository } = videoRepositorySlice.actions;
 
 export default store;

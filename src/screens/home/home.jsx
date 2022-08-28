@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setVideoList } from '../../store';
 import { useNavigate } from 'react-router-dom';
 
-const Home = ({ youtube, videoRepository }) => {
+const Home = ({ youtube }) => {
   const [loading, setLoading] = useState(true);
   const videos = useSelector(state => state.videoList.data);
   const dispatch = useDispatch();
@@ -31,12 +31,7 @@ const Home = ({ youtube, videoRepository }) => {
       {loading ? (
         <Loading />
       ) : (
-        <VideoList
-          youtube={youtube}
-          videos={videos}
-          page="home"
-          videoRepository={videoRepository}
-        />
+        <VideoList youtube={youtube} videos={videos} page="home" />
       )}
     </>
   );

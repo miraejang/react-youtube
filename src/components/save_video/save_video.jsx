@@ -5,18 +5,13 @@ import { useSelector } from 'react-redux';
 import CreatePlaylistGroup from '../create_playlist_group/create_playlist_group';
 import styles from './save_video.module.css';
 
-const SaveVideo = ({
-  closePopup,
-  videoRepository,
-  videoId,
-  thumbnail,
-  channelId,
-}) => {
+const SaveVideo = ({ closePopup, videoId, thumbnail, channelId }) => {
   const popupRef = useRef();
   const [createFormOpen, setCreateFormOpen] = useState(false);
   const user = useSelector(state => state.user.data);
   const { wishList, playlist } = useSelector(state => state.userFeeds);
   const groups = { WL: { ...wishList }, ...playlist };
+  const videoRepo = useSelector(state => state.videoRepo.data);
 
   const createGroup = (id, groupName) => {
     const alreadyUsed =
@@ -24,7 +19,7 @@ const SaveVideo = ({
       Object.keys(groups).find(groupId => groups[groupId].name === groupName);
 
     if (!alreadyUsed) {
-      videoRepository.savePlaylist(user.uid, id, {
+      videoRepo.savePlaylist(user.uid, id, {
         name: groupName,
       });
     } else {
@@ -58,7 +53,7 @@ const SaveVideo = ({
       [];
 
     if (checked) {
-      videoRepository.savePlaylist(user.uid, id, {
+      videoRepo.savePlaylist(user.uid, id, {
         name,
         lastUpdate: new Date().toLocaleDateString(),
         thumbnail: videos.length > 0 ? videos[0].thumbnail : thumbnail,
@@ -72,7 +67,7 @@ const SaveVideo = ({
         ],
       });
     } else {
-      videoRepository.savePlaylist(user.uid, id, {
+      videoRepo.savePlaylist(user.uid, id, {
         name,
         lastUpdate: groups[id].lastUpdate,
         thumbnail: videos.length > 0 ? groups[id].thumbnail : null,

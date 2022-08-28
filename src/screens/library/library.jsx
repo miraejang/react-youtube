@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import VideoList from '../../components/video_list/video_list';
 import styles from './library.module.css';
 
-const Library = ({ youtube, videoRepository }) => {
+const Library = ({ youtube }) => {
   const page = 'library';
   const { history, wishList, playlist } = useSelector(state => state.userFeeds);
   const historyVideos =
@@ -48,7 +48,6 @@ const Library = ({ youtube, videoRepository }) => {
                 youtube={youtube}
                 videos={historyVideos}
                 page={page}
-                videoRepository={videoRepository}
                 listId="history"
               />
             )}
@@ -75,7 +74,6 @@ const Library = ({ youtube, videoRepository }) => {
                 youtube={youtube}
                 videos={wishList.videos.slice(0, 5)}
                 page={page}
-                videoRepository={videoRepository}
                 listId="wishList"
               />
             )}

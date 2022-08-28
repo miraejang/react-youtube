@@ -11,14 +11,7 @@ import Login from '../login/login';
 import NavHeader from '../nav_header/nav_header';
 import styles from './nav.module.css';
 
-const Nav = ({
-  authService,
-  navInit,
-  isWatch,
-  navExpand,
-  sliderNavOpen,
-  setNavType,
-}) => {
+const Nav = ({ navInit, isWatch, navExpand, sliderNavOpen, setNavType }) => {
   const user = useSelector(state => state.user.data);
   const playlist = useSelector(state => state.userFeeds.playlist);
   const navRef = useRef();
@@ -119,7 +112,7 @@ const Nav = ({
                 <p className={styles.loginText}>
                   로그인하면 저장된 동영상 리스트를 볼 수 있습니다.
                 </p>
-                <Login authService={authService} />
+                <Login />
               </div>
             )}
           </div>

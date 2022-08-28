@@ -5,14 +5,7 @@ import { setSelectedVideo } from '../../store';
 import VideoMenu from '../video_menu/video_menu';
 import styles from './video_item.module.css';
 
-const VideoItem = ({
-  youtube,
-  videoId,
-  channelId,
-  page,
-  videoRepository,
-  listId,
-}) => {
+const VideoItem = ({ youtube, videoId, channelId, page, listId }) => {
   const RESULTS = page === 'results';
   const HISTORY = page === 'history';
   const PLAYLIST = page === 'playlist';
@@ -23,6 +16,7 @@ const VideoItem = ({
   const history = useSelector(state => state.userFeeds.history);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const videoRepo = useSelector(state => state.videoRepo.data);
   // video menu variables
   const [videoMenuOpen, setVideoMenuOpen] = useState(false);
   const videoMenu = useSelector(state => state.videoMenu);
@@ -81,10 +75,7 @@ const VideoItem = ({
         history[date].filter(video => video.videoId !== videoId)) ||
       [];
 
-    videoRepository.saveVideo(user.uid, [
-      { videoId, channelId },
-      ...todayHistory,
-    ]);
+    videoRepo.saveVideo(user.uid, [{ videoId, channelId }, ...todayHistory]);
   };
 
   const compCount = count => {
@@ -126,7 +117,6 @@ const VideoItem = ({
           videoId={videoId}
           thumbnail={video.snippet.thumbnails.medium.url}
           channelId={channelId}
-          videoRepository={videoRepository}
           clearHover={clearHover}
           hover={hover}
           listId={listId}

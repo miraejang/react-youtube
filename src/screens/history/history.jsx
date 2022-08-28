@@ -6,7 +6,7 @@ import Login from '../../components/login/login';
 import styles from './history.module.css';
 import VideoList from '../../components/video_list/video_list';
 
-const History = ({ youtube, authService, videoRepository }) => {
+const History = ({ youtube }) => {
   const user = useSelector(state => state.user.data);
   const history = useSelector(state => state.userFeeds.history);
   const sortedDate =
@@ -81,7 +81,6 @@ const History = ({ youtube, authService, videoRepository }) => {
                     youtube={youtube}
                     videos={history[date]}
                     page="history"
-                    videoRepository={videoRepository}
                     listId={`history${date}`}
                   />
                 </div>
@@ -95,7 +94,7 @@ const History = ({ youtube, authService, videoRepository }) => {
             <p className={styles.desc}>
               로그아웃하면 시청 기록을 볼 수 없습니다.
             </p>
-            <Login authService={authService} />
+            <Login />
           </>
         )}
       </div>
