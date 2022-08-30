@@ -4,6 +4,7 @@
 }
 .container {
   display: flex;
+  width: 100%;
   max-width: 110rem;
 }
 .video {
