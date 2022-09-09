@@ -6,7 +6,7 @@ import Login from '../../components/login/login';
 import styles from './history.module.css';
 import VideoList from '../../components/video_list/video_list';
 
-const History = ({ youtube }) => {
+const History = () => {
   const user = useSelector(state => state.authService.user);
   const history = useSelector(state => state.videoRepository.feeds.history);
   const sortedDate =
@@ -78,7 +78,6 @@ const History = ({ youtube }) => {
                 <div className={styles.dayHistory} key={date}>
                   <p className={styles.dateTitle}>{transformDate(date)}</p>
                   <VideoList
-                    youtube={youtube}
                     videos={history[date]}
                     page="history"
                     listId={`history${date}`}

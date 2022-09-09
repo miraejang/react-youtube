@@ -1,39 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import Loading from '../components/loading/loading';
 import VideoList from '../components/video_list/video_list';
-import { setVideoList } from '../store';
+import { searchResult } from '../store';
 
-const Results = ({ youtube }) => {
-  const [loading, setLoading] = useState(true);
-  const term = useSelector(state => state.search.term);
-  const videos = useSelector(state => state.videoList.data);
+const Results = () => {
+  const { search } = useLocation();
+  const { loading, videos, searchTerm } = useSelector(state => state.youtube);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
-    youtube
-      .search(term) //
-      .then(videos => {
-        dispatch(setVideoList(videos));
-        setLoading(false);
-      })
-      .catch(error =>
-        navigate({
-          pathname: `/error/${error.response.status}`,
-        })
-      );
-  }, [term]);
+    console.log(search);
+    if (videos === null) {
+    }
+    dispatch(searchResult(searchTerm));
+  }, [searchTerm]);
 
   return (
     <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <VideoList youtube={youtube} videos={videos} page="results" />
-      )}
+      {console.log(videos)}
+      {loading ? <Loading /> : <VideoList videos={videos} page="results" />}
     </>
   );
 };

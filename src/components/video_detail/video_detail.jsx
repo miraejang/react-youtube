@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import SaveVideo from '../save_video/save_video';
 import styles from './video_detail.module.css';
 
-const VideoDetail = ({ selectedVideo: { video, channel } }) => {
+const VideoDetail = ({ selectedVideo, selectedVideo: { video, channel } }) => {
   const [saveVideoOpen, setSaveVideoOpen] = useState(false);
 
   const toggleSaveVideo = () => {
@@ -80,14 +80,7 @@ const VideoDetail = ({ selectedVideo: { video, channel } }) => {
               <button className={styles.saveVideoBtn} onClick={toggleSaveVideo}>
                 <FontAwesomeIcon icon={faPlus} /> 저장
               </button>
-              {saveVideoOpen && (
-                <SaveVideo
-                  videoId={video.id.videoId || video.id}
-                  thumbnail={video.snippet.thumbnails.medium.url}
-                  channelId={video.snippet.channelId}
-                  closePopup={closePopup}
-                />
-              )}
+              {saveVideoOpen && <SaveVideo closePopup={closePopup} />}
             </div>
           </div>
         </div>

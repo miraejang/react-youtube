@@ -5,12 +5,20 @@ import { setSelectedVideo } from '../../store';
 import VideoMenu from '../video_menu/video_menu';
 import styles from './video_item.module.css';
 
-const VideoItem = ({ youtube, videoId, channelId, page, listId }) => {
+const VideoItem = ({
+  videoData,
+  videoData: {
+    video,
+    channel,
+    channel: { id: channelId },
+  },
+  page,
+  listId,
+}) => {
   const RESULTS = page === 'results';
   const HISTORY = page === 'history';
   const PLAYLIST = page === 'playlist';
-  const [video, setvideo] = useState(null);
-  const [channel, setChannel] = useState(null);
+  const videoId = video.id.videoId || video.id;
   const [hover, setHover] = useState(false);
   const user = useSelector(state => state.authService.user);
   const {
@@ -43,22 +51,8 @@ const VideoItem = ({ youtube, videoId, channelId, page, listId }) => {
   };
 
   // functions
-  useEffect(() => {
-    youtube
-      .getAllData(videoId, channelId) //
-      .then(data => {
-        setvideo(data[0]);
-        setChannel(data[1]);
-      })
-      .catch(error =>
-        navigate({
-          pathname: `/error/${error.response.status}`,
-        })
-      );
-  }, [youtube, videoId, channelId]);
-
   const clickVideo = () => {
-    dispatch(setSelectedVideo({ video, channel }));
+    dispatch(setSelectedVideo(videoData));
     if (user) {
       saveHistory();
     }
@@ -74,10 +68,10 @@ const VideoItem = ({ youtube, videoId, channelId, page, listId }) => {
     const todayHistory =
       (history &&
         history[date] &&
-        history[date].filter(video => video.videoId !== videoId)) ||
+        history[date].filter(videoData => videoData.video.id !== videoId)) ||
       [];
 
-    videoRepo.saveVideo(user.uid, [{ videoId, channelId }, ...todayHistory]);
+    videoRepo.saveVideo(user.uid, [videoData, ...todayHistory]);
   };
 
   const compCount = count => {
@@ -172,14 +166,18 @@ const VideoItem = ({ youtube, videoId, channelId, page, listId }) => {
                       {video.snippet.channelTitle}
                     </div>
                   </div>
-                  <p className={styles.popularity}>
-                    <span>조회수 {compCount(video.statistics.viewCount)}</span>
-                    <span> • </span>
-                    <span>
-                      {new Date(video.snippet.publishedAt) //
-                        .toLocaleDateString('ko-KR')}
-                    </span>
-                  </p>
+                  {video.statistics && (
+                    <p className={styles.popularity}>
+                      <span>
+                        조회수 {compCount(video.statistics.viewCount)}
+                      </span>
+                      <span> • </span>
+                      <span>
+                        {new Date(video.snippet.publishedAt) //
+                          .toLocaleDateString('ko-KR')}
+                      </span>
+                    </p>
+                  )}
                   {/* {(RESULTS || HISTORY) && (
                     <p className={styles.desc}>{video.snippet.description}</p>
                   )} */}

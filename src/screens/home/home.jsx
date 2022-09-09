@@ -1,39 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import VideoList from '../../components/video_list/video_list';
 import Loading from '../../components/loading/loading';
 import { useDispatch, useSelector } from 'react-redux';
-import { setVideoList } from '../../store';
-import { useNavigate } from 'react-router-dom';
+import { mostPopular } from '../../store';
 
-const Home = ({ youtube }) => {
-  const [loading, setLoading] = useState(true);
-  const videos = useSelector(state => state.videoList.data);
+const Home = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const loading = useSelector(state => state.youtube.loading);
+  const videos = useSelector(state => state.youtube.videos);
 
   useEffect(() => {
     localStorage.setItem('searchTerm', '');
-    youtube
-      .mostPopular()
-      .then(videos => {
-        dispatch(setVideoList(videos));
-        setLoading(false);
-      })
-      .catch(error =>
-        navigate({
-          pathname: `/error/${error.response.status}`,
-        })
-      );
+    dispatch(mostPopular());
   }, []);
 
+  useEffect(() => {
+    console.log(loading);
+  }, [loading]);
+
   return (
-    <>
-      {loading ? (
-        <Loading />
-      ) : (
-        <VideoList youtube={youtube} videos={videos} page="home" />
-      )}
-    </>
+    <>{loading ? <Loading /> : <VideoList videos={videos} page="home" />}</>
   );
 };
 export default Home;

@@ -2,7 +2,7 @@ import React from 'react';
 import VideoItem from '../video_item/video_item';
 import styles from './video_list.module.css';
 
-const VideoList = ({ youtube, videos, page, listId = null }) => {
+const VideoList = ({ videos, page, listId = null }) => {
   const type = page => {
     switch (page) {
       case 'home':
@@ -25,13 +25,11 @@ const VideoList = ({ youtube, videos, page, listId = null }) => {
   return (
     <ul className={type(page)}>
       {videos &&
-        videos.map(video => (
+        videos.map(videoData => (
           <VideoItem
-            youtube={youtube}
-            videoId={video.videoId || video.id.videoId || video.id}
-            channelId={video.channelId || video.snippet.channelId}
+            videoData={videoData}
             page={page}
-            key={video.videoId || video.id.videoId || video.id}
+            key={videoData.video.id.videoId || videoData.video.id}
             listId={listId}
           />
         ))}

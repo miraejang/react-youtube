@@ -19,7 +19,7 @@ import {
 import Library from './screens/library/library';
 import Error from './screens/error/error';
 
-function App({ youtube, authService, videoRepository }) {
+function App({ authService, videoRepository }) {
   const [init, setInit] = useState(false);
   const [navInit, setNavInit] = useState(false);
   const [isWatch, setIsWatch] = useState(false);
@@ -27,7 +27,7 @@ function App({ youtube, authService, videoRepository }) {
   const [sliderNavOpen, setSliderNavOpen] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
-  const containerRef = useRef(null);
+  const containerRef = useRef();
   const auth = useSelector(state => state.authService.auth);
   const videoRepo = useSelector(state => state.videoRepository.repository);
 
@@ -49,15 +49,27 @@ function App({ youtube, authService, videoRepository }) {
           );
           videoRepo &&
             videoRepo.syncFeeds(user.uid, feeds => {
-              dispatch(
-                setUserFeeds({
-                  history: feeds.history ? { ...feeds.history } : null,
-                  wishList: feeds.wishList
-                    ? { ...feeds.wishList }
-                    : { name: '나중에 볼 동영상' },
-                  playlist: feeds.playlist ? { ...feeds.playlist } : null,
-                })
-              );
+              if (feeds) {
+                dispatch(
+                  setUserFeeds({
+                    history: feeds.history ? { ...feeds.history } : null,
+                    wishList:
+                      feeds && feeds.wishList
+                        ? { ...feeds.wishList }
+                        : { name: '나중에 볼 동영상' },
+                    playlist:
+                      feeds && feeds.playlist ? { ...feeds.playlist } : null,
+                  })
+                );
+              } else {
+                dispatch(
+                  setUserFeeds({
+                    history: null,
+                    wishList: null,
+                    playlist: null,
+                  })
+                );
+              }
             });
         }
         setInit(true);
@@ -103,29 +115,14 @@ function App({ youtube, authService, videoRepository }) {
               sliderNavOpen={sliderNavOpen}
               setNavType={setNavType}
             />
-            <div className={styles.container}>
+            <div ref={containerRef} className={styles.container}>
               <Routes>
-                <Route path="/" element={<Home youtube={youtube} />} />
-                <Route
-                  path="/watch/:id"
-                  element={<Watch youtube={youtube} />}
-                />
-                <Route
-                  path="/results"
-                  element={<Results youtube={youtube} />}
-                />
-                <Route
-                  path="/history"
-                  element={<History youtube={youtube} />}
-                />
-                <Route
-                  path="/playlist"
-                  element={<Playlist youtube={youtube} />}
-                />
-                <Route
-                  path="/library"
-                  element={<Library youtube={youtube} />}
-                />
+                <Route path="/" element={<Home />} />
+                <Route path="/watch/:id" element={<Watch />} />
+                <Route path="/results" element={<Results />} />
+                <Route path="/history" element={<History />} />
+                <Route path="/playlist" element={<Playlist />} />
+                <Route path="/library" element={<Library />} />
                 <Route path="/error/:code" element={<Error />} />
               </Routes>
             </div>

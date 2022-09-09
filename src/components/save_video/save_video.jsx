@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import CreatePlaylistGroup from '../create_playlist_group/create_playlist_group';
 import styles from './save_video.module.css';
 
-const SaveVideo = ({ closePopup, videoId, thumbnail, channelId }) => {
+const SaveVideo = ({ closePopup }) => {
   const popupRef = useRef();
   const [createFormOpen, setCreateFormOpen] = useState(false);
   const user = useSelector(state => state.authService.user);
@@ -13,6 +13,11 @@ const SaveVideo = ({ closePopup, videoId, thumbnail, channelId }) => {
     repository: videoRepo,
     feeds: { wishList, playlist },
   } = useSelector(state => state.videoRepository);
+  const {
+    selectedVideo,
+    selectedVideo: { video },
+  } = useSelector(state => state.youtube);
+  const videoId = video.id.videoId || video.id;
   const groups = { WL: { ...wishList }, ...playlist };
 
   const createGroup = (id, groupName) => {
@@ -51,22 +56,20 @@ const SaveVideo = ({ closePopup, videoId, thumbnail, channelId }) => {
       (groups &&
         groups[id] &&
         groups[id].videos &&
-        groups[id].videos.filter(video => video.videoId !== videoId)) ||
+        groups[id].videos.filter(videoData => {
+          const id = videoData.video.id.videoId || videoData.video.id;
+          return id !== videoId;
+        })) ||
       [];
 
     if (checked) {
       videoRepo.savePlaylist(user.uid, id, {
         name,
         lastUpdate: new Date().toLocaleDateString(),
-        thumbnail: videos.length > 0 ? videos[0].thumbnail : thumbnail,
-        videos: [
-          {
-            videoId,
-            thumbnail,
-            channelId,
-          },
-          ...videos,
-        ],
+        thumbnail: videos[0]
+          ? videos[0].thumbnail
+          : video.snippet.thumbnails.medium.url,
+        videos: [selectedVideo, ...videos],
       });
     } else {
       videoRepo.savePlaylist(user.uid, id, {
@@ -80,6 +83,7 @@ const SaveVideo = ({ closePopup, videoId, thumbnail, channelId }) => {
 
   return (
     <div className={styles.saveVideoPopup} onClick={onClick}>
+      {console.log('selectedVideo', selectedVideo, videoId)}
       <div className={styles.popupContainer}>
         <div ref={popupRef} className={styles.popup}>
           <div className={styles.header}>
@@ -95,7 +99,9 @@ const SaveVideo = ({ closePopup, videoId, thumbnail, channelId }) => {
                   const gorup = groups[id];
                   const checked =
                     gorup.videos &&
-                    gorup.videos.find(video => video.videoId === videoId)
+                    gorup.videos.find(
+                      videoData => videoData.video.id === videoId
+                    )
                       ? true
                       : false;
 

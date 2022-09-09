@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import VideoList from '../../components/video_list/video_list';
 import styles from './library.module.css';
 
-const Library = ({ youtube }) => {
+const Library = () => {
   const page = 'library';
   const { history, wishList, playlist } = useSelector(
     state => state.videoRepository.feeds
@@ -46,12 +46,7 @@ const Library = ({ youtube }) => {
           </div>
           <div className={styles.content}>
             {historyVideos && (
-              <VideoList
-                youtube={youtube}
-                videos={historyVideos}
-                page={page}
-                listId="history"
-              />
+              <VideoList videos={historyVideos} page={page} listId="history" />
             )}
             {!historyVideos && (
               <p className={styles.emptyTxt}>
@@ -71,15 +66,14 @@ const Library = ({ youtube }) => {
             </Link>
           </div>
           <div className={styles.content}>
-            {wishList && (
+            {wishList && wishList.videos && (
               <VideoList
-                youtube={youtube}
                 videos={wishList.videos.slice(0, 5)}
                 page={page}
                 listId="wishList"
               />
             )}
-            {!wishList && (
+            {(!wishList || !wishList.videos) && (
               <p className={styles.emptyTxt}>
                 동영상을 나중에 볼 동영상에 저장해 보세요. 목록이 여기에
                 표시됩니다.

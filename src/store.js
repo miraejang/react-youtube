@@ -1,4 +1,9 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import {
+  configureStore,
+  createAsyncThunk,
+  createSlice,
+} from '@reduxjs/toolkit';
+import axios from 'axios';
 import thunk from 'redux-thunk';
 
 const videoListSlice = createSlice({
@@ -7,26 +12,6 @@ const videoListSlice = createSlice({
   reducers: {
     setVideoList: (state, action) => {
       state.data = action.payload;
-    },
-  },
-});
-
-const selectedSlice = createSlice({
-  name: 'selected',
-  initialState: { data: null },
-  reducers: {
-    setSelectedVideo: (state, action) => {
-      state.data = action.payload;
-    },
-  },
-});
-
-const searchSlice = createSlice({
-  name: 'search',
-  initialState: { term: null },
-  reducers: {
-    setSearchTerm: (state, action) => {
-      state.term = action.payload;
     },
   },
 });
@@ -77,24 +62,157 @@ const videoRepositorySlice = createSlice({
   },
 });
 
+// youtube
+const httpClient = axios.create({
+  baseURL: 'https://www.googleapis.com/youtube/v3/',
+  params: {
+    key: process.env.REACT_APP_YOUTUBE_API_KEY,
+  },
+});
+const youtubeApi = httpClient;
+
+export const mostPopular = createAsyncThunk(
+  'youtube/mostPopular', //
+  async (_, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await youtubeApi.get('videos', {
+        params: {
+          part: 'snippet, statistics',
+          chart: 'mostPopular',
+          maxResults: 20,
+          regionCode: 'KR',
+        },
+      });
+      const items = response.data.items;
+
+      const listData = await Promise.all(
+        items.map(async video => {
+          const channel = await (
+            await dispatch(getChannel(video.snippet.channelId))
+          ).payload;
+          return { video, channel };
+        })
+      );
+
+      return listData;
+    } catch (err) {
+      return rejectWithValue(err.response.status);
+    }
+  }
+);
+
+export const searchResult = createAsyncThunk(
+  'youtube/searchResult', //
+  async (query, { dispatch }) => {
+    const response = await youtubeApi.get('search', {
+      params: {
+        part: 'snippet',
+        q: query,
+        maxResults: 20,
+        type: 'video',
+      },
+    });
+    const items = response.data.items;
+
+    const listData = await Promise.all(
+      items.map(async video => {
+        const channel = await (
+          await dispatch(getChannel(video.snippet.channelId))
+        ).payload;
+        return { video, channel };
+      })
+    );
+
+    return listData;
+  }
+);
+
+export const getVideo = createAsyncThunk(
+  'youtube/getVideo', //
+  async (id, { dispatch }) => {
+    const response = await youtubeApi.get('videos', {
+      params: {
+        part: 'snippet, statistics',
+        id: id,
+        maxResults: 1,
+      },
+    });
+    const video = response.data.items[0];
+    const channel = await (
+      await dispatch(getChannel(video.snippet.channelId))
+    ).payload;
+
+    return { video, channel };
+  }
+);
+
+export const getChannel = createAsyncThunk(
+  'youtube/getChannel', //
+  async id => {
+    const response = await youtubeApi.get('channels', {
+      params: {
+        part: 'snippet, statistics',
+        id: id,
+        maxResults: 1,
+      },
+    });
+    return response.data.items[0];
+  }
+);
+
+const youtubeSlice = createSlice({
+  name: 'youtube',
+  initialState: {
+    loading: true,
+    detailLoading: true,
+    videos: null,
+    selectedVideo: null,
+    searchTerm: null,
+    errorCode: null,
+  },
+  reducers: {
+    setSelectedVideo: (state, action) => {
+      state.selectedVideo = action.payload;
+    },
+    setSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+    },
+  },
+  extraReducers: {
+    [mostPopular.rejected]: (state, action) => {
+      state.errorCode = action.payload;
+    },
+    [mostPopular.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.videos = action.payload;
+    },
+    [searchResult.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.videos = action.payload;
+    },
+    [getVideo.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.selectedVideo = action.payload;
+    },
+  },
+});
+
 const store = configureStore({
   reducer: {
-    selected: selectedSlice.reducer,
-    search: searchSlice.reducer,
     videoList: videoListSlice.reducer,
     videoMenu: videoMenuSlice.reducer,
     authService: authServiceSlice.reducer,
     videoRepository: videoRepositorySlice.reducer,
+    youtube: youtubeSlice.reducer,
   },
   middleware: [thunk],
 });
 
-export const { setSelectedVideo } = selectedSlice.actions;
-export const { setSearchTerm } = searchSlice.actions;
 export const { setVideoList } = videoListSlice.actions;
 export const { setVideoMenu } = videoMenuSlice.actions;
 export const { setAuthService, setUser } = authServiceSlice.actions;
 export const { setvideoRepository, setUserFeeds } =
   videoRepositorySlice.actions;
+export const { setSelectedVideo, setSearchTerm } = youtubeSlice.actions;
 
 export default store;
