@@ -83,7 +83,6 @@ const SaveVideo = ({ closePopup }) => {
 
   return (
     <div className={styles.saveVideoPopup} onClick={onClick}>
-      {console.log('selectedVideo', selectedVideo, videoId)}
       <div className={styles.popupContainer}>
         <div ref={popupRef} className={styles.popup}>
           <div className={styles.header}>

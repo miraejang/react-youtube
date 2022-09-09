@@ -14,10 +14,6 @@ const Home = () => {
     dispatch(mostPopular());
   }, []);
 
-  useEffect(() => {
-    console.log(loading);
-  }, [loading]);
-
   return (
     <>{loading ? <Loading /> : <VideoList videos={videos} page="home" />}</>
   );

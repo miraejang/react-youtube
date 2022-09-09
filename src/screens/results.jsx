@@ -11,17 +11,13 @@ const Results = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(search);
     if (videos === null) {
     }
     dispatch(searchResult(searchTerm));
   }, [searchTerm]);
 
   return (
-    <>
-      {console.log(videos)}
-      {loading ? <Loading /> : <VideoList videos={videos} page="results" />}
-    </>
+    <>{loading ? <Loading /> : <VideoList videos={videos} page="results" />}</>
   );
 };
 

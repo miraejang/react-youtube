@@ -23,7 +23,6 @@ const Playlist = () => {
 
   return (
     <div className={styles.playlist}>
-      {console.log(group)}
       <div className={styles.groupInfo}>
         <div className={styles.info}>
           <div className={styles.thumbnail}>
