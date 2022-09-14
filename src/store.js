@@ -6,16 +6,6 @@ import {
 import axios from 'axios';
 import thunk from 'redux-thunk';
 
-const videoListSlice = createSlice({
-  name: 'videoList',
-  initialState: { data: null },
-  reducers: {
-    setVideoList: (state, action) => {
-      state.data = action.payload;
-    },
-  },
-});
-
 const videoMenuSlice = createSlice({
   name: 'videoMenu',
   initialState: { listId: null, videoId: null },
@@ -179,12 +169,18 @@ const youtubeSlice = createSlice({
     },
   },
   extraReducers: {
+    [mostPopular.pending]: state => {
+      state.loading = true;
+    },
     [mostPopular.rejected]: (state, action) => {
       state.errorCode = action.payload;
     },
     [mostPopular.fulfilled]: (state, action) => {
       state.loading = false;
       state.videos = action.payload;
+    },
+    [searchResult.pending]: state => {
+      state.loading = true;
     },
     [searchResult.fulfilled]: (state, action) => {
       state.loading = false;
@@ -199,7 +195,6 @@ const youtubeSlice = createSlice({
 
 const store = configureStore({
   reducer: {
-    videoList: videoListSlice.reducer,
     videoMenu: videoMenuSlice.reducer,
     authService: authServiceSlice.reducer,
     videoRepository: videoRepositorySlice.reducer,
@@ -208,7 +203,6 @@ const store = configureStore({
   middleware: [thunk],
 });
 
-export const { setVideoList } = videoListSlice.actions;
 export const { setVideoMenu } = videoMenuSlice.actions;
 export const { setAuthService, setUser } = authServiceSlice.actions;
 export const { setvideoRepository, setUserFeeds } =
