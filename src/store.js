@@ -1,5 +1,6 @@
 import {
   configureStore,
+  createAction,
   createAsyncThunk,
   createSlice,
 } from '@reduxjs/toolkit';
@@ -77,6 +78,11 @@ export const mostPopular = createAsyncThunk(
 
       const listData = await Promise.all(
         items.map(async video => {
+          video.snippet.title = video.snippet.title.replace(
+            /&#\d+;/gm, //
+            s => String.fromCharCode(s.match(/\d+/gm)[0])
+          );
+
           const channel = await (
             await dispatch(getChannel(video.snippet.channelId))
           ).payload;
@@ -106,6 +112,11 @@ export const searchResult = createAsyncThunk(
 
     const listData = await Promise.all(
       items.map(async video => {
+        video.snippet.title = video.snippet.title.replace(
+          /&#\d+;/gm, //
+          s => String.fromCharCode(s.match(/\d+/gm)[0])
+        );
+
         const channel = await (
           await dispatch(getChannel(video.snippet.channelId))
         ).payload;
@@ -128,6 +139,11 @@ export const getVideo = createAsyncThunk(
       },
     });
     const video = response.data.items[0];
+    video.snippet.title = video.snippet.title.replace(
+      /&#\d+;/gm, //
+      s => String.fromCharCode(s.match(/\d+/gm)[0])
+    );
+
     const channel = await (
       await dispatch(getChannel(video.snippet.channelId))
     ).payload;

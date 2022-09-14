@@ -67,9 +67,9 @@ const SaveVideo = ({ closePopup }) => {
         name,
         lastUpdate: new Date().toLocaleDateString(),
         thumbnail: videos[0]
-          ? videos[0].thumbnail
+          ? videos[0].video.snippet.thumbnails.medium.url
           : video.snippet.thumbnails.medium.url,
-        videos: [selectedVideo, ...videos],
+        videos: [...videos, selectedVideo],
       });
     } else {
       videoRepo.savePlaylist(user.uid, id, {

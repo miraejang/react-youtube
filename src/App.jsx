@@ -53,12 +53,10 @@ function App({ authService, videoRepository }) {
                 dispatch(
                   setUserFeeds({
                     history: feeds.history ? { ...feeds.history } : null,
-                    wishList:
-                      feeds && feeds.wishList
-                        ? { ...feeds.wishList }
-                        : { name: '나중에 볼 동영상' },
-                    playlist:
-                      feeds && feeds.playlist ? { ...feeds.playlist } : null,
+                    wishList: feeds.wishList
+                      ? { ...feeds.wishList }
+                      : { name: '나중에 볼 동영상' },
+                    playlist: feeds.playlist ? { ...feeds.playlist } : null,
                   })
                 );
               } else {
