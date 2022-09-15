@@ -68,7 +68,10 @@ const VideoItem = ({
     const todayHistory =
       (history &&
         history[date] &&
-        history[date].filter(videoData => videoData.video.id !== videoId)) ||
+        history[date].filter(
+          videoData =>
+            (videoData.video.id.videoId || videoData.video.id) !== videoId
+        )) ||
       [];
 
     videoRepo.saveVideo(user.uid, [videoData, ...todayHistory]);
@@ -89,6 +92,7 @@ const VideoItem = ({
 
   // video menu functions
   useEffect(() => {
+    console.log(videoMenu);
     if (videoMenu.listId === listId && videoMenu.videoId === videoId) {
       setVideoMenuOpen(true);
     } else {
@@ -110,6 +114,7 @@ const VideoItem = ({
     <div className={styles.videoMenu}>
       {video && channel && (
         <VideoMenu
+          videoData={videoData}
           videoId={videoId}
           thumbnail={video.snippet.thumbnails.medium.url}
           channelId={channelId}

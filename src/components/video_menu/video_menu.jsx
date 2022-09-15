@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setVideoMenu } from '../../store';
 
 const VideoMenu = ({
+  videoData,
   videoId,
   thumbnail,
   channelId,
@@ -31,22 +32,25 @@ const VideoMenu = ({
 
   const saveWishList = e => {
     e.preventDefault();
-    const videos =
-      wishList.videos &&
-      (wishList.videos.filter(video => video.videoId !== videoId) || []);
-    videoRepo.savePlaylist(user.uid, 'WL', {
-      name: wishList.name,
-      lastUpdate: new Date().toLocaleDateString(),
-      thumbnail: videos.length > 0 ? videos[0].thumbnail : thumbnail,
-      videos: [
-        {
-          videoId,
-          thumbnail,
-          channelId,
-        },
-        ...videos,
-      ],
-    });
+    const videos = wishList.videos || [];
+    const alreadySaved = videos.find(
+      videoData =>
+        (videoData.video.id.videoId || videoData.video.id) === videoId
+    )
+      ? true
+      : false;
+
+    if (!alreadySaved) {
+      videoRepo.savePlaylist(user.uid, 'WL', {
+        name: wishList.name,
+        lastUpdate: new Date().toLocaleDateString(),
+        thumbnail:
+          videos.length > 0
+            ? videos[0].video.snippet.thumbnails.medium.url
+            : thumbnail,
+        videos: [videoData, ...videos],
+      });
+    }
   };
 
   const savePlaylist = e => {

@@ -56,10 +56,10 @@ const SaveVideo = ({ closePopup }) => {
       (groups &&
         groups[id] &&
         groups[id].videos &&
-        groups[id].videos.filter(videoData => {
-          const id = videoData.video.id.videoId || videoData.video.id;
-          return id !== videoId;
-        })) ||
+        groups[id].videos.filter(
+          videoData =>
+            (videoData.video.id.videoId || videoData.video.id) !== videoId
+        )) ||
       [];
 
     if (checked) {
@@ -99,7 +99,9 @@ const SaveVideo = ({ closePopup }) => {
                   const checked =
                     gorup.videos &&
                     gorup.videos.find(
-                      videoData => videoData.video.id === videoId
+                      videoData =>
+                        (videoData.video.id.videoId || videoData.video.id) ===
+                        videoId
                     )
                       ? true
                       : false;
