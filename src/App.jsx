@@ -78,6 +78,7 @@ function App({ authService, videoRepository }) {
     containerRef.current && containerRef.current.scrollTo(0, 0);
     if (location.pathname && location.pathname.search(/^\/watch/) >= 0) {
       setNavInit(false);
+      setSliderNavOpen(false);
       setIsWatch(true);
     } else {
       setIsWatch(false);
