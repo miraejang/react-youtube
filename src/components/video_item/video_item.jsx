@@ -73,7 +73,7 @@ const VideoItem = ({
         )) ||
       [];
 
-    videoRepo.saveVideo(user.uid, [videoData, ...todayHistory]);
+    videoRepo.saveHistory(user.uid, [videoData, ...todayHistory]);
   };
 
   const compCount = count => {
