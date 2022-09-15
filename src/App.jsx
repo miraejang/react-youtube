@@ -34,7 +34,7 @@ function App({ authService, videoRepository }) {
   useEffect(() => {
     dispatch(setAuthService(authService));
     dispatch(setvideoRepository(videoRepository));
-  }, []);
+  }, [authService, videoRepository, dispatch]);
 
   useEffect(() => {
     auth &&
@@ -72,7 +72,7 @@ function App({ authService, videoRepository }) {
         }
         setInit(true);
       });
-  }, [auth, videoRepo]);
+  }, [auth, videoRepo, dispatch]);
 
   useEffect(() => {
     containerRef.current && containerRef.current.scrollTo(0, 0);
@@ -84,7 +84,7 @@ function App({ authService, videoRepository }) {
       setIsWatch(false);
       dispatch(setVideoMenu({ listId: null, videoId: null }));
     }
-  }, [location]);
+  }, [location, dispatch]);
 
   const setNavType = state => {
     if (navInit === false) setNavInit(true);

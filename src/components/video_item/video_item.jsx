@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { setSelectedVideo } from '../../store';
 import VideoMenu from '../video_menu/video_menu';
 import styles from './video_item.module.css';
@@ -26,7 +26,6 @@ const VideoItem = ({
     feeds: { history },
   } = useSelector(state => state.videoRepository);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   // video menu variables
   const [videoMenuOpen, setVideoMenuOpen] = useState(false);
   const videoMenu = useSelector(state => state.videoMenu);
@@ -97,7 +96,7 @@ const VideoItem = ({
     } else {
       setVideoMenuOpen(false);
     }
-  }, [videoMenu]);
+  }, [videoMenu, listId, videoId]);
 
   const hoverContainer = e => {
     if (e.type === 'mouseenter') setHover(true);

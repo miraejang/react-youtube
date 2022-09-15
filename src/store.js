@@ -1,6 +1,5 @@
 import {
   configureStore,
-  createAction,
   createAsyncThunk,
   createSlice,
 } from '@reduxjs/toolkit';

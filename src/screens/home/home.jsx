@@ -12,7 +12,7 @@ const Home = () => {
   useEffect(() => {
     localStorage.setItem('searchTerm', '');
     dispatch(mostPopular());
-  }, []);
+  }, [dispatch]);
 
   return (
     <>{loading ? <Loading /> : <VideoList videos={videos} page="home" />}</>

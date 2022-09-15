@@ -24,7 +24,7 @@ const Watch = () => {
       const searchTerm = localStorage.getItem('searchTerm');
       searchTerm ? dispatch(searchResult(searchTerm)) : dispatch(mostPopular());
     }
-  }, [id]);
+  }, [id, selectedVideo, videos, dispatch]);
 
   return (
     <>
