@@ -92,7 +92,6 @@ const VideoItem = ({
 
   // video menu functions
   useEffect(() => {
-    console.log(videoMenu);
     if (videoMenu.listId === listId && videoMenu.videoId === videoId) {
       setVideoMenuOpen(true);
     } else {
