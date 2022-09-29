@@ -44,7 +44,7 @@
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: rgba(48, 48, 48, 0.5);
+  background-color: rgba(33, 33, 33, 0.98);
   z-index: 100;
 }
 .settings li {
