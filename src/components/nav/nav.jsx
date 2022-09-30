@@ -2,7 +2,12 @@ import {
   faFolderClosed,
   faRectangleList,
 } from '@fortawesome/free-regular-svg-icons';
-import { faClock, faHistory, faHome } from '@fortawesome/free-solid-svg-icons';
+import {
+  faClock,
+  faHistory,
+  faHome,
+  faThumbsUp,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
@@ -105,6 +110,16 @@ const Nav = ({ navInit, isWatch, navExpand, sliderNavOpen, setNavType }) => {
                       </Link>
                     </li>
                   ))}
+
+                <li className={styles.item}>
+                  <Link to={'/playlist?list=LL'} className={styles.link}>
+                    <FontAwesomeIcon
+                      icon={faThumbsUp}
+                      className={styles.icon}
+                    />
+                    <span className={styles.text}>좋아요 표시한 동영상</span>
+                  </Link>
+                </li>
               </ul>
             )}
             {!user && (
