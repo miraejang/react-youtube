@@ -1,4 +1,5 @@
 # YouTube
+Youtube API를 활용하여 React로 제작된 SPA입니다.   
 　　  
 
 ## 사용한 기술
