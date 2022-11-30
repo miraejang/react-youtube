@@ -16,6 +16,7 @@ Youtube API를 활용하여 React로 제작된 SPA입니다.
 ### 동영상 저장
 - 상세페이지의 저장을 이용하거나 비디오 리스트 우측의 ⁝ 버튼을 클릭하면 동영상을 저장할 수 있습니다.   
 - 저장한 동영상은 해당 폴더 페이지에서 확인할 수 있습니다.   
+- 저장할 수 있는 재생목록을 생성할 수 있습니다.   
 
 ![image](https://user-images.githubusercontent.com/45534877/202352792-78ca1ea2-9dc9-4abd-b6f5-50ff2be19550.png)   
 ![image](https://user-images.githubusercontent.com/45534877/202352964-a6e3a2ef-9538-4d5a-81fd-e425457cdb2b.png)   
